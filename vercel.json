@@ -1,0 +1,17 @@
+{
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "build": {
+    "env": {
+      "DATABASE_URL": "@your-database-url",
+      "NEXTAUTH_URL": "https://mental-health-seven-lake.vercel.app"
+    },
+    "post-build": {
+      "commands": ["npx prisma generate"]
+    }
+  }
+}
