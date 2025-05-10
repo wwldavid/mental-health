@@ -14,3 +14,5 @@
 
 9. npx prisma generate
 10. npx prisma migrate dev --name init
+
+11. npx prisma migrate dev --name init_postgresql

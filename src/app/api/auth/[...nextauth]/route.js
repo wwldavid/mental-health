@@ -53,11 +53,6 @@ const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-// 分别导出 GET 和 POST 方法
-export async function GET(req) {
-  return NextAuth(req, authOptions);
-}
-
-export async function POST(req) {
-  return NextAuth(req, authOptions);
-}
+// ✅ 正确的导出方式
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
