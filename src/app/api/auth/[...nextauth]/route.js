@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
-const handler = NextAuth({
+const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -51,7 +51,13 @@ const handler = NextAuth({
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
-});
+};
 
-export const GET = handler;
-export const POST = handler;
+// 分别导出 GET 和 POST 方法
+export async function GET(req) {
+  return NextAuth(req, authOptions);
+}
+
+export async function POST(req) {
+  return NextAuth(req, authOptions);
+}
