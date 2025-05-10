@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,28 +12,50 @@ import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
 
+  // ✅ 添加路由路径
   const menuItems = [
     {
       label: "Content1",
-      items: ["Subitem 1", "Subitem 2", "Subitem 3"],
+      items: [
+        { name: "Subitem 1", path: "/subitem1" },
+        { name: "Subitem 2", path: "/subitem2" },
+        { name: "Subitem 3", path: "/subitem3" },
+      ],
     },
     {
       label: "Content2",
-      items: ["Subitem 4", "Subitem 5", "Subitem 6"],
+      items: [
+        { name: "Subitem 4", path: "/subitem4" },
+        { name: "Subitem 5", path: "/subitem5" },
+        { name: "Subitem 6", path: "/subitem6" },
+      ],
     },
     {
       label: "Content3",
-      items: ["Subitem 7", "Subitem 8", "Subitem 9"],
+      items: [
+        { name: "Subitem 7", path: "/subitem7" },
+        { name: "Subitem 8", path: "/subitem8" },
+        { name: "Subitem 9", path: "/subitem9" },
+      ],
     },
   ];
+
+  const handleSignIn = () => router.push("/sign-in");
+  const handleSignUp = () => router.push("/sign-up");
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
       <nav className="w-full bg-white border-b shadow-sm">
         <div className="container mx-auto px-4 flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="text-xl font-bold">Logo</div>
+          <div
+            className="text-xl font-bold cursor-pointer"
+            onClick={() => router.push("/")}
+          >
+            Logo
+          </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-6">
@@ -43,13 +66,25 @@ const Navbar = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   {menu.items.map((item, idx) => (
-                    <DropdownMenuItem key={idx}>{item}</DropdownMenuItem>
+                    <DropdownMenuItem
+                      key={idx}
+                      onClick={() => router.push(item.path)} // ✅ 点击后跳转
+                    >
+                      {item.name}
+                    </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
             ))}
-            <Button variant="ghost">Sign In / Sign Up</Button>
+            <Button variant="ghost" onClick={handleSignIn}>
+              Sign In
+            </Button>
+            <Button variant="ghost" onClick={handleSignUp}>
+              Sign Up
+            </Button>
           </div>
+
+          {/* Try for Free 按钮 */}
           <div>
             <Button className="ml-4" variant="outline">
               Try for Free
@@ -71,7 +106,6 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(true)}
               />
             )}
-            {() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           </div>
         </div>
 
@@ -87,15 +121,34 @@ const Navbar = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   {menu.items.map((item, idx) => (
-                    <DropdownMenuItem key={idx}>{item}</DropdownMenuItem>
+                    <DropdownMenuItem
+                      key={idx}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false); // 关闭菜单
+                        router.push(item.path); // 跳转
+                      }}
+                    >
+                      {item.name}
+                    </DropdownMenuItem>
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
             ))}
-            <Button variant="ghost" className=" block w-full text-left">
-              Sign In / Sign Up
+            <Button
+              variant="ghost"
+              className="block w-full text-left"
+              onClick={handleSignIn}
+            >
+              Sign In
             </Button>
-            <Button variant="outline" className="text-left">
+            <Button
+              variant="ghost"
+              className="block w-full text-left"
+              onClick={handleSignUp}
+            >
+              Sign Up
+            </Button>
+            <Button variant="outline" className="w-full text-left">
               Try for Free
             </Button>
           </div>
