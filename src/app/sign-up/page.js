@@ -15,7 +15,6 @@ export default function SignUp() {
     setError(null);
     setMessage(null);
 
-    // 🚀 1️⃣ 校验两次密码是否一致
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
@@ -43,52 +42,115 @@ export default function SignUp() {
   };
 
   return (
-    <div>
-      <h1>Sign Up</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {message && <p style={{ color: "green" }}>{message}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
+    <div className="flex items-center justify-center h-full ">
+      <div className="w-[490px] bg-white rounded-xl shadow-xl overflow-hidden mt-10">
+        <div className="h-12 bg-[#a4e2c6] flex items-center justify-center">
+          <div className="w-3 h-3 rounded-full bg-white opacity-60 mx-1"></div>
+          <div className="w-3 h-3 rounded-full bg-white opacity-80 mx-1"></div>
+          <div className="w-3 h-3 rounded-full bg-white mx-1"></div>
         </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+
+        <div className="px-8 py-6">
+          <h1 className="text-3xl font-light text-gray-800 mb-6 text-center">
+            Create Account
+          </h1>
+
+          {error && (
+            <div className="bg-red-50 text-red-600 p-3 rounded-lg mb-4 text-sm">
+              {error}
+            </div>
+          )}
+
+          {message && (
+            <div className="bg-green-50 text-green-600 p-3 rounded-lg mb-4 text-sm">
+              {message}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Username
+              </label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a4e2c6] transition"
+                placeholder="johndoe"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a4e2c6] transition"
+                placeholder="your@email.com"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Password
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a4e2c6] transition"
+                placeholder="••••••••"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a4e2c6] transition"
+                placeholder="••••••••"
+              />
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="submit"
+                className="w-full bg-[#a4e2c6] hover:bg-[#8ed4b5] text-white font-medium py-3 rounded-lg transition duration-300 shadow-md shadow-[#a4e2c6]/30"
+              >
+                Create Account
+              </button>
+            </div>
+          </form>
+
+          <div className="mt-6 flex items-center justify-center">
+            <div className="h-px w-full bg-gray-200"></div>
+          </div>
+
+          <div className="mt-8 text-center">
+            <p className="text-sm text-gray-600">
+              Already have an account?{" "}
+              <a
+                href="/sign-in"
+                className="text-[#66c29a] hover:underline font-medium"
+              >
+                Sign in
+              </a>
+            </p>
+          </div>
         </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Confirm Password:</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
-      <p>
-        Already have an account? <a href="/sign-in">Sign In</a>
-      </p>
+      </div>
     </div>
   );
 }
