@@ -75,6 +75,13 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ))}
+            <Button
+              variant="ghost"
+              className="block w-full text-left"
+              onClick={() => router.push("/contact")}
+            >
+              Contact Us
+            </Button>
             <Button variant="ghost" onClick={handleSignIn}>
               Sign In
             </Button>
@@ -133,6 +140,13 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ))}
+            <Button
+              variant="ghost"
+              className="block w-full text-left"
+              onClick={() => router.push("/contact")}
+            >
+              Contact Us
+            </Button>
             <Button
               variant="ghost"
               className="block w-full text-left"
