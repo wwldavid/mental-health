@@ -16,3 +16,7 @@
 10. npx prisma migrate dev --name init
 
 11. npx prisma migrate dev --name init_postgresql
+
+12. npx shadcn add input
+
+13. npx shadcn add textarea
