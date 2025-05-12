@@ -14,7 +14,6 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
 
-  // ✅ 添加路由路径
   const menuItems = [
     {
       label: "Content1",
@@ -68,7 +67,7 @@ const Navbar = () => {
                   {menu.items.map((item, idx) => (
                     <DropdownMenuItem
                       key={idx}
-                      onClick={() => router.push(item.path)} // ✅ 点击后跳转
+                      onClick={() => router.push(item.path)}
                     >
                       {item.name}
                     </DropdownMenuItem>
