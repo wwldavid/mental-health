@@ -108,8 +108,8 @@ export default function Carousel() {
                     width={380}
                     height={380}
                     className={`${
-                      isMobile ? "w-full" : "w-[380px]"
-                    } h-[380px] object-cover rounded-2xl`}
+                      isMobile ? "w-full" : "w-[360px]"
+                    } h-[360px] object-cover rounded-2xl`}
                   />
                 </div>
               ))}
