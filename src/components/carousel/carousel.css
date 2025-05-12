@@ -1,0 +1,16 @@
+.carousel-container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .carousel-slide {
+    width: 100%;
+  }
+
+  .carousel-item {
+    width: 100% !important;
+    padding: 0 10px;
+  }
+}
