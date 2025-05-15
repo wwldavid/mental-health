@@ -20,3 +20,9 @@
 12. npx shadcn add input
 
 13. npx shadcn add textarea
+
+14. npm install express ws
+
+15. npm install @daily-co/daily-js
+
+16. npm install twilio
