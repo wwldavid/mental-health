@@ -26,7 +26,7 @@ const Navbar = () => {
     {
       label: "Content2",
       items: [
-        { name: "Subitem 4", path: "/subitem4" },
+        { name: "user-room", path: "/user-room" },
         { name: "Subitem 5", path: "/subitem5" },
         { name: "Subitem 6", path: "/subitem6" },
       ],
@@ -34,7 +34,7 @@ const Navbar = () => {
     {
       label: "Content3",
       items: [
-        { name: "Subitem 7", path: "/subitem7" },
+        { name: "doctor-room", path: "/doctor-room" },
         { name: "Subitem 8", path: "/subitem8" },
         { name: "Subitem 9", path: "/subitem9" },
       ],
