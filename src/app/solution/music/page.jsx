@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import AudioPlayer from "@/components/audioplayer";
 
+import suggestions from "@/lib/suggestions";
+
 const tracks = [
   {
     audioSrc: "/audios/track1.mp3",
@@ -21,8 +23,10 @@ const tracks = [
   },
 ];
 
-export default function Subitem1Page() {
+export default function MusicPage() {
   const router = useRouter();
+
+  const content = suggestions.find((s) => s.slug === "music");
 
   return (
     <div className="container mx-auto px-4 pt-24 pb-16">
@@ -35,7 +39,8 @@ export default function Subitem1Page() {
           Back
         </Button>
 
-        <h1 className="text-3xl font-bold mb-6">Subitem 1</h1>
+        <h1 className="text-3xl font-semibold mb-4">{content.title}</h1>
+        <p className="text-lg text-gray-700">{content.description}</p>
 
         <div className="flex flex-wrap justify-center gap-4">
           {tracks.map((track, index) => (
