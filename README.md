@@ -26,3 +26,7 @@
 15. npm install @daily-co/daily-js
 
 16. npm install twilio
+
+17. npx shadcn@latest add card
+
+18. npm install framer-motion

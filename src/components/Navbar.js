@@ -16,15 +16,14 @@ const Navbar = () => {
 
   const menuItems = [
     {
-      label: "Content1",
+      label: "Home",
       items: [
-        { name: "Subitem 1", path: "/subitem1" },
         { name: "Subitem 2", path: "/subitem2" },
-        { name: "Subitem 3", path: "/subitem3" },
+        { name: "home1", path: "/home1" },
       ],
     },
     {
-      label: "Content2",
+      label: "Journal",
       items: [
         { name: "user-room", path: "/user-room" },
         { name: "Subitem 5", path: "/subitem5" },
@@ -32,12 +31,16 @@ const Navbar = () => {
       ],
     },
     {
-      label: "Content3",
+      label: "Sessions",
       items: [
         { name: "doctor-room", path: "/doctor-room" },
         { name: "Subitem 8", path: "/subitem8" },
         { name: "Subitem 9", path: "/subitem9" },
       ],
+    },
+    {
+      label: "Goals",
+      items: [{ name: "Subitem 10", path: "/subitem10" }],
     },
   ];
 
