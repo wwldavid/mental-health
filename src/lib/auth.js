@@ -5,16 +5,27 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
+console.log("Prisma client:", prisma ? "✅ Loaded" : "❌ Undefined");
+
 export const authOptions = {
+  debug: process.env.NODE_ENV === "development",
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      authorization: {
+        params: {
+          prompt: "consent", // 强制每次显示授权页面
+          access_type: "offline",
+          scope: "openid email profile", // 明确请求的权限
+        },
+      },
     }),
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
+      authorization: { params: { scope: "identify email" } },
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -36,41 +47,41 @@ export const authOptions = {
   ],
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30天
+  },
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+      },
+    },
   },
   callbacks: {
-    async signIn({ user, account }) {
-      if (account?.provider === "credentials") return true; // 已存在用户
-      try {
-        await prisma.user.upsert({
-          where: { email: user.email },
-          update: { name: user.name || "" },
-          create: {
-            email: user.email,
-            name: user.name || "",
-            username:
-              user.name?.replace(/\s/g, "").toLowerCase() ||
-              `user${Date.now()}`,
-          },
-        });
-        return true;
-      } catch (err) {
-        console.error("Error upserting user:", err);
-        return false;
-      }
-    },
-    async session({ session, token }) {
-      if (token && session.user) {
-        session.user.id = token.id;
-        session.user.email = token.email;
-      }
-      return session;
-    },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
         token.email = user.email;
+        token.name = user.name;
+        token.picture = user.image;
+      }
+      if (account) {
+        token.accessToken = account.access_token;
       }
       return token;
+    },
+    async session({ session, token }) {
+      session.user = {
+        id: token.id,
+        name: token.name,
+        email: token.email,
+        image: token.picture,
+      };
+      session.accessToken = token.accessToken;
+      return session;
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
