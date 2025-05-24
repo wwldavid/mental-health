@@ -19,6 +19,8 @@ model User {
   providerId String? 
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+
+  diaryEntries DiaryEntry[]  // ➕ 1-to-many relation
 }
 
 model ContactMessage {
@@ -29,3 +31,14 @@ model ContactMessage {
   message   String
   createdAt DateTime @default(now())
 }
+
+model DiaryEntry {
+  id        Int      @id @default(autoincrement())
+  content   String
+  isPublic  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int      // must match User's primary key type
+}
+

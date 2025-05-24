@@ -12,6 +12,9 @@ export default function SignIn() {
     e.preventDefault();
     setError(null);
 
+    const callbackUrl =
+      new URLSearchParams(window.location.search).get("callbackUrl") || "/";
+
     const result = await signIn("credentials", {
       email,
       password,
@@ -21,7 +24,7 @@ export default function SignIn() {
     if (result.error) {
       setError(result.error);
     } else {
-      window.location.href = "/";
+      window.location.href = callbackUrl;
     }
   };
 
@@ -100,7 +103,13 @@ export default function SignIn() {
 
           <div className="mt-6 grid grid-cols-2 gap-3">
             <button
-              onClick={() => signIn("google", { callbackUrl: "/" })}
+              onClick={() => {
+                const callbackUrl =
+                  new URLSearchParams(window.location.search).get(
+                    "callbackUrl"
+                  ) || "/";
+                signIn("google", { callbackUrl });
+              }}
               className="flex justify-center items-center py-2.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition"
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -125,7 +134,13 @@ export default function SignIn() {
             </button>
 
             <button
-              onClick={() => signIn("discord", { callbackUrl: "/" })}
+              onClick={() => {
+                const callbackUrl =
+                  new URLSearchParams(window.location.search).get(
+                    "callbackUrl"
+                  ) || "/";
+                signIn("discord", { callbackUrl });
+              }}
               className="flex justify-center items-center py-2.5 border border-gray-200 rounded-lg hover:bg-gray-50 transition"
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="#7289DA">
