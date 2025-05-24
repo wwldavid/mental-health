@@ -7,9 +7,15 @@ import bcrypt from "bcryptjs";
 
 console.log("Prisma client:", prisma ? "✅ Loaded" : "❌ Undefined");
 
+const adapter = PrismaAdapter(prisma);
+if (!adapter.createUser || !adapter.linkAccount) {
+  console.error("❌ Prisma Adapter 方法缺失");
+}
+
 export const authOptions = {
-  debug: process.env.NODE_ENV === "development",
-  adapter: PrismaAdapter(prisma),
+  trustHost: true,
+
+  adapter,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -54,9 +60,9 @@ export const authOptions = {
       name: `__Secure-next-auth.session-token`,
       options: {
         httpOnly: true,
-        sameSite: "lax",
+        sameSite: "none",
         path: "/",
-        secure: process.env.NODE_ENV === "production",
+        secure: ".vercel.app",
       },
     },
   },
