@@ -26,7 +26,7 @@ const Navbar = () => {
       label: "Journal",
       items: [
         { name: "user-room", path: "/user-room" },
-        { name: "Subitem 5", path: "/subitem5" },
+        { name: "journal-test", path: "/journal-test" },
         { name: "Subitem 6", path: "/subitem6" },
       ],
     },
