@@ -30,3 +30,9 @@
 17. npx shadcn@latest add card
 
 18. npm install framer-motion
+
+19. npx prisma migrate dev --name add-diary-model
+
+20. npm install @next-auth/prisma-adapter
+
+21. npx prisma generate

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SignUp() {
   const [username, setUsername] = useState("");
@@ -9,6 +10,10 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +37,12 @@ export default function SignUp() {
       const data = await response.json();
       if (response.ok) {
         setMessage(data.message);
+        // ✅ 注册成功后跳转登录页，保留 callbackUrl
+        setTimeout(() => {
+          router.push(
+            `/sign-in?callbackUrl=${encodeURIComponent(callbackUrl)}`
+          );
+        }, 1000);
       } else {
         setError(data.error);
       }
