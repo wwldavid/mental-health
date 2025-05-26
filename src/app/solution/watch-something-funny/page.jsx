@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const funnyVideos = [
   "https://www.youtube.com/embed/C9E1BmpFn2M",
@@ -22,6 +23,8 @@ export default function SomethingFunny() {
   const [videoIndex, setVideoIndex] = useState(0);
   const [quoteIndex, setQuoteIndex] = useState(0);
 
+  const router = useRouter();
+
   const handleRefresh = () => {
     setVideoIndex(Math.floor(Math.random() * funnyVideos.length));
     setQuoteIndex(Math.floor(Math.random() * funnyQuotes.length));
@@ -29,9 +32,18 @@ export default function SomethingFunny() {
 
   return (
     <div className="max-w-3xl mx-auto py-10 px-4">
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        Watch Something Funny 😂
-      </h1>
+      <div className="flex items-center mb-10 gap-14">
+        <h1 className="text-3xl font-bold  text-center">
+          Watch Something Funny 😂
+        </h1>
+        <Button
+          variant="outline"
+          onClick={() => router.back()}
+          className="bg-[#8b968d] text-white"
+        >
+          Back
+        </Button>
+      </div>
 
       <p className="text-lg text-center italic mb-6">
         {funnyQuotes[quoteIndex]}
