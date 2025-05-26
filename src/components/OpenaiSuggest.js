@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function Home() {
+export default function OpenaiSuggest() {
   const [feeling, setFeeling] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -26,15 +26,17 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-b from-sky-100 to-white">
-      <motion.h1
+    <main className="flex flex-col items-center justify-center p-6 mb-10">
+      <motion.h2
         className="text-3xl sm:text-4xl font-serif text-center mb-6"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
+        Hi,welcome to our app!
+        <br />
         How are you feeling today?
-      </motion.h1>
+      </motion.h2>
 
       <Textarea
         value={feeling}
@@ -44,7 +46,11 @@ export default function Home() {
         rows={3}
       />
 
-      <Button onClick={handleSubmit} disabled={loading}>
+      <Button
+        onClick={handleSubmit}
+        disabled={loading}
+        className="bg-[#00a3af] hover:opacity-90 text-white"
+      >
         {loading ? "Analyzing..." : "Get Suggestions"}
       </Button>
 

@@ -1,3 +1,3 @@
-import UserRoom from "@/app/user-room/page";
+import ConsultTherapist from "@/app/consult/page";
 
-export default UserRoom;
+export default ConsultTherapist;

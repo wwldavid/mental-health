@@ -1,3 +1,3 @@
-import Diary from "@/app/journal-test/page";
+import WriteJournal from "@/app/write-journal/page";
 
-export default Diary;
+export default WriteJournal;

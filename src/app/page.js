@@ -1,14 +1,10 @@
 import Carousel from "@/components/carousel/carousel";
+import OpenaiSuggest from "@/components/OpenaiSuggest";
 
 export default function Home() {
   return (
-    <div>
-      <main className="flex flex-grow items-center justify-center h-96">
-        <h1 className="text-4xl font-bold text-blue-500">
-          Hello, Mental Health App!
-        </h1>
-      </main>
-
+    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-b from-sky-100 to-white">
+      <OpenaiSuggest />
       <Carousel />
     </div>
   );
