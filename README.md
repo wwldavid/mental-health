@@ -36,3 +36,5 @@
 20. npm install @next-auth/prisma-adapter
 
 21. npx prisma generate
+
+22. npx shadcn@latest add slider
