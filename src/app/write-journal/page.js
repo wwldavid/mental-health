@@ -86,10 +86,10 @@ export default function WriteJournal() {
             Please log in or sign up to write and save your journal entries.
           </p>
           <div className="flex justify-center gap-4">
-            <Link href="/sign-in?callbackUrl=/journal-test">
+            <Link href="/sign-in?callbackUrl=/write-journal">
               <Button variant="outline">Sign In</Button>
             </Link>
-            <Link href="/sign-up?callbackUrl=/journal-test">
+            <Link href="/sign-up?callbackUrl=/write-journal">
               <Button variant="outline">Sign Up</Button>
             </Link>
           </div>
