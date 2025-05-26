@@ -31,15 +31,17 @@ export default function MusicPage() {
   return (
     <div className="container mx-auto px-4 pt-24 pb-16">
       <div className="max-w-4xl mx-auto">
-        <Button
-          variant="outline"
-          className="mb-6"
-          onClick={() => router.back()}
-        >
-          Back
-        </Button>
+        <div className="flex items-center gap-14">
+          <h1 className="text-3xl font-semibold mb-4">{content.title}</h1>
+          <Button
+            variant="outline"
+            className="mb-6 bg-[#8b968d] text-white"
+            onClick={() => router.back()}
+          >
+            Back
+          </Button>
+        </div>
 
-        <h1 className="text-3xl font-semibold mb-4">{content.title}</h1>
         <p className="text-lg text-gray-700">{content.description}</p>
 
         <div className="flex flex-wrap justify-center gap-4">

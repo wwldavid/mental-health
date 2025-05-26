@@ -7,7 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 
-export default function DiaryPage() {
+export default function WriteJournal() {
   const { data: session, status } = useSession();
   const [content, setContent] = useState("");
   const [isPublic, setIsPublic] = useState(false);

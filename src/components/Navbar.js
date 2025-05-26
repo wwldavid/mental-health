@@ -18,15 +18,24 @@ const Navbar = () => {
     {
       label: "Home",
       items: [
-        { name: "Subitem 2", path: "/subitem2" },
-        { name: "home1", path: "/home1" },
+        { name: "Mental Health Assessment", path: "/assessment" },
+        { name: "Try meditation", path: "/meditation" },
+        { name: "Take a walk", path: "/walk" },
+        { name: "Listen to music", path: "/music" },
+        { name: "Watch something funny", path: "/watch-something-funny" },
+        { name: "Breathing exercise", path: "do-breathing-exercise" },
+        { name: "Read a book", path: "read-a-book" },
+        { name: "Take a short nap", path: "take-a-nap" },
+        { name: "Write a gratitude list", path: "gratitude-list" },
+        { name: "Drink a glass of water", path: "drink-water" },
+        { name: "Call a friend", path: "call-friend" },
       ],
     },
     {
       label: "Journal",
       items: [
-        { name: "user-room", path: "/user-room" },
-        { name: "journal-test", path: "/journal-test" },
+        { name: "Write in a journal", path: "/write-journal" },
+        { name: "Talk to a therapist", path: "/consult" },
         { name: "Subitem 6", path: "/subitem6" },
       ],
     },
