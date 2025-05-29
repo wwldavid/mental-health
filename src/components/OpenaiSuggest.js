@@ -9,6 +9,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function OpenaiSuggest() {
   const [feeling, setFeeling] = useState("");
+  const [acknowledgement, setAcknowledgement] = useState([]);
+  const [advice, setAdvice] = useState("");
+
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -21,6 +24,8 @@ export default function OpenaiSuggest() {
       headers: { "Content-Type": "application/json" },
     });
     const data = await res.json();
+    setAcknowledgement(data.acknowledgement);
+    setAdvice(data.advice);
     setSuggestions(data.suggestions);
     setLoading(false);
   };
@@ -54,6 +59,24 @@ export default function OpenaiSuggest() {
         {loading ? "Analyzing..." : "Get Suggestions"}
       </Button>
 
+      <div className="mt-8 max-w-2xl w-full">
+        {acknowledgement.length > 0 && (
+          <div className="mb-4 space-y-2">
+            {acknowledgement.map((line, idx) => (
+              <p key={idx} className="text-gray-700 italic">
+                {line}
+              </p>
+            ))}
+          </div>
+        )}
+
+        {advice && (
+          <div className="mb-6">
+            <p className="text-base text-gray-800 font-medium">{advice}</p>
+          </div>
+        )}
+      </div>
+
       <section className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl w-full">
         <AnimatePresence>
           {suggestions.map((s, i) => (
@@ -68,7 +91,8 @@ export default function OpenaiSuggest() {
                 onClick={() => router.push(`/solution/${s.slug}`)}
                 className="hover:shadow-xl transition cursor-pointer"
               >
-                <CardContent className="p-4 text-center font-medium text-lg">
+                <CardContent className="p-4 flex items-center justify-center gap-2 text-lg font-medium text-[#00a3af]">
+                  <span>🌼</span>
                   {s.title}
                 </CardContent>
               </Card>
