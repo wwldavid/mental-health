@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+
 import SessionProviderWrapper from "@/components/SessionProviderWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,8 +18,10 @@ export default function RootLayout({ children }) {
         <div className="flex flex-col min-h-screen">
           <SessionProviderWrapper>
             <Navbar />
-            <main className="flex-grow pt-16 flex flex-col">{children}</main>
-            <Footer />
+            <main className="flex-grow pt-0 md:pt-16 flex flex-col">
+              {children}
+            </main>
+            <Navbar mobile />
           </SessionProviderWrapper>
         </div>
       </body>
