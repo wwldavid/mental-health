@@ -8,9 +8,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Menu, X } from "lucide-react";
+// import { Menu, X } from "lucide-react";
 
-const Navbar = () => {
+const Navbar = ({ mobile = false }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
 
@@ -51,13 +51,55 @@ const Navbar = () => {
       label: "Goals",
       items: [{ name: "Subitem 10", path: "/subitem10" }],
     },
+    {
+      label: "Chat",
+      items: [{ name: "Subitem 11", path: "/subitem11" }],
+    },
   ];
 
   const handleSignIn = () => router.push("/sign-in");
   const handleSignUp = () => router.push("/sign-up");
 
+  if (mobile) {
+    return (
+      <div className="fixed bottom-0 left-0 w-full z-50 bg-white border-t shadow-md flex justify-around items-center h-16 md:hidden">
+        <button
+          onClick={() => router.push("/")}
+          className="text-sm text-gray-700 hover:text-blue-500"
+        >
+          Home
+        </button>
+        <button
+          onClick={() => router.push("/write-journal")}
+          className="text-sm text-gray-700 hover:text-blue-500"
+        >
+          Journal
+        </button>
+        <button
+          onClick={() => router.push("/consult")}
+          className="text-sm text-gray-700 hover:text-blue-500"
+        >
+          Sessions
+        </button>
+        <button
+          onClick={() => router.push("/subitem10")}
+          className="text-sm text-gray-700 hover:text-blue-500"
+        >
+          Goals
+        </button>
+        <button
+          onClick={() => router.push("/subitem11")}
+          className="text-sm text-gray-700 hover:text-blue-500"
+        >
+          Chat
+        </button>
+      </div>
+    );
+  }
+
+  // ✅ 桌面端顶部 navbar 样式
   return (
-    <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
+    <div className="fixed top-0 left-0 w-full z-50 bg-white shadow-md hidden md:block">
       <nav className="w-full bg-white border-b shadow-sm">
         <div className="container mx-auto px-4 flex items-center justify-between h-16">
           {/* Logo */}
@@ -69,7 +111,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="flex items-center gap-6">
             {menuItems.map((menu, index) => (
               <DropdownMenu key={index}>
                 <DropdownMenuTrigger asChild>
@@ -87,7 +129,7 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ))}
-            <Button
+            {/* <Button
               variant="ghost"
               className="block w-full text-left"
               onClick={() => router.push("/contact")}
@@ -99,18 +141,11 @@ const Navbar = () => {
             </Button>
             <Button variant="ghost" onClick={handleSignUp}>
               Sign Up
-            </Button>
-          </div>
-
-          {/* Try for Free 按钮 */}
-          <div>
-            <Button className="ml-4" variant="outline">
-              Try for Free
-            </Button>
+            </Button> */}
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-4">
+          {/* <div className="md:hidden flex items-center gap-4">
             {isMobileMenuOpen ? (
               <X
                 size={24}
@@ -124,7 +159,7 @@ const Navbar = () => {
                 onClick={() => setIsMobileMenuOpen(true)}
               />
             )}
-          </div>
+          </div> */}
         </div>
 
         {/* Mobile Menu Dropdown */}
@@ -152,7 +187,7 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ))}
-            <Button
+            {/* <Button
               variant="ghost"
               className="block w-full text-left"
               onClick={() => router.push("/contact")}
@@ -172,10 +207,7 @@ const Navbar = () => {
               onClick={handleSignUp}
             >
               Sign Up
-            </Button>
-            <Button variant="outline" className="w-full text-left">
-              Try for Free
-            </Button>
+            </Button> */}
           </div>
         )}
       </nav>
