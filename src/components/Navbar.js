@@ -9,6 +9,11 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 // import { Menu, X } from "lucide-react";
+import HomeIcon from "@/icons/home.svg";
+import JournalIcon from "@/icons/book.svg";
+import SessionsIcon from "@/icons/calendar.svg";
+import GoalsIcon from "@/icons/target.svg";
+import ChatIcon from "@/icons/chat.svg";
 
 const Navbar = ({ mobile = false }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -65,33 +70,33 @@ const Navbar = ({ mobile = false }) => {
       <div className="fixed bottom-0 left-0 w-full z-50 bg-white border-t shadow-md flex justify-around items-center h-16 md:hidden">
         <button
           onClick={() => router.push("/")}
-          className="text-sm text-gray-700 hover:text-blue-500"
+          className="text-gray-700 hover:text-blue-500 p-2"
         >
-          Home
+          <HomeIcon className="w-6 h-6 scale-125" />
         </button>
         <button
           onClick={() => router.push("/write-journal")}
-          className="text-sm text-gray-700 hover:text-blue-500"
+          className="text-gray-700 hover:text-blue-500 p-2"
         >
-          Journal
+          <JournalIcon className="w-6 h-6 scale-125" />
         </button>
         <button
           onClick={() => router.push("/consult")}
-          className="text-sm text-gray-700 hover:text-blue-500"
+          className="text-gray-700 hover:text-blue-500 p-2"
         >
-          Sessions
+          <SessionsIcon className="w-6 h-6 scale-125" />
         </button>
         <button
           onClick={() => router.push("/subitem10")}
-          className="text-sm text-gray-700 hover:text-blue-500"
+          className="text-gray-700 hover:text-blue-500 p-2"
         >
-          Goals
+          <GoalsIcon className="w-6 h-6 scale-125" />
         </button>
         <button
           onClick={() => router.push("/subitem11")}
-          className="text-sm text-gray-700 hover:text-blue-500"
+          className="text-gray-700 hover:text-blue-500 p-2"
         >
-          Chat
+          <ChatIcon className="w-6 h-6 scale-110" />
         </button>
       </div>
     );

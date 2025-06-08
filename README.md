@@ -38,3 +38,5 @@
 21. npx prisma generate
 
 22. npx shadcn@latest add slider
+
+23. npm install @svgr/webpack
