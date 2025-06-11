@@ -3,19 +3,40 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+const walkerImages = [
+  "/icons/walker1.png",
+  "/icons/walker2.png",
+  "/icons/walker3.png",
+  "/icons/walker4.png",
+  "/icons/walker5.png",
+];
 
 export default function WalkPage() {
   const router = useRouter();
   const [isWalking, setIsWalking] = useState(false);
+  const [realPathLength, setRealPathLength] = useState(595);
   const [isPaused, setIsPaused] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [pathProgress, setPathProgress] = useState(0); // 0 to 1
   const [showSummary, setShowSummary] = useState(false);
+  const [selectedDuration, setSelectedDuration] = useState(5 * 60); // 默认5分钟（秒）
+  const [finalElapsedTime, setFinalElapsedTime] = useState(null);
+
   const intervalRef = useRef(null);
   const audioRef = useRef(null);
+  const startTimeRef = useRef(null);
 
-  const PATH_LENGTH = 790; // 这个值来自路径大概长度，可以用浏览器开发者工具精确测
-  const TOTAL_DURATION = 900; // 总共走多长时间，秒（会控制速度）
+  const TOTAL_DURATION = selectedDuration;
+
+  useEffect(() => {
+    // 获取真实的路径长度
+    const pathElement = document.getElementById("mainPath");
+    if (pathElement) {
+      const length = pathElement.getTotalLength();
+      setRealPathLength(length);
+      console.log("Real path length:", length); // 调试用
+    }
+  }, []);
 
   // 启动步行
   const startWalking = () => {
@@ -24,8 +45,9 @@ export default function WalkPage() {
     setShowSummary(false);
     setElapsedTime(0);
     setPathProgress(0);
+    startTimeRef.current = Date.now();
 
-    audioRef.current = new Audio("/audios/nature-sounds.mp3");
+    audioRef.current = new Audio("/audios/just-relax.mp3");
     audioRef.current.loop = true;
     audioRef.current.volume = 0.4;
     audioRef.current.play();
@@ -33,7 +55,13 @@ export default function WalkPage() {
     intervalRef.current = setInterval(() => {
       setElapsedTime((prev) => {
         const newElapsed = prev + 1;
-        setPathProgress(Math.min(newElapsed / TOTAL_DURATION, 1));
+        const progress = Math.min(newElapsed / TOTAL_DURATION, 1);
+        setPathProgress(progress);
+
+        if (newElapsed >= TOTAL_DURATION) {
+          endWalking();
+        }
+
         return newElapsed;
       });
     }, 1000);
@@ -44,7 +72,13 @@ export default function WalkPage() {
       intervalRef.current = setInterval(() => {
         setElapsedTime((prev) => {
           const newElapsed = prev + 1;
-          setPathProgress(Math.min(newElapsed / TOTAL_DURATION, 1));
+          const progress = Math.min(newElapsed / TOTAL_DURATION, 1);
+          setPathProgress(progress);
+
+          if (progress >= 1) {
+            endWalking();
+          }
+
           return newElapsed;
         });
       }, 1000);
@@ -57,12 +91,34 @@ export default function WalkPage() {
     }
   };
 
+  // const endWalking = () => {
+  //   clearInterval(intervalRef.current);
+  //   audioRef.current?.pause();
+  //   setIsWalking(false);
+  //   setIsPaused(false);
+  //   setShowSummary(true);
+  // };
   const endWalking = () => {
     clearInterval(intervalRef.current);
     audioRef.current?.pause();
+
+    const finalTime = Math.min(elapsedTime, TOTAL_DURATION); // ✅ 用 elapsedTime
+
+    setFinalElapsedTime(finalTime);
+    setPathProgress(Math.min(finalTime / TOTAL_DURATION, 1));
+
     setIsWalking(false);
     setIsPaused(false);
     setShowSummary(true);
+  };
+
+  const restartWalking = () => {
+    setIsWalking(false);
+    setIsPaused(false);
+    setElapsedTime(0);
+    setFinalElapsedTime(null);
+    setPathProgress(0);
+    setShowSummary(false);
   };
 
   useEffect(() => {
@@ -73,13 +129,6 @@ export default function WalkPage() {
   }, []);
 
   const [stepIndex, setStepIndex] = useState(0);
-  const walkerImages = [
-    "/icons/walker1.png",
-    "/icons/walker2.png",
-    "/icons/walker3.png",
-    "/icons/walker4.png",
-    "/icons/walker5.png",
-  ];
 
   useEffect(() => {
     if (isWalking && !isPaused) {
@@ -104,6 +153,28 @@ export default function WalkPage() {
       <p className="text-base md:text-lg text-gray-700 max-w-md mb-6">
         Breathe deeply. Walk at your own pace. Let the path guide your calm.
       </p>
+      <div className="mb-6">
+        <label className="text-green-800 font-medium mr-2">
+          Set walking time (minutes):
+        </label>
+        <select
+          value={selectedDuration / 60}
+          onChange={(e) => setSelectedDuration(Number(e.target.value) * 60)}
+          disabled={isWalking} // 👈 正在走路时禁用
+          className={`p-2 rounded border ${
+            isWalking ? "bg-gray-200 text-gray-500" : "bg-white text-green-900"
+          } border-green-400`}
+        >
+          {[...Array(25)].map((_, i) => {
+            const min = i + 1;
+            return (
+              <option key={min} value={min}>
+                {min} minutes
+              </option>
+            );
+          })}
+        </select>
+      </div>
 
       <svg
         viewBox="0 0 300 300"
@@ -127,8 +198,8 @@ export default function WalkPage() {
               stroke="#22c55e"
               strokeWidth="7"
               fill="none"
-              strokeDasharray={PATH_LENGTH}
-              strokeDashoffset={PATH_LENGTH * (1 - pathProgress)}
+              strokeDasharray={realPathLength} // 使用真实长度
+              strokeDashoffset={realPathLength * (1 - pathProgress)} // 使用真实长度
             />
           )}
         </g>
@@ -139,13 +210,12 @@ export default function WalkPage() {
         <image href="/icons/tree4.png" x="140" y="40" width="70" height="70" />
         <image href="/icons/tree6.png" x="210" y="140" width="50" height="50" />
         <image href="/icons/tree7.png" x="50" y="140" width="80" height="80" />
-
-        {/* 小人 */}
-        {isWalking && !showSummary && (
+        小人
+        {/* {isWalking && !showSummary && (
           <g>
             <animateMotion
               dur={`${TOTAL_DURATION}s`}
-              repeatCount="indefinite"
+              repeatCount="1"
               begin="0s"
               fill="freeze"
               keyPoints={`${pathProgress};${pathProgress + 0.001}`}
@@ -159,10 +229,19 @@ export default function WalkPage() {
               href={walkerImages[stepIndex]}
               width="30"
               height="30"
-              x="1"
+              x="0"
               y="40"
             />
           </g>
+        )} */}
+        {isWalking && !showSummary && (
+          <image
+            href={walkerImages[stepIndex]}
+            width="40"
+            height="40"
+            x="120" // 👈 调整你想要的位置
+            y="120"
+          />
         )}
       </svg>
 
@@ -193,10 +272,22 @@ export default function WalkPage() {
         </div>
       )}
 
-      {showSummary && (
-        <div className="mt-8 text-green-900 text-xl font-semibold">
-          🌟 You walked for {elapsedTime} second{elapsedTime !== 1 && "s"}!
-          Great job!
+      {showSummary && finalElapsedTime !== null && (
+        <div className="mt-8 text-green-900 text-xl font-semibold flex flex-col items-center gap-4">
+          <div>
+            🌟 You walked for {Math.floor(finalElapsedTime / 60)} minute
+            {Math.floor(finalElapsedTime / 60) !== 1 ? "s" : ""} and{" "}
+            {finalElapsedTime % 60} second
+            {finalElapsedTime % 60 !== 1 ? "s" : ""}!
+            <br />
+            Great job completing your walk!
+          </div>
+          <Button
+            className="bg-green-600 text-white px-6 py-2 rounded-xl hover:bg-green-700 transition"
+            onClick={restartWalking}
+          >
+            Restart Walk
+          </Button>
         </div>
       )}
     </main>
