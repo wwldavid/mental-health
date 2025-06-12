@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export default function Upperbar() {
+export default function Upperbar({ title = "My Center" }) {
   const router = useRouter();
 
   return (
@@ -13,7 +13,7 @@ export default function Upperbar() {
       >
         <ChevronLeft size={24} />
       </button>
-      <div className="text-lg font-semibold text-gray-800">My Center</div>
+      <div className="text-lg font-semibold text-gray-800">{title}</div>
       <div className="flex gap-2 p-2">
         <div
           className="w-[43px] h-[43px] rounded-full"

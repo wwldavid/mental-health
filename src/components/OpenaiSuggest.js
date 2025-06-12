@@ -34,7 +34,7 @@ export default function OpenaiSuggest() {
 
   return (
     <main className="h-screen ">
-      <Upperbar />
+      <Upperbar title="My Center" />
       <div className="flex flex-col items-center justify-center p-6 mt-28">
         <motion.h3
           className="text-2xl sm:text-4xl font-serif text-center mb-6"
