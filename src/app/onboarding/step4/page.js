@@ -6,7 +6,7 @@ export default function Step4() {
   const router = useRouter();
 
   const buttonStyle =
-    "w-full max-w-xs bg-[#3a5b52] text-white py-2 px-4 rounded mb-4 hover:bg-[#7ebeab] active:bg-[#7ebeab] transition duration-200";
+    "w-full h-[46px] mx-auto block bg-[#000] text-white py-2 px-4 rounded mb-4 hover:bg-[#7ebeab] active:bg-[#7ebeab] transition duration-200";
 
   const options = [
     "I am stressed or anxious",

@@ -69,12 +69,6 @@ const Navbar = ({ mobile = false }) => {
     return (
       <div className="fixed bottom-7 left-0 w-full z-50 bg-[#fff] border-t shadow-md flex justify-around items-center h-[50px] md:hidden">
         <button
-          onClick={() => router.push("/")}
-          className="text-gray-700 hover:text-blue-500 p-2"
-        >
-          <HomeIcon className="w-6 h-6 scale-125" />
-        </button>
-        <button
           onClick={() => router.push("/write-journal")}
           className="text-gray-700 hover:text-blue-500 p-2"
         >
@@ -87,16 +81,23 @@ const Navbar = ({ mobile = false }) => {
           <SessionsIcon className="w-6 h-6 scale-125" />
         </button>
         <button
-          onClick={() => router.push("/subitem10")}
+          onClick={() => router.push("/")}
           className="text-gray-700 hover:text-blue-500 p-2"
         >
-          <GoalsIcon className="w-6 h-6 scale-125" />
+          <HomeIcon className="w-6 h-6 scale-150" />
         </button>
+
         <button
           onClick={() => router.push("/subitem11")}
           className="text-gray-700 hover:text-blue-500 p-2"
         >
           <ChatIcon className="w-6 h-6 scale-110" />
+        </button>
+        <button
+          onClick={() => router.push("/subitem10")}
+          className="text-gray-700 hover:text-blue-500 p-2"
+        >
+          <GoalsIcon className="w-6 h-6 scale-125" />
         </button>
       </div>
     );

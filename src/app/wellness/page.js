@@ -44,7 +44,7 @@ export default function Wellness() {
 
   return (
     <div className=" min-h-screen flex flex-col items-center justify-center  bg-[#E9E9E9]">
-      <Upperbar />
+      <Upperbar title="Wellness" />
       <div className=" p-3">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-4xl mx-auto">
           {features.map((f, i) => (
@@ -53,7 +53,7 @@ export default function Wellness() {
               onClick={() => router.push(f.path)}
               className="cursor-pointer flex flex-col items-center justify-center p-4 border rounded-lg shadow hover:shadow-lg transition w-[172px] h-[151px] bg-[#000]"
             >
-              <div className="w-24 h-24 mb-2">
+              <div className="w-20 h-20 mb-2">
                 <Image
                   src={f.icon}
                   alt={f.title}
