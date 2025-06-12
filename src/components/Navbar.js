@@ -67,7 +67,7 @@ const Navbar = ({ mobile = false }) => {
 
   if (mobile) {
     return (
-      <div className="fixed bottom-0 left-0 w-full z-50 bg-white border-t shadow-md flex justify-around items-center h-16 md:hidden">
+      <div className="fixed bottom-7 left-0 w-full z-50 bg-[#fff] border-t shadow-md flex justify-around items-center h-[50px] md:hidden">
         <button
           onClick={() => router.push("/")}
           className="text-gray-700 hover:text-blue-500 p-2"
@@ -168,7 +168,7 @@ const Navbar = ({ mobile = false }) => {
         </div>
 
         {/* Mobile Menu Dropdown */}
-        {isMobileMenuOpen && (
+        {/* {isMobileMenuOpen && (
           <div className="md:hidden bg-white shadow-md border-t space-y-4">
             {menuItems.map((menu, index) => (
               <DropdownMenu key={index}>
@@ -192,7 +192,7 @@ const Navbar = ({ mobile = false }) => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ))}
-            {/* <Button
+            <Button
               variant="ghost"
               className="block w-full text-left"
               onClick={() => router.push("/contact")}
@@ -212,9 +212,9 @@ const Navbar = ({ mobile = false }) => {
               onClick={handleSignUp}
             >
               Sign Up
-            </Button> */}
+            </Button>
           </div>
-        )}
+        )} */}
       </nav>
     </div>
   );

@@ -33,8 +33,8 @@ export default function OpenaiSuggest() {
   };
 
   return (
-    <main>
-      <div className="fixed top-5 left-0 w-full bg-white shadow-sm px-4 py-2 mb-6 flex items-center justify-between">
+    <main className="h-screen ">
+      <div className="fixed top-14 h-[59px] left-0 w-full bg-white shadow-sm px-4 py-2 mb-6 flex items-center justify-between">
         <button
           onClick={() => router.back()}
           className="text-xl text-gray-600 hover:text-black"
@@ -42,34 +42,42 @@ export default function OpenaiSuggest() {
           <ChevronLeft size={24} />
         </button>
         <div className="text-lg font-semibold text-gray-800">My Center</div>
-        <div className="w-8 h-8 rounded-full bg-gray-300 overflow-hidden">
-          {/* 你可以换成真实头像 */}
-          <Image
-            src="/images/avatar.png"
-            width={10}
-            height={10}
-            alt="User Avatar"
-            className="w-full h-full object-cover"
-          />
+        <div className="flex gap-2 p-2">
+          <div className="w-[43px] h-[43px] rounded-full">
+            <Image
+              src="/images/wellness.png"
+              width={10}
+              height={10}
+              alt="User Avatar"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="w-[43px] h-[43px] rounded-full">
+            <Image
+              src="/images/avatar.png"
+              width={10}
+              height={10}
+              alt="User Avatar"
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center p-6 mt-10 mb-10">
-        <motion.h2
-          className="text-3xl sm:text-4xl font-serif text-center mb-6"
+      <div className="flex flex-col items-center justify-center p-6 mt-28">
+        <motion.h3
+          className="text-2xl sm:text-4xl font-serif text-center mb-6"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Hi,welcome to our app!
-          <br />
-          How are you feeling today?
-        </motion.h2>
+          Hello [User], how are you feeling today?
+        </motion.h3>
 
         <Textarea
           value={feeling}
           onChange={(e) => setFeeling(e.target.value)}
-          placeholder="e.g. I feel a bit anxious..."
-          className="max-w-xl w-full mb-4"
+          placeholder="I am feeling stressed because of work. My boss is very difficult and I am burned out."
+          className="w-[361px] h-[233px] shrink-0 rounded-[15px] mt-4 mb-4 bg-[#D9D9D9]"
           rows={3}
         />
 
