@@ -6,8 +6,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import { ChevronLeft } from "lucide-react";
+
+import Upperbar from "./Upperbar";
 
 export default function OpenaiSuggest() {
   const [feeling, setFeeling] = useState("");
@@ -34,35 +34,7 @@ export default function OpenaiSuggest() {
 
   return (
     <main className="h-screen ">
-      <div className="fixed top-14 h-[59px] left-0 w-full bg-white shadow-sm px-4 py-2 mb-6 flex items-center justify-between">
-        <button
-          onClick={() => router.back()}
-          className="text-xl text-gray-600 hover:text-black"
-        >
-          <ChevronLeft size={24} />
-        </button>
-        <div className="text-lg font-semibold text-gray-800">My Center</div>
-        <div className="flex gap-2 p-2">
-          <div className="w-[43px] h-[43px] rounded-full">
-            <Image
-              src="/images/wellness.png"
-              width={10}
-              height={10}
-              alt="User Avatar"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="w-[43px] h-[43px] rounded-full">
-            <Image
-              src="/images/avatar.png"
-              width={10}
-              height={10}
-              alt="User Avatar"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
+      <Upperbar />
       <div className="flex flex-col items-center justify-center p-6 mt-28">
         <motion.h3
           className="text-2xl sm:text-4xl font-serif text-center mb-6"
