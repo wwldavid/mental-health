@@ -19,7 +19,7 @@ export default function Home() {
   if (!showMain) return null;
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-gradient-to-b from-sky-100 to-white">
+    <div className="flex flex-col items-center justify-center p-6 bg-[#E9E9E9]">
       <OpenaiSuggest />
     </div>
   );

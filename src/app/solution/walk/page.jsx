@@ -102,7 +102,12 @@ export default function WalkPage() {
     clearInterval(intervalRef.current);
     audioRef.current?.pause();
 
-    const finalTime = Math.min(elapsedTime, TOTAL_DURATION); // ✅ 用 elapsedTime
+    // const finalTime = Math.min(elapsedTime, TOTAL_DURATION);
+    const now = Date.now();
+    const finalTime = Math.min(
+      Math.floor((now - startTimeRef.current) / 1000),
+      TOTAL_DURATION
+    );
 
     setFinalElapsedTime(finalTime);
     setPathProgress(Math.min(finalTime / TOTAL_DURATION, 1));
