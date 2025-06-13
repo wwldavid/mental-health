@@ -51,7 +51,7 @@ export default function Wellness() {
             <div
               key={i}
               onClick={() => router.push(f.path)}
-              className="cursor-pointer flex flex-col items-center justify-center p-4 border rounded-lg shadow hover:shadow-lg transition w-[172px] h-[151px] bg-[#000]"
+              className="cursor-pointer flex flex-col items-center justify-center p-4 border rounded-[10px] shadow hover:shadow-lg transition w-[172px] h-[151px] bg-[#000]"
             >
               <div className="w-20 h-20 mb-2">
                 <Image
@@ -69,6 +69,7 @@ export default function Wellness() {
           ))}
         </div>
       </div>
+
       <Navbar />
     </div>
   );
