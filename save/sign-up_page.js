@@ -1,3 +1,5 @@
+// src>app>sign-up>page.js
+
 "use client";
 
 import { useState } from "react";

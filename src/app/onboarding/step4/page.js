@@ -1,13 +1,10 @@
 "use client";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 
 export default function Step4() {
   const router = useRouter();
-
-  const buttonStyle =
-    "w-full h-[46px] mx-auto block bg-[#000] text-white py-2 px-4 rounded mb-4 hover:bg-[#7ebeab] active:bg-[#7ebeab] transition duration-200";
-
   const options = [
     "I am stressed or anxious",
     "I am feeling depressed",
@@ -21,48 +18,56 @@ export default function Step4() {
     "I am just exploring",
     "Other",
   ];
+  const [selected, setSelected] = useState([]);
+  const [error, setError] = useState("");
+
+  const toggle = (opt) => {
+    setSelected((prev) =>
+      prev.includes(opt) ? prev.filter((x) => x !== opt) : [...prev, opt]
+    );
+  };
+
+  const handleNext = async () => {
+    if (selected.length === 0) {
+      setError("Please select at least one option.");
+      return;
+    }
+    await fetch("/api/profile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ reasons: selected.join(",") }),
+    });
+    router.push("/onboarding/step5");
+  };
 
   return (
-    <div className="min-h-screen flex flex-col p-6">
-      {/* 顶部标题和引导 */}
-      <div>
-        <div className="flex justify-between items-center mb-6">
-          <button
-            onClick={() => router.back()}
-            className="text-gray-600 text-xl"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          <span className="text-sm text-gray-600">Step 4 of 4</span>
-        </div>
-
-        <h2 className="text-2xl font-semibold mb-4">
-          What brings you here today?
-        </h2>
-      </div>
-
-      {/* 选项滚动区域，设置最大高度和滚动 */}
-      <div className="max-h-[400px] overflow-y-auto pr-2 mb-6">
-        <form className="space-y-4">
-          {options.map((label, idx) => (
-            <div key={idx} className="flex items-center space-x-2">
-              <input type="checkbox" id={label} />
-              <label htmlFor={label}>{label}</label>
-            </div>
-          ))}
-        </form>
-      </div>
-
-      {/* 固定底部按钮 */}
-      <div>
-        <button
-          type="button"
-          onClick={() => router.push("/onboarding/step5")}
-          className={buttonStyle}
-        >
-          Next
+    <div className="min-h-screen p-6 flex flex-col">
+      <div className="flex justify-between items-center mt-10 mb-6">
+        <button onClick={() => router.back()} className="text-gray-600 text-xl">
+          <ChevronLeft size={24} />
         </button>
+        <span className="text-sm text-gray-600">Step 4 of 5</span>
       </div>
+      <h2 className="text-2xl font-semibold mb-4">What brings you here?</h2>
+      {error && <p className="text-red-600 mb-4">{error}</p>}
+      <div className="overflow-y-auto pr-2 space-y-2">
+        {options.map((opt) => (
+          <label key={opt} className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              checked={selected.includes(opt)}
+              onChange={() => toggle(opt)}
+            />
+            <span>{opt}</span>
+          </label>
+        ))}
+      </div>
+      <button
+        onClick={handleNext}
+        className="mt-6 w-full bg-black text-white py-2 rounded"
+      >
+        Next
+      </button>
     </div>
   );
 }

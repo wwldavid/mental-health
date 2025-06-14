@@ -1,3 +1,5 @@
+// src>app>api>auth>login>route.js
+
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
