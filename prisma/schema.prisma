@@ -18,6 +18,7 @@ model User {
   reasons            String?   // 第四步：来这里的原因（逗号分隔）
   emailVerified      DateTime?
   image              String?
+  role     String   @default("user")    // "user" 或 "counselor"
   provider           String?
   providerId         String?
   createdAt          DateTime  @default(now())
