@@ -58,7 +58,7 @@ const Navbar = ({ mobile = false }) => {
     },
     {
       label: "Chat",
-      items: [{ name: "Subitem 11", path: "/subitem11" }],
+      items: [{ name: "Chat", path: "/chat" }],
     },
   ];
 
@@ -88,7 +88,7 @@ const Navbar = ({ mobile = false }) => {
         </button>
 
         <button
-          onClick={() => router.push("/subitem11")}
+          onClick={() => router.push("/chat")}
           className="text-gray-700 hover:text-blue-500 p-2"
         >
           <ChatIcon className="w-6 h-6 scale-110" />
