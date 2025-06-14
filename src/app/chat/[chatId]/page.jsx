@@ -63,7 +63,7 @@ export default function ChatDetailPage({ userId }) {
         />
         <button
           onClick={sendMessage}
-          className="ml-2 px-4 py-2 bg-blue-500 text-white rounded"
+          className="ml-2 px-4 py-2 bg-white text-black rounded"
         >
           Send
         </button>
