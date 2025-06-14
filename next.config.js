@@ -7,6 +7,9 @@ const nextConfig = {
     });
     return config;
   },
+  images: {
+    domains: ["avatars.dicebear.com"],
+  },
 };
 
 module.exports = nextConfig;

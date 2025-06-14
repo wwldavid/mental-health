@@ -69,7 +69,7 @@ export default function ChatListPage() {
               className="flex items-center p-2 border-b cursor-pointer hover:bg-gray-100"
             >
               <Image
-                src={chat.user.avatarUrl || "/default-avatar.png"}
+                src={chat.user.image || "/default-avatar.png"}
                 alt={chat.user.name}
                 width={40}
                 height={40}
