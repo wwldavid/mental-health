@@ -1,5 +1,6 @@
 "use client";
 
+import Upperbar from "@/components/Upperbar";
 import { useRouter, useParams } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 
@@ -36,7 +37,8 @@ export default function ChatDetailPage({ userId }) {
   };
 
   return (
-    <div className="p-4 flex flex-col h-full">
+    <div className=" min-h-screen flex flex-col p-4  bg-[#E9E9E9]">
+      <Upperbar title="My Chat" />
       <div className="overflow-y-auto flex-1 mb-4">
         {messages.map((msg) => (
           <div
