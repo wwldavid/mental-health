@@ -42,7 +42,7 @@ export async function GET(request) {
       user: {
         id: other.id,
         name: other.name,
-        avatarUrl: other.avatarUrl,
+        image: other.image,
       },
       lastMessage: lastMsg?.content ?? "",
       unreadCount,
