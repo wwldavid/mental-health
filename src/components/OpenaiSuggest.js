@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react"; // ← 新增
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,10 +11,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import Upperbar from "./Upperbar";
 
 export default function OpenaiSuggest() {
+  const { data: session } = useSession(); // ← 新增
+  const userName = session?.user?.name || "there"; // ← 新增
+
   const [feeling, setFeeling] = useState("");
   const [acknowledgement, setAcknowledgement] = useState([]);
   const [advice, setAdvice] = useState("");
-
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -33,7 +36,7 @@ export default function OpenaiSuggest() {
   };
 
   return (
-    <main className="h-screen ">
+    <main className="h-screen">
       <Upperbar title="My Center" />
       <div className="flex flex-col items-center justify-center p-6 mt-28">
         <motion.h3
@@ -42,7 +45,7 @@ export default function OpenaiSuggest() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Hello [User], how are you feeling today?
+          Hello {userName}, how are you feeling today?
         </motion.h3>
 
         <Textarea

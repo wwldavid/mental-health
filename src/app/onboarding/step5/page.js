@@ -4,34 +4,29 @@ import { ChevronLeft } from "lucide-react";
 
 export default function Step5() {
   const router = useRouter();
-
-  const buttonStyle =
-    "w-full h-[46px] mx-auto block bg-[#000] text-white py-2 px-4 rounded mb-4 hover:bg-[#7ebeab] active:bg-[#7ebeab] transition duration-200";
-
   const handleBegin = () => {
     localStorage.setItem("onboardingComplete", "true");
-    router.push("/");
+    router.push("/"); // 或者 router.push("/openai-suggest")
   };
 
   return (
-    <div className="min-h-screen flex  flex-col p-6">
-      <div>
-        <button
-          onClick={() => router.back()}
-          className="text-gray-600 text-xl mb-6"
-        >
+    <div className="min-h-screen p-6 flex flex-col">
+      <div className="flex items-center mt-10 mb-6">
+        <button onClick={() => router.back()} className="text-gray-600 text-xl">
           <ChevronLeft size={24} />
         </button>
-        <p className=" my-28 text-lg font-medium">
-          You have taken a meaningful step, and your presence here is a sign of
-          strength. Remember: it is okay to reach out.
-        </p>
+        <span className="text-sm text-gray-600">Step 5 of 5</span>
       </div>
-      <div className="pt-4">
-        <button onClick={handleBegin} className={buttonStyle}>
-          Begin
-        </button>
-      </div>
+      <p className="text-center text-lg mb-6">
+        You’ve taken a meaningful step, and your presence here is a sign of
+        strength. Remember: it’s always okay to reach out.
+      </p>
+      <button
+        onClick={handleBegin}
+        className="w-full bg-black text-white py-2 rounded"
+      >
+        Begin
+      </button>
     </div>
   );
 }

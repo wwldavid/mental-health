@@ -1,5 +1,4 @@
 // src/lib/auth.js
-import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import DiscordProvider from "next-auth/providers/discord";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -7,24 +6,26 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
+console.log("Prisma client:", prisma ? "✅ Loaded" : "❌ Undefined");
+
+const adapter = PrismaAdapter(prisma);
+if (!adapter.createUser || !adapter.linkAccount) {
+  console.error("❌ Prisma Adapter 方法缺失");
+}
+
 export const authOptions = {
-  adapter: PrismaAdapter(prisma),
+  trustHost: true,
 
-  // 使用 JWT 存会话
-  session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 天
-  },
-
+  adapter,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       authorization: {
         params: {
-          prompt: "consent",
+          prompt: "consent", // 强制每次显示授权页面
           access_type: "offline",
-          scope: "openid email profile",
+          scope: "openid email profile", // 明确请求的权限
         },
       },
     }),
@@ -34,50 +35,51 @@ export const authOptions = {
       authorization: { params: { scope: "identify email" } },
     }),
     CredentialsProvider({
-      name: "邮箱/密码登录",
+      name: "Credentials",
       credentials: {
-        email: { label: "邮箱", type: "email" },
-        password: { label: "密码", type: "password" },
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // 查用户
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
-        if (!user || !user.password) {
-          throw new Error("邮箱或密码错误");
+
+        if (user && bcrypt.compareSync(credentials.password, user.password)) {
+          return user;
         }
-        // 验证密码
-        const valid = await bcrypt.compare(credentials.password, user.password);
-        if (!valid) {
-          throw new Error("邮箱或密码错误");
-        }
-        // 返回到 JWT 的 user 对象里
-        return {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          image: user.image,
-        };
+        return null;
       },
     }),
   ],
-
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30天
+  },
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "none",
+        path: "/",
+        secure: ".vercel.app",
+      },
+    },
+  },
   callbacks: {
-    // 把 user.id 写到 token 里
     async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
-        token.name = user.name;
         token.email = user.email;
+        token.name = user.name;
         token.picture = user.image;
       }
-      if (account?.access_token) {
+      if (account) {
         token.accessToken = account.access_token;
       }
       return token;
     },
-    // client 侧 session.user 拿到我们写的字段
     async session({ session, token }) {
       session.user = {
         id: token.id,
@@ -89,11 +91,5 @@ export const authOptions = {
       return session;
     },
   },
-
-  // 如果你想自定义 signIn 页面路径：
-  pages: {
-    signIn: "/sign-in",
-  },
-
   secret: process.env.NEXTAUTH_SECRET,
 };
