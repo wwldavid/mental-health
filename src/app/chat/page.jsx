@@ -41,7 +41,7 @@ export default function ChatListPage() {
         placeholder="Search chats..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full p-2 border rounded mb-4"
+        className="w-full p-2 border rounded mt-28 mb-4"
       />
 
       <div className="flex gap-4 mb-4">
