@@ -39,7 +39,7 @@ export default function ChatDetailPage({ userId }) {
   return (
     <div className=" min-h-screen flex flex-col p-4  bg-[#E9E9E9]">
       <Upperbar title="My Chat" />
-      <div className="overflow-y-auto flex-1 mt-28 mb-4">
+      <div className="overflow-y-auto  mt-28 mb-4">
         {messages.map((msg) => (
           <div
             key={msg.id}
@@ -47,7 +47,7 @@ export default function ChatDetailPage({ userId }) {
               msg.senderId === userId ? "justify-end" : "justify-start"
             }`}
           >
-            <div className="inline-block px-3 py-2 rounded bg-gray-200 max-w-xs">
+            <div className="inline-block px-3 py-2 rounded bg-lime-300 max-w-xs">
               {msg.content}
             </div>
           </div>
