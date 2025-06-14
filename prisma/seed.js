@@ -1,67 +1,44 @@
 // prisma/seed.js
-import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcryptjs";
+const { PrismaClient } = require("@prisma/client");
+const bcrypt = require("bcryptjs");
 const prisma = new PrismaClient();
 
 async function main() {
-  // 1. 造两个用户
-  const alice = await prisma.user.create({
-    data: {
-      name: "Alice",
-      email: "alice@example.com",
-      password: await bcrypt.hash("password123", 10),
-      // 如果你在模型里用了 image 字段，可以给个默认头像
-      image: `https://avatars.dicebear.com/api/identicon/${encodeURIComponent(
-        "alice@example.com"
-      )}.svg`,
+  const experts = [
+    {
+      name: "Dr. Alice",
+      email: "alice@therapy.com",
+      image: "/experts/alice.png",
+      password: "12345678",
     },
-  });
-  const bob = await prisma.user.create({
-    data: {
-      name: "Bob",
-      email: "bob@example.com",
-      password: await bcrypt.hash("password123", 10),
-      image: `https://avatars.dicebear.com/api/identicon/${encodeURIComponent(
-        "bob@example.com"
-      )}.svg`,
+    {
+      name: "Dr. Bob",
+      email: "bob@therapy.com",
+      image: "/experts/bob.png",
+      password: "12345678",
     },
-  });
+    {
+      name: "Dr. Carol",
+      email: "carol@therapy.com",
+      image: "/experts/carol.png",
+      password: "12345678",
+    },
+  ];
 
-  // 2. 新建一个 Chat
-  const chat = await prisma.chat.create({ data: {} });
-
-  // 3. 关联 Alice 和 Bob
-  await prisma.chatUser.createMany({
-    data: [
-      { chatId: chat.id, userId: alice.id },
-      { chatId: chat.id, userId: bob.id },
-    ],
-  });
-
-  // 4. 在这个 Chat 里插入几条消息
-  await prisma.message.createMany({
-    data: [
-      {
-        chatId: chat.id,
-        senderId: alice.id,
-        content: "Hi Bob，这里是 Alice。",
+  for (const e of experts) {
+    await prisma.user.upsert({
+      where: { email: e.email },
+      update: {},
+      create: {
+        name: e.name,
+        email: e.email,
+        image: e.image,
+        password: e.password,
       },
-      {
-        chatId: chat.id,
-        senderId: bob.id,
-        content: "你好 Alice，我已经收到啦！",
-      },
-    ],
-  });
-
-  console.log("🎉 Seed 数据已创建：", { alice, bob, chat });
+    });
+  }
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+  .catch(console.error)
+  .finally(() => prisma.$disconnect());

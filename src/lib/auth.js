@@ -1,4 +1,3 @@
-// src/lib/auth.js
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import DiscordProvider from "next-auth/providers/discord";
@@ -10,10 +9,9 @@ import bcrypt from "bcryptjs";
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
 
-  // 使用 JWT 存会话
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 天
+    maxAge: 30 * 24 * 60 * 60,
   },
 
   providers: [
@@ -40,19 +38,16 @@ export const authOptions = {
         password: { label: "密码", type: "password" },
       },
       async authorize(credentials) {
-        // 查用户
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
         });
         if (!user || !user.password) {
           throw new Error("邮箱或密码错误");
         }
-        // 验证密码
         const valid = await bcrypt.compare(credentials.password, user.password);
         if (!valid) {
           throw new Error("邮箱或密码错误");
         }
-        // 返回到 JWT 的 user 对象里
         return {
           id: user.id,
           name: user.name,
@@ -64,7 +59,6 @@ export const authOptions = {
   ],
 
   callbacks: {
-    // 把 user.id 写到 token 里
     async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
@@ -77,7 +71,6 @@ export const authOptions = {
       }
       return token;
     },
-    // client 侧 session.user 拿到我们写的字段
     async session({ session, token }) {
       session.user = {
         id: token.id,
@@ -90,10 +83,32 @@ export const authOptions = {
     },
   },
 
-  // 如果你想自定义 signIn 页面路径：
   pages: {
     signIn: "/sign-in",
   },
 
   secret: process.env.NEXTAUTH_SECRET,
+
+  events: {
+    createUser: async ({ user }) => {
+      const expertIds = [10, 11, 12]; // 对应你 seed 脚本里那三个专家的 id
+      try {
+        await Promise.all(
+          expertIds.map((expertId) =>
+            prisma.chat.create({
+              data: {
+                chatUsers: {
+                  create: [{ userId: user.id }, { userId: expertId }],
+                },
+              },
+            })
+          )
+        );
+      } catch (err) {
+        console.error("自动创建咨询师聊天失败：", err);
+      }
+    },
+  },
 };
+
+export default NextAuth(authOptions);
