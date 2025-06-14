@@ -34,6 +34,7 @@ export default function SignInPage() {
       setError(res.error);
     } else {
       // 登录成功，跳转到 callbackUrl
+      localStorage.setItem("onboardingComplete", "true");
       router.push(res.url || callbackUrl);
     }
   };

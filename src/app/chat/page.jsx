@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
@@ -15,6 +14,7 @@ export default function ChatListPage() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
 
+  // 已登录才拉后端数据
   useEffect(() => {
     if (status === "authenticated") {
       fetchChats();
@@ -27,15 +27,39 @@ export default function ChatListPage() {
     setChats(data);
   }
 
-  if (status === "loading") return <p>Loading…</p>;
-  if (status === "unauthenticated") {
-    router.push("/sign-up");
-    return null;
+  // 🔴 1) loading 状态
+  if (status === "loading") {
+    return <p className="p-4 text-center">Loading…</p>;
   }
 
+  // 🔴 2) 未认证：显示提示并提供跳转
+  if (status === "unauthenticated") {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[#E9E9E9]">
+        <p className="mb-6 text-lg">请先登录或注册，以开始与咨询师Chat。</p>
+        <div className="flex gap-4">
+          <button
+            onClick={() => router.push("/sign-in")}
+            className="px-4 py-2 bg-[#a4e2c6] text-white rounded"
+          >
+            登录
+          </button>
+          <button
+            onClick={() => router.push("/sign-up")}
+            className="px-4 py-2 bg-[#66c29a] text-white rounded"
+          >
+            注册
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // 🔴 3) 已认证：正常渲染后端返回的 chats 列表（此时包含三位咨询师的会话）
   return (
-    <div className=" min-h-screen flex flex-col p-4  bg-[#E9E9E9]">
+    <div className="min-h-screen flex flex-col p-4 bg-[#E9E9E9]">
       <Upperbar title="My Chat" />
+
       <input
         type="text"
         placeholder="Search chats..."
