@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import Upperbar from "@/components/Upperbar";
 
 export default function ChatListPage() {
   const router = useRouter();
@@ -28,12 +29,13 @@ export default function ChatListPage() {
 
   if (status === "loading") return <p>Loading…</p>;
   if (status === "unauthenticated") {
-    router.push("/api/auth/sign-up");
+    router.push("/sign-up");
     return null;
   }
 
   return (
-    <div className="p-4">
+    <div className=" min-h-screen flex flex-col p-4  bg-[#E9E9E9]">
+      <Upperbar title="My Chat" />
       <input
         type="text"
         placeholder="Search chats..."
