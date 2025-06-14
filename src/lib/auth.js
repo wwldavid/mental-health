@@ -44,8 +44,11 @@ export const authOptions = {
         if (!user || !user.password) {
           throw new Error("邮箱或密码错误");
         }
-        const valid = await bcrypt.compare(credentials.password, user.password);
-        if (!valid) {
+        const isValid = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
+        if (!isValid) {
           throw new Error("邮箱或密码错误");
         }
         return {
@@ -53,6 +56,7 @@ export const authOptions = {
           name: user.name,
           email: user.email,
           image: user.image,
+          role: user.role,
         };
       },
     }),
@@ -65,6 +69,7 @@ export const authOptions = {
         token.name = user.name;
         token.email = user.email;
         token.picture = user.image;
+        token.role = user.role;
       }
       if (account?.access_token) {
         token.accessToken = account.access_token;
@@ -77,6 +82,7 @@ export const authOptions = {
         name: token.name,
         email: token.email,
         image: token.picture,
+        role: token.role,
       };
       session.accessToken = token.accessToken;
       return session;
