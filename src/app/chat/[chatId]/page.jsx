@@ -78,20 +78,22 @@ export default function ChatDetailPage() {
       <Upperbar title="My Chat" />
 
       {/* 消息列表区，自动滚动到底部 */}
-      <div className=" mt-28 mb-4 px-2">
-        {messages.map((msg) => (
-          <div
-            key={msg.id}
-            className={`mb-2 flex ${
-              msg.senderId === userId ? "justify-end" : "justify-start"
-            }`}
-          >
-            <div className="inline-block px-3 py-2 rounded bg-lime-300 max-w-xs">
-              {msg.content}
+      <div className=" mt-28 mb-4 px-2 max-h-[60vh] overflow-y-auto">
+        <div className="  px-4 py-2">
+          {messages.map((msg) => (
+            <div
+              key={msg.id}
+              className={`mb-2 flex ${
+                msg.senderId === userId ? "justify-end" : "justify-start"
+              }`}
+            >
+              <div className="inline-block px-3 py-2 rounded bg-lime-300 max-w-xs">
+                {msg.content}
+              </div>
             </div>
-          </div>
-        ))}
-        <div ref={endRef} />
+          ))}
+          <div ref={endRef} />
+        </div>
       </div>
 
       {/* 输入框和发送按钮 */}
