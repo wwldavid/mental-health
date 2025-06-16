@@ -1,3 +1,5 @@
+// src/app/api/diary/route.js
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import prisma from "@/lib/prisma";
@@ -5,50 +7,41 @@ import prisma from "@/lib/prisma";
 // 获取当前用户的所有日记（按创建时间倒序）
 export async function GET(req) {
   const session = await getServerSession(authOptions);
+  // 未登录时只返回公开条目，登录后返回自己的全部条目
+  const where = session
+    ? { user: { email: session.user.email } }
+    : { isPublic: true };
 
-  if (session) {
-    // 登录用户：获取自己的全部日记
-    const dbUser = await prisma.user.findUnique({
-      where: { email: session.user.email },
-    });
+  const entries = await prisma.diaryEntry.findMany({
+    where,
+    orderBy: { createdAt: "desc" },
+    select: {
+      id: true,
+      content: true,
+      isPublic: true,
+      color: true, // 新增：返回颜色字段
+      createdAt: true,
+    },
+  });
 
-    if (!dbUser) return new Response("User not found", { status: 404 });
-
-    const entries = await prisma.diaryEntry.findMany({
-      where: { userId: dbUser.id },
-      orderBy: { createdAt: "desc" },
-    });
-
-    return Response.json(entries);
-  } else {
-    // 未登录用户：只显示公开的日记
-    const publicEntries = await prisma.diaryEntry.findMany({
-      where: { isPublic: true },
-      orderBy: { createdAt: "desc" },
-    });
-
-    return Response.json(publicEntries);
-  }
+  return Response.json(entries);
 }
 
 // 创建一条新的日记
 export async function POST(req) {
   const session = await getServerSession(authOptions);
-  if (!session) return new Response("Unauthorized", { status: 401 });
+  if (!session) {
+    return new Response("Unauthorized", { status: 401 });
+  }
 
-  const dbUser = await prisma.user.findUnique({
-    where: { email: session.user.email },
-  });
-
-  if (!dbUser) return new Response("User not found", { status: 404 });
-
-  const { content, isPublic } = await req.json();
+  const { content, isPublic, color } = await req.json();
 
   const newEntry = await prisma.diaryEntry.create({
     data: {
       content,
       isPublic,
-      userId: dbUser.id,
+      color, // 新增：存颜色
+      user: { connect: { email: session.user.email } },
     },
   });
 

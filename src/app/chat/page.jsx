@@ -60,7 +60,7 @@ export default function ChatListPage() {
     );
   }
 
-  //  3) 已认证：正常渲染后端返回的 chats 列表（此时包含三位咨询师的会话）
+  //  3) 已认证：正常渲染后端返回的 chats   列表（此时包含三位咨询师的会话）
   return (
     <div className="min-h-screen flex flex-col p-4 bg-[#E9E9E9]">
       <Upperbar title="My Chat" />
@@ -70,7 +70,7 @@ export default function ChatListPage() {
         placeholder="Search chats..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className=" mt-28 mb-4 w-full h-9 p-2  bg-neutral-50/95 rounded-[10px] mx-auto"
+        className="mt-28 mb-4 w-full h-9 p-2  bg-neutral-50/95 rounded-[10px] mx-auto"
       />
 
       <div className="flex gap-4 mb-4">
