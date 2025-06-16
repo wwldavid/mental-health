@@ -39,7 +39,7 @@ const Navbar = ({ mobile = false }) => {
     {
       label: "Journal",
       items: [
-        { name: "Write in a journal", path: "/write-journal" },
+        { name: "Write in a journal", path: "/journal" },
         { name: "Talk to a therapist", path: "/consult" },
         { name: "Subitem 6", path: "/subitem6" },
       ],
@@ -69,7 +69,7 @@ const Navbar = ({ mobile = false }) => {
     return (
       <div className="fixed bottom-7 left-0 w-full z-50 bg-[#fff] border-t shadow-md flex justify-around items-center h-[50px] md:hidden">
         <button
-          onClick={() => router.push("/write-journal")}
+          onClick={() => router.push("/journal")}
           className="text-gray-700 hover:text-blue-500 p-2"
         >
           <JournalIcon className="w-6 h-6 scale-125" />
