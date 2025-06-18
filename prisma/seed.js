@@ -11,6 +11,12 @@ async function main() {
       image: "/experts/alice.png",
       password: "12345678",
       role: "counselor",
+      // Alice 专属 Provider 内容
+      bio: "I support individuals navigating anxiety, overwhelm, and the mental load of daily life. My approach is grounded, compassionate, and focused on helping you find steadiness in moments of stress. Whether you're feeling stuck, overstimulated, or just need space to breathe and sort through things, I am here to listen and guide without judgment.",
+      specialties: "anxiety, stress",
+      rateInfo: "Sliding scale available",
+      languages: "English",
+      availability: "Mon-Wed 9:00-17:00",
     },
     {
       name: "Dr. Bob",
@@ -18,6 +24,12 @@ async function main() {
       image: "/experts/bob.png",
       password: "12345678",
       role: "counselor",
+      // Bob 专属 Provider 内容
+      bio: "I work with people facing low mood, self-doubt, and the weight that often comes with depression. My approach is straightforward but supportive — I’ll meet you where you are without sugarcoating or judgment. Whether you're struggling to find motivation or feeling stuck in your own head, I am here to help you get clearer, steadier, and more in touch with your own sense of worth.",
+      specialties: "depression, self-esteem",
+      rateInfo: "First session free",
+      languages: "English, Spanish",
+      availability: "Tue-Thu 10:00-18:00",
     },
     {
       name: "Dr. Carol",
@@ -25,12 +37,20 @@ async function main() {
       image: "/experts/carol.png",
       password: "12345678",
       role: "counselor",
+      // Carol 专属 Provider 内容
+      bio: "Specializing in life transitions, I am here to support you through change. My approach is compassionate and client-centered, focusing on building resilience and emotional clarity. Whether you're facing personal loss, career shifts, or identity changes, we'll navigate the path forward together.",
+      specialties: "life transitions, grief",
+      rateInfo: "Insurance accepted",
+      languages: "English, French",
+      availability: "Mon, Fri 11:00-16:00",
     },
   ];
 
+  // 1) 先 upsert User
+  const createdUsers = [];
   for (const e of experts) {
     const hashed = await bcrypt.hash(e.password, 10);
-    await prisma.user.upsert({
+    const user = await prisma.user.upsert({
       where: { email: e.email },
       update: { password: hashed, role: e.role },
       create: {
@@ -41,9 +61,44 @@ async function main() {
         role: e.role,
       },
     });
+    createdUsers.push(user);
   }
+
+  // 2) 再为这些用户在 Provider 表里 upsert 对应行
+  for (let i = 0; i < createdUsers.length; i++) {
+    const user = createdUsers[i];
+    // 对应上面 experts 数组里的第 i 个对象
+    const e = experts[i];
+    await prisma.provider.upsert({
+      where: { userId: user.id },
+      update: {
+        bio: e.bio,
+        specialties: e.specialties,
+        rateInfo: e.rateInfo,
+        languages: e.languages,
+        availability: e.availability,
+        image: user.image,
+      },
+      create: {
+        userId: user.id,
+        bio: e.bio,
+        specialties: e.specialties,
+        rateInfo: e.rateInfo,
+        languages: e.languages,
+        availability: e.availability,
+        image: user.image,
+      },
+    });
+  }
+
+  console.log("Seeding complete!");
 }
 
 main()
-  .catch(console.error)
-  .finally(() => prisma.$disconnect());
+  .catch((e) => {
+    console.error(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

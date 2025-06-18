@@ -30,6 +30,38 @@ model User {
   diaryEntries       DiaryEntry[]
   chatUsers          ChatUser[]
   sentMessages       Message[] @relation("SentMessages")
+
+  counselor   Provider? @relation("CounselorRelation")
+
+  // client 模式下的 sessions
+  sessionsAsUser TherapySession[] @relation("UserTherapySessions")
+
+
+}
+model Provider {
+  id          Int     @id @default(autoincrement())
+  user        User    @relation("CounselorRelation", fields: [userId], references: [id])
+  userId      Int     @unique
+  bio         String
+  specialties String
+  rateInfo    String
+  languages   String
+  availability String
+  image       String?
+
+  sessions TherapySession[] @relation("ProviderTherapySessions")
+}
+model TherapySession {
+  id          Int       @id @default(autoincrement())
+  user        User      @relation("UserTherapySessions", fields: [userId], references: [id])
+  userId      Int
+  provider    Provider  @relation("ProviderTherapySessions", fields: [providerId], references: [id])
+  providerId  Int
+  scheduledAt DateTime
+  status      String    // e.g. "booked" | "cancelled" | "completed"
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model ContactMessage {

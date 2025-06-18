@@ -40,3 +40,5 @@
 22. npx shadcn@latest add slider
 
 23. npm install @svgr/webpack
+
+24. npm install dayjs

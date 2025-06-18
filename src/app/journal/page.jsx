@@ -22,7 +22,7 @@ export default function JournalListPage() {
   );
 
   return (
-    <div className=" min-h-screen flex flex-col p-4 bg-[#E9E9E9]">
+    <div className="min-h-screen flex flex-col p-4 bg-[#E9E9E9]">
       <Upperbar title="Journal" />
 
       {/* 搜索框 */}
