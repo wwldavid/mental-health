@@ -1,11 +1,13 @@
 // src/app/consult/page.js
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Upperbar from "@/components/Upperbar";
 import Navbar from "@/components/Navbar";
 import Calendar from "@/components/Calendar";
 import ProviderCard from "@/components/ProviderCard";
+import dayjs from "dayjs";
 
 export default function ConsultPage() {
   const router = useRouter();
@@ -45,8 +47,29 @@ export default function ConsultPage() {
     }
   }, [mode]);
 
+  const prevMonth = () => {
+    let m = displayMonth - 1,
+      y = displayYear;
+    if (m < 1) {
+      m = 12;
+      y -= 1;
+    }
+    setDisplayMonth(m);
+    setDisplayYear(y);
+  };
+  const nextMonth = () => {
+    let m = displayMonth + 1,
+      y = displayYear;
+    if (m > 12) {
+      m = 1;
+      y += 1;
+    }
+    setDisplayMonth(m);
+    setDisplayYear(y);
+  };
+
   return (
-    <div className="min-h-screen flex flex-col p-4 bg-[#E9E9E9]">
+    <div className="h-screen flex flex-col p-4 bg-[#E9E9E9]">
       <Upperbar title="Session" />
 
       {/* 切换按钮组 */}
@@ -74,15 +97,26 @@ export default function ConsultPage() {
       </div>
 
       {/* 主体内容 */}
-      <div className="flex flex-col items-center gap-4 mt-4">
+      <div className="flex-1 overflow-y-auto flex-col items-center gap-4 mt-4 pb-20">
         {mode === "mine" ? (
           <>
+            <div className="flex items-center gap-4">
+              <button onClick={prevMonth} className="px-2">
+                ‹
+              </button>
+              <span className="font-medium">
+                {dayjs(`${displayYear}-${displayMonth}-01`).format("MMMM YYYY")}
+              </span>
+              <button onClick={nextMonth} className="px-2">
+                ›
+              </button>
+            </div>
             <Calendar
               year={displayYear}
               month={displayMonth}
               sessions={sessions}
             />
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 mt-4">
               {sessions.map((s) => (
                 <ProviderCard
                   key={s.id}

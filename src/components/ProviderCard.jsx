@@ -22,7 +22,7 @@ export default function ProviderCard({
             alt={session.provider.user.name}
             width={144}
             height={144}
-            className="w-36 h-36 rounded-full"
+            className="w-36 h-36 bg-lime-50"
           />
           <div className="ml-4 text-sm flex flex-col justify-between">
             <div>{session.provider.user.name}</div>
