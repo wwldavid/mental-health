@@ -21,7 +21,7 @@ export default function LiveSessionPage() {
           body: JSON.stringify({ sessionId: id }),
         });
         const { url, error: roomErr } = await res.json();
-        if (roomErr || !url) throw new Error(roomErr || "房间创建失败");
+        if (roomErr || !url) throw new Error(roomErr || "Creating room failed");
         setRoomUrl(url);
 
         // 短信里发回我们的 App 路由，让医生也能走同样的逻辑 join
@@ -33,7 +33,7 @@ export default function LiveSessionPage() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             to: providerPhone,
-            message: `您有一个新的视频会话，点击此链接加入：${appLink}`,
+            message: `You have a new video call invitation. Click here to join: ${appLink}`,
           }),
         });
       } catch (e) {
@@ -49,14 +49,14 @@ export default function LiveSessionPage() {
   if (error) {
     return (
       <div className="flex h-screen items-center justify-center text-red-500">
-        错误：{error}
+        Error: {error}
       </div>
     );
   }
   if (!roomUrl) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <p className="text-lg">正在准备视频会话…</p>
+        <p className="text-lg">Preparing your video call......</p>
       </div>
     );
   }
@@ -65,7 +65,7 @@ export default function LiveSessionPage() {
     <div className="fixed inset-0 bg-black">
       {sendingSms && (
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-white px-4 py-2 rounded shadow">
-          正在发送会话通知…
+          Sending out the session notification......
         </div>
       )}
       <iframe
@@ -77,7 +77,7 @@ export default function LiveSessionPage() {
         className="absolute top-4 right-4 px-3 py-1 bg-white text-black rounded"
         onClick={() => router.push("/consult")}
       >
-        退出
+        Exit
       </button>
     </div>
   );
