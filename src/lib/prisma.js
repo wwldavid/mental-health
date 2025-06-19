@@ -1,3 +1,5 @@
+// src>lib>prisma.js
+
 import { PrismaClient } from "@prisma/client";
 
 // 使用 globalThis 代替 global 以获得更好的跨环境兼容性
