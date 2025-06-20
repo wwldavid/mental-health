@@ -11,7 +11,7 @@ export default function Step5() {
 
   return (
     <div className="min-h-screen p-6 flex flex-col">
-      <div className="flex items-center mt-10 mb-6">
+      <div className="flex justify-between items-center mt-10 px-4 h-12 mb-6 bg-[#EAD098] rounded-bl-2xl rounded-br-2xl">
         <button onClick={() => router.back()} className="text-gray-600 text-xl">
           <ChevronLeft size={24} />
         </button>
@@ -23,7 +23,7 @@ export default function Step5() {
       </p>
       <button
         onClick={handleBegin}
-        className="w-full bg-black text-white py-2 rounded"
+        className="mt-6 w-full h-11 mx-auto block bg-[#325C77] rounded-2xl text-white py-2 mb-6 hover:bg-[#7ebeab] active:bg-[#7ebeab] transition duration-200"
       >
         Begin
       </button>

@@ -15,10 +15,12 @@ export default function Step1() {
 
   const handleNext = async () => {
     // —— 简单校验 ——
-    if (!name || !email) return setError("姓名和邮箱不能为空");
-    if (email !== confirmEmail) return setError("两次邮箱输入不一致");
-    if (password.length < 8) return setError("密码至少 8 位");
-    if (!agree) return setError("请先同意条款");
+    if (!name || !email) return setError("Please enter your name and email.");
+    if (email !== confirmEmail)
+      return setError("Both email inputs must match.");
+    if (password.length < 8)
+      return setError("Password must be at least 8 characters long.");
+    if (!agree) return setError("Please accept the terms and conditions.");
 
     // 1️⃣ 调用注册 API
     const res = await fetch("/api/auth/signup", {
@@ -39,8 +41,8 @@ export default function Step1() {
   };
 
   return (
-    <div className="min-h-screen p-6">
-      <div className="flex justify-between items-center mt-10 mb-6">
+    <div className="min-h-screen p-4">
+      <div className="flex justify-between items-center mt-10 px-4 h-12 mb-6 bg-[#EAD098] rounded-bl-2xl rounded-br-2xl">
         <button
           onClick={() => router.push("/welcome")}
           className="text-gray-600 text-xl"
@@ -107,7 +109,7 @@ export default function Step1() {
         </div>
         <button
           onClick={handleNext}
-          className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
+          className="mt-6 w-full h-11 mx-auto block bg-[#325C77] rounded-2xl text-white py-2 mb-6 hover:bg-[#7ebeab] active:bg-[#7ebeab] transition duration-200"
         >
           Next
         </button>

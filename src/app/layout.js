@@ -1,6 +1,7 @@
+// src>app>layout.js
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import ConditionalNavbar from "@/components/ConditionalNavbar";
 
 import SessionProviderWrapper from "@/components/SessionProviderWrapper";
 
@@ -17,11 +18,11 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <div className="flex flex-col min-h-screen">
           <SessionProviderWrapper>
-            <Navbar />
+            <ConditionalNavbar />
             <main className="flex-grow pt-0 md:pt-16 flex flex-col">
               {children}
             </main>
-            <Navbar mobile />
+            <ConditionalNavbar mobile />
           </SessionProviderWrapper>
         </div>
       </body>
