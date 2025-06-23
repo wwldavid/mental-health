@@ -7,9 +7,8 @@ export default function Welcome() {
 
   const buttonStyle =
     "w-96 h-11 mx-auto block bg-[#325C77] rounded-2xl text-white py-2 mb-6 hover:bg-[#7ebeab] active:bg-[#7ebeab] transition duration-200 ";
-
   return (
-    <div className="h-screen flex flex-col items-center gap-80 bg-white">
+    <div className="h-screen flex flex-col items-center gap-60 bg-white">
       <div className="flex flex-col items-center mt-52">
         <Image src="/logo.png" alt="logo" width={263} height={85} priority />
       </div>
