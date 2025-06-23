@@ -101,7 +101,7 @@ export default function Step1() {
             <a href="#" className="text-blue-500 underline">
               User Agreement
             </a>{" "}
-            和
+            and{" "}
             <a href="#" className="text-blue-500 underline">
               Privacy Policy
             </a>

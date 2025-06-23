@@ -22,7 +22,7 @@ const suggestions = [
     description: "Practice mindfulness to stay grounded and reduce anxiety.",
   },
   {
-    slug: "write-journal",
+    slug: "journal",
     title: "Write in a journal",
     description: "Journaling helps you process thoughts and emotions.",
   },

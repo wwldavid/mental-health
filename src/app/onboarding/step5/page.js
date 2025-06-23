@@ -17,13 +17,13 @@ export default function Step5() {
         </button>
         <span className="text-sm text-gray-600">Step 5 of 5</span>
       </div>
-      <p className="text-center text-lg mb-6">
+      <p className="text-center mt-28 text-lg  mb-6">
         You’ve taken a meaningful step, and your presence here is a sign of
         strength. Remember: it’s always okay to reach out.
       </p>
       <button
         onClick={handleBegin}
-        className="mt-6 w-full h-11 mx-auto block bg-[#325C77] rounded-2xl text-white py-2 mb-6 hover:bg-[#7ebeab] active:bg-[#7ebeab] transition duration-200"
+        className="mt-40 w-full h-11 mx-auto block bg-[#325C77] rounded-2xl text-white py-2 mb-6 hover:bg-[#7ebeab] active:bg-[#7ebeab] transition duration-200"
       >
         Begin
       </button>

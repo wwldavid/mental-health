@@ -10,9 +10,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import Upperbar from "./Upperbar";
 
+const buttonStyle =
+  "w-full p-2 flex items-center justify-center text-base font-medium text-white bg-[#325C77] hover:bg-[#7ebeab] transition duration-200 ";
+
 export default function OpenaiSuggest() {
   const { data: session } = useSession(); // ← 新增
-  const userName = session?.user?.name || "there"; // ← 新增
+  const userName = session?.user?.name || "there"; // ←
 
   const [feeling, setFeeling] = useState("");
   const [acknowledgement, setAcknowledgement] = useState([]);
@@ -36,7 +39,7 @@ export default function OpenaiSuggest() {
   };
 
   return (
-    <main className="h-screen">
+    <main className="min-h-screen">
       <Upperbar title="My Center" />
       <div className="flex flex-col items-center justify-center p-6 mt-28">
         <motion.h3
@@ -59,7 +62,7 @@ export default function OpenaiSuggest() {
         <Button
           onClick={handleSubmit}
           disabled={loading}
-          className="bg-[#00a3af] hover:opacity-90 text-white"
+          className={buttonStyle}
         >
           {loading ? "Analyzing..." : "Get Suggestions"}
         </Button>
@@ -82,7 +85,7 @@ export default function OpenaiSuggest() {
           )}
         </div>
 
-        <section className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl w-full">
+        <section className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl w-full pb-40">
           <AnimatePresence>
             {suggestions.map((s, i) => (
               <motion.div
@@ -96,8 +99,7 @@ export default function OpenaiSuggest() {
                   onClick={() => router.push(`/solution/${s.slug}`)}
                   className="hover:shadow-xl transition cursor-pointer"
                 >
-                  <CardContent className="p-4 flex items-center justify-center gap-2 text-lg font-medium text-[#00a3af]">
-                    <span>🌼</span>
+                  <CardContent className="p-2 flex items-center justify-center text-base font-medium text-white bg-[#325C77]">
                     {s.title}
                   </CardContent>
                 </Card>
