@@ -41,7 +41,7 @@ export default function NewJournalPage() {
       <Upperbar title="Journal" />
 
       <div className="mt-20 mb-10 w-full p-2 h-[60vh] overflow-y-auto space-y-4">
-        <p className="text-lg">{today}</p>
+        <p className="text-base">Today is {today}</p>
         <p className="text-sm text-gray-600">What colour feels like today?</p>
 
         {/* 颜色选择 */}
