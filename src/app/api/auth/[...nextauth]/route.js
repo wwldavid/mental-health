@@ -1,3 +1,4 @@
+// src>app>api>auth>[...nextauth]>route.js
 import NextAuth from "next-auth";
 import { authOptions } from "@/lib/auth"; // ✅ 使用统一的 authOptions
 

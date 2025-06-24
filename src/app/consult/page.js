@@ -8,9 +8,11 @@ import Navbar from "@/components/Navbar";
 import Calendar from "@/components/Calendar";
 import ProviderCard from "@/components/ProviderCard";
 import dayjs from "dayjs";
+import { useSession, signIn } from "next-auth/react";
 
 export default function ConsultPage() {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [mode, setMode] = useState("mine"); // 'mine' or 'find'
   const [sessions, setSessions] = useState([]);
   const [providers, setProviders] = useState([]);
@@ -20,12 +22,18 @@ export default function ConsultPage() {
   const [displayMonth, setDisplayMonth] = useState(now.getMonth() + 1);
 
   useEffect(() => {
+    if (status === "loading") return;
+    if (status === "unauthenticated") signIn();
+  }, [status]);
+
+  useEffect(() => {
+    if (status !== "authenticated") return;
     if (mode === "mine") {
       fetch("/api/sessions")
         .then((res) => res.json())
         .then((data) => {
           console.log("Loaded sessions:", data);
-          setSessions(data);
+          setSessions(Array.isArray(data) ? data : []);
 
           // 如果有预约，就自动跳到第一条 session 的月份
           if (data.length > 0) {
@@ -45,7 +53,7 @@ export default function ConsultPage() {
         .then((data) => setProviders(data))
         .catch((err) => console.error("Failed to load providers", err));
     }
-  }, [mode]);
+  }, [mode, status]);
 
   const prevMonth = () => {
     let m = displayMonth - 1,
@@ -67,6 +75,10 @@ export default function ConsultPage() {
     setDisplayMonth(m);
     setDisplayYear(y);
   };
+  // 渲染保护
+  if (status !== "authenticated") {
+    return <p>加载中……</p>;
+  }
 
   return (
     <div className="h-screen flex flex-col p-4 bg-[#E9E9E9]">
@@ -117,7 +129,7 @@ export default function ConsultPage() {
               sessions={sessions}
             />
             <div className="flex flex-wrap justify-center gap-4 mt-4">
-              {sessions.map((s) => (
+              {/* {sessions.map((s) => (
                 <ProviderCard
                   key={s.id}
                   mode="mine"
@@ -128,7 +140,23 @@ export default function ConsultPage() {
                     router.push(`/consult/provider/${s.provider.id}/book`)
                   }
                 />
-              ))}
+              ))} */}
+              {sessions.length > 0 ? (
+                sessions.map((s) => (
+                  <ProviderCard
+                    key={s.id}
+                    mode="mine"
+                    session={s}
+                    onJoin={() => router.push(`/consult/live/${s.id}`)}
+                    onCancel={() => router.push(`/consult/cancel/${s.id}`)}
+                    onBook={() =>
+                      router.push(`/consult/provider/${s.provider.id}/book`)
+                    }
+                  />
+                ))
+              ) : (
+                <p className="text-center py-4">暂无预约会话</p>
+              )}
             </div>
           </>
         ) : (
