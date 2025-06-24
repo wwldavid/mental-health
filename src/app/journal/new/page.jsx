@@ -27,7 +27,7 @@ export default function NewJournalPage() {
     <div className="min-h-screen flex flex-col p-4 bg-[#E9E9E9]">
       <Upperbar title="Journal" />
 
-      <div className="mt-28 mb-10 w-full p-2 h-[60vh] overflow-y-auto space-y-4">
+      <div className="mt-20 mb-10 w-full p-2 h-[60vh] overflow-y-auto space-y-4">
         <p className="text-lg">Today</p>
         <p className="text-sm text-gray-600">What colour feels like today?</p>
 
