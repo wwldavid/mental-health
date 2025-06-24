@@ -43,7 +43,7 @@ export default function Wellness() {
   const router = useRouter();
 
   return (
-    <div className=" min-h-screen flex flex-col items-center justify-center  bg-[#E9E9E9]">
+    <div className="h-screen flex flex-col items-center justify-center  bg-[#E9E9E9]">
       <Upperbar title="Wellness" />
       <div className=" p-3">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-4xl mx-auto">
