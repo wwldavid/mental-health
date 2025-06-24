@@ -26,7 +26,7 @@ export default function JournalListPage() {
       <Upperbar title="Journal" />
 
       {/* 搜索框 */}
-      <div className="flex mt-28 mb-4 w-full h-9 p-2  bg-neutral-50/95 rounded-[10px] mx-auto">
+      <div className="flex mt-36 mb-4 w-full h-9 p-2  bg-neutral-50/95 rounded-[10px] mx-auto">
         <Search className="text-gray-400  mr-2" />
         <input
           className="flex-1 focus:outline-none bg-neutral-50/95"
@@ -37,7 +37,7 @@ export default function JournalListPage() {
       </div>
 
       {/* 列表 */}
-      <div className="h-[60vh] overflow-y-auto px-4 py-2 space-y-2">
+      <div className="h-[50vh] overflow-y-auto px-4 py-2 space-y-2">
         {filtered.map((entry) => (
           <div
             key={entry.id}

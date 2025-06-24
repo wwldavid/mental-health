@@ -6,7 +6,7 @@ export default function Upperbar({ title = "My Center" }) {
   const router = useRouter();
 
   return (
-    <div className="fixed top-8 h-[59px] left-0 w-full bg-white shadow-sm px-4 py-2 mb-6 flex items-center justify-between">
+    <div className="fixed top-6 h-[59px] left-0 w-full bg-white shadow-sm px-4 py-2 mb-6 flex items-center justify-between">
       <button
         onClick={() => router.back()}
         className="text-xl text-gray-600 hover:text-black"

@@ -67,7 +67,7 @@ const Navbar = ({ mobile = false }) => {
 
   if (mobile) {
     return (
-      <div className="fixed bottom-3 left-0 w-full z-100 bg-[#fff] border-t shadow-md flex justify-around items-center h-[50px] md:hidden">
+      <div className="fixed bottom-2 left-0 w-full z-100 bg-[#fff] border-t shadow-md flex justify-around items-center h-[50px] md:hidden">
         <button
           onClick={() => router.push("/journal")}
           className="text-gray-700 hover:text-blue-500 p-2"
