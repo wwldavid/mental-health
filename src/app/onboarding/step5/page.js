@@ -23,7 +23,10 @@ export default function Step5() {
         </p>
 
         <button
-          onClick={() => router.push("/")}
+          onClick={() => {
+            localStorage.setItem("onboardingComplete", "true");
+            router.push("/");
+          }}
           className="bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
         >
           Begin
