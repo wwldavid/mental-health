@@ -155,27 +155,27 @@ export default function WalkPage2() {
 
       {!showSummary ? (
         <button
-          className="w-[109px] h-[46px] bg-black text-white rounded"
+          className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
           onClick={handleStop}
         >
           Stop
         </button>
       ) : (
-        <div className="flex flex-col items-center space-y-4">
+        <div className="w-full flex flex-col items-center space-y-4">
           <button
-            className="w-[109px] h-[46px] bg-black text-white rounded"
+            className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
             onClick={handleRestart}
           >
             Restart
           </button>
           <button
-            className="w-[361px] h-[46px] bg-black text-white rounded"
+            className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
             onClick={feelBetter}
           >
             I am Feeling Better
           </button>
           <button
-            className="w-[361px] h-[46px] bg-black text-white rounded"
+            className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
             onClick={moreActs}
           >
             More Activities

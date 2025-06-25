@@ -26,14 +26,16 @@ export default function Upperbar({ title = "My Center" }) {
   }, []);
 
   return (
-    <div className="fixed top-3 h-[59px] left-0 w-full bg-white shadow-sm px-4 py-2 mb-6 flex items-center justify-between">
+    // <div className="fixed top-3 h-[59px] left-0 w-full bg-[#325C77] text-white shadow-sm px-4 py-2 mb-6 flex items-center justify-between">
+    <div className="fixed top-0 left-0 px-4 pt-10 pb-2 w-full bg-[#325C77] text-white shadow-sm  mb-6 flex items-center justify-between rounded-b-xl">
+      {/* className="bg-[#325C77] px-4 pt-9 pb-3 rounded-b-xl flex justify-between items-center shadow-md" */}
       <button
         onClick={() => router.back()}
-        className="text-xl text-gray-600 hover:text-black"
+        className="text-xl text-white hover:text-black"
       >
         <ChevronLeft size={24} />
       </button>
-      <div className="text-lg font-semibold text-gray-800">{title}</div>
+      <div className="text-lg font-semibold text-white">{title}</div>
       <div className="relative flex gap-2 p-2 items-center">
         <div
           className="w-[43px] h-[43px] rounded-full"
@@ -44,7 +46,7 @@ export default function Upperbar({ title = "My Center" }) {
             width={10}
             height={10}
             alt="wellness icon"
-            className="w-full h-full object-cover"
+            className="w-full h-full  object-cover filter brightness-0 invert"
           />
         </div>
         <div
@@ -61,13 +63,13 @@ export default function Upperbar({ title = "My Center" }) {
             width={10}
             height={10}
             alt="User Avatar"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover filter brightness-0 invert"
           />
         </div>
         {/* 下拉菜单 */}
         {menuOpen && status === "authenticated" && (
           <div
-            className="absolute right-0 mt-2 w-32 bg-white border shadow-lg rounded"
+            className="absolute right-0 mt-2 w-32 bg-[#325C77] border shadow-lg rounded"
             style={{ top: "60px" }}
           >
             <button

@@ -68,37 +68,37 @@ const Navbar = ({ mobile = false }) => {
 
   if (mobile) {
     return (
-      <div className="fixed bottom-0 left-0 w-full z-100 bg-[#fff] border-t shadow-md flex justify-around items-center h-[50px] md:hidden">
+      <div className="fixed bottom-0 left-0 w-full z-100 bg-[#325C77] border-t shadow-md flex justify-around items-center h-[50px] md:hidden">
         <button
           onClick={() => router.push("/journal")}
           className="text-gray-700 hover:text-blue-500 p-2"
         >
-          <JournalIcon className="w-6 h-6 scale-125" />
+          <JournalIcon className="w-6 h-6 scale-125 text-white fill-current" />
         </button>
         <button
           onClick={() => router.push("/consult")}
           className="text-gray-700 hover:text-blue-500 p-2"
         >
-          <SessionsIcon className="w-6 h-6 scale-125" />
+          <SessionsIcon className="w-6 h-6 scale-125 text-white fill-current" />
         </button>
         <button
           onClick={() => router.push("/")}
           className="text-gray-700 hover:text-blue-500 p-2"
         >
-          <HomeIcon className="w-6 h-6 scale-150" />
+          <HomeIcon className="w-6 h-6 scale-150 text-white fill-current" />
         </button>
 
         <button
           onClick={() => router.push("/chat")}
           className="text-gray-700 hover:text-blue-500 p-2"
         >
-          <ChatIcon className="w-6 h-6 scale-110" />
+          <ChatIcon className="w-6 h-6 scale-110 text-white fill-current" />
         </button>
         <button
           onClick={() => router.push("/subitem10")}
           className="text-gray-700 hover:text-blue-500 p-2"
         >
-          <GoalsIcon className="w-6 h-6 scale-125" />
+          <GoalsIcon className="w-6 h-6 scale-125 text-white fill-current" />
         </button>
       </div>
     );

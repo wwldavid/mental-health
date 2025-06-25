@@ -51,7 +51,7 @@ export default function Wellness() {
             <div
               key={i}
               onClick={() => router.push(f.path)}
-              className="cursor-pointer flex flex-col items-center justify-center p-4 border rounded-[10px] shadow hover:shadow-lg transition w-[172px] h-[151px] bg-[#000]"
+              className="cursor-pointer flex flex-col items-center justify-center p-4 border rounded-[10px] shadow hover:shadow-lg transition w-[172px] h-[151px] bg-[#EAD098]"
             >
               <div className="w-20 h-20 mb-2">
                 <Image
@@ -60,6 +60,9 @@ export default function Wellness() {
                   width={76}
                   height={76}
                   className="w-full h-full object-contain"
+                  style={{
+                    filter: "brightness(0) invert(1) brightness(0.35)",
+                  }}
                 />
               </div>
               <span className="w-[188px] h-[20px] text-center text-base font-medium text-[#fff]">

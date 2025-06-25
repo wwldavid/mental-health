@@ -109,7 +109,7 @@ export default function WalkPage1() {
       </div>
 
       <button
-        className="w-[109px] h-[46px] bg-black text-white rounded"
+        className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
         onClick={handleStart}
       >
         Start

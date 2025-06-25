@@ -30,7 +30,7 @@ export default function Step1() {
     });
     if (!res.ok) {
       const { error } = await res.json();
-      return setError(error || "注册失败");
+      return setError(error || "register failed");
     }
 
     // 2️⃣ 注册成功后自动登录（JWT）
@@ -41,75 +41,77 @@ export default function Step1() {
   };
 
   return (
-    <div className="min-h-screen p-4">
-      <div className="flex justify-between items-center mt-10 px-4 h-12 mb-6 bg-[#EAD098] rounded-bl-2xl rounded-br-2xl">
+    <div className="min-h-screen bg-white flex flex-col">
+      <div className="bg-[#325C77] px-4 pt-9 pb-3 rounded-b-xl flex justify-between items-center shadow-md">
         <button
           onClick={() => router.push("/welcome")}
-          className="text-gray-600 text-xl"
+          className="text-white text-xl"
         >
           <ChevronLeft size={24} />
         </button>
-        <span className="text-sm text-gray-600">Step 1 of 5</span>
+        <span className="text-sm text-white">Step 1 of 5</span>
       </div>
-      <h2 className="text-2xl font-semibold mb-4">Create an Account</h2>
-      {error && <p className="text-red-600 mb-4">{error}</p>}
-      <div className="space-y-4">
-        <div>
-          <label className="block mb-1">Your Name</label>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full border p-2 rounded"
-          />
-        </div>
-        <div>
-          <label className="block mb-1">Your Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full border p-2 rounded"
-          />
-        </div>
-        <div>
-          <label className="block mb-1">Confirm Your Email</label>
-          <input
-            type="email"
-            value={confirmEmail}
-            onChange={(e) => setConfirmEmail(e.target.value)}
-            className="w-full border p-2 rounded"
-          />
-        </div>
-        <div>
-          <label className="block mb-1">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full border p-2 rounded"
-          />
-          <p className="text-xs text-gray-500 mt-1">at least 8 letters</p>
-        </div>
-        <div className="flex items-start gap-2">
-          <input
-            type="checkbox"
-            checked={agree}
-            onChange={(e) => setAgree(e.target.checked)}
-          />
-          <label className="text-sm">
-            I agree
-            <a href="#" className="text-blue-500 underline">
-              User Agreement
-            </a>{" "}
-            and{" "}
-            <a href="#" className="text-blue-500 underline">
-              Privacy Policy
-            </a>
-          </label>
+      <div className="flex-1 p-6 max-w-md w-full mx-auto space-y-14">
+        <h2 className="text-2xl font-semibold mb-4">Create an Account</h2>
+        {error && <p className="text-red-600 mb-4">{error}</p>}
+        <div className="space-y-3">
+          <div>
+            <label className="block mb-1">Your Name</label>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full border p-2 rounded"
+            />
+          </div>
+          <div>
+            <label className="block mb-1">Your Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border p-2 rounded"
+            />
+          </div>
+          <div>
+            <label className="block mb-1">Confirm Your Email</label>
+            <input
+              type="email"
+              value={confirmEmail}
+              onChange={(e) => setConfirmEmail(e.target.value)}
+              className="w-full border p-2 rounded"
+            />
+          </div>
+          <div>
+            <label className="block mb-1">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full border p-2 rounded"
+            />
+            <p className="text-xs text-gray-500 mt-1">at least 8 letters</p>
+          </div>
+          <div className="flex items-start gap-2">
+            <input
+              type="checkbox"
+              checked={agree}
+              onChange={(e) => setAgree(e.target.checked)}
+            />
+            <label className="text-sm">
+              I agree
+              <a href="#" className="text-blue-500 underline">
+                User Agreement
+              </a>{" "}
+              and{" "}
+              <a href="#" className="text-blue-500 underline">
+                Privacy Policy
+              </a>
+            </label>
+          </div>
         </div>
         <button
           onClick={handleNext}
-          className="mt-6 w-full h-11 mx-auto block bg-[#325C77] rounded-2xl text-white py-2 mb-6 hover:bg-[#7ebeab] active:bg-[#7ebeab] transition duration-200"
+          className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
         >
           Next
         </button>

@@ -77,22 +77,22 @@ export default function Breathing() {
       </p>
 
       <button
-        className="w-28 h-11 bg-black flex justify-center items-center text-white text-xl font-bold"
+        className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
         onClick={running ? stopExercise : startExercise}
       >
         {running ? "Stop" : "Start"}
       </button>
 
       {showOptions && (
-        <div className="flex flex-col items-center space-y-4 mt-6">
+        <div className="w-full flex flex-col items-center space-y-4 mt-6">
           <button
-            className="w-[361px] h-[46px] bg-black text-white rounded"
+            className="w-full py-3 bg-[#EAD098] text-gray-800 rounded-xl font-semibold hover:opacity-90 transition"
             onClick={feelBetter}
           >
             I am Feeling Better
           </button>
           <button
-            className="w-[361px] h-[46px] bg-black text-white rounded"
+            className="w-full py-3 bg-[#EAD098] text-gray-800 rounded-xl font-semibold hover:opacity-90 transition"
             onClick={moreActs}
           >
             More Activities
