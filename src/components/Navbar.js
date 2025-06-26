@@ -82,7 +82,7 @@ const Navbar = ({ mobile = false }) => {
           <SessionsIcon className="w-6 h-6 scale-125 text-white fill-current" />
         </button>
         <button
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/home")}
           className="text-gray-700 hover:text-blue-500 p-2"
         >
           <HomeIcon className="w-6 h-6 scale-150 text-white fill-current" />

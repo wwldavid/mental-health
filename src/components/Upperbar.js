@@ -26,9 +26,7 @@ export default function Upperbar({ title = "My Center" }) {
   }, []);
 
   return (
-    // <div className="fixed top-3 h-[59px] left-0 w-full bg-[#325C77] text-white shadow-sm px-4 py-2 mb-6 flex items-center justify-between">
-    <div className="fixed top-0 left-0 px-4 pt-10 pb-2 w-full bg-[#325C77] text-white shadow-sm  mb-6 flex items-center justify-between rounded-b-xl">
-      {/* className="bg-[#325C77] px-4 pt-9 pb-3 rounded-b-xl flex justify-between items-center shadow-md" */}
+    <div className="fixed top-0 left-0 px-4 pt-10 pb-2 w-full bg-[#325C77] text-white shadow-sm mb-6 flex items-center justify-between rounded-b-2xl">
       <button
         onClick={() => router.back()}
         className="text-xl text-white hover:text-black"
@@ -38,15 +36,15 @@ export default function Upperbar({ title = "My Center" }) {
       <div className="text-lg font-semibold text-white">{title}</div>
       <div className="relative flex gap-2 p-2 items-center">
         <div
-          className="w-[43px] h-[43px] rounded-full"
+          className="w-[43px] h-[43px]"
           onClick={() => router.push("/wellness")}
         >
           <Image
-            src="/images/wellness.png"
-            width={10}
-            height={10}
+            src="/images/heart.svg"
+            width={43}
+            height={43}
             alt="wellness icon"
-            className="w-full h-full  object-cover filter brightness-0 invert"
+            className="w-full h-full  object-cover "
           />
         </div>
         <div
@@ -55,34 +53,46 @@ export default function Upperbar({ title = "My Center" }) {
             status === "authenticated" ? "" : "filter grayscale opacity-50"
           } `}
           onClick={() => {
-            if (status === "authenticated") setMenuOpen((o) => !o);
+            if (status === "authenticated") {
+              // 切换下拉菜单
+              setMenuOpen((o) => !o);
+            } else {
+              setMenuOpen(true);
+            }
           }}
         >
           <Image
-            src="/images/avatar.png"
-            width={10}
-            height={10}
+            src="/images/avatar.svg"
+            width={43}
+            height={43}
             alt="User Avatar"
-            className="w-full h-full object-cover filter brightness-0 invert"
+            className="w-full h-full object-cover"
           />
         </div>
         {/* 下拉菜单 */}
-        {menuOpen && status === "authenticated" && (
+        {menuOpen && (
           <div
             className="absolute right-0 mt-2 w-32 bg-[#325C77] border shadow-lg rounded"
             style={{ top: "60px" }}
           >
-            <button
-              className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-              onClick={() => {
-                // 先删掉你的 onboardingComplete flag
-                localStorage.removeItem("onboardingComplete");
-                // 再调用 NextAuth 的登出
-                signOut({ callbackUrl: "/welcome" });
-              }}
-            >
-              Log out
-            </button>
+            {status === "authenticated" ? (
+              <button
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                onClick={() => {
+                  localStorage.removeItem("onboardingComplete");
+                  signOut({ callbackUrl: "/welcome" });
+                }}
+              >
+                Log out
+              </button>
+            ) : (
+              <button
+                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                onClick={() => router.push("/sign-in")}
+              >
+                Sign in
+              </button>
+            )}
           </div>
         )}
       </div>

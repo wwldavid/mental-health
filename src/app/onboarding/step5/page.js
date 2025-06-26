@@ -21,11 +21,12 @@ export default function Step5() {
             Remember: it is always okay to reach out.
           </span>
         </p>
-
+      </div>
+      <div className="fixed bottom-5 left-0 w-full  p-4 ">
         <button
           onClick={() => {
             localStorage.setItem("onboardingComplete", "true");
-            router.push("/");
+            router.push("/home");
           }}
           className="bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
         >

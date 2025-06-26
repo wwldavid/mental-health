@@ -28,7 +28,7 @@ export default function Welcome() {
         <button
           onClick={() => {
             localStorage.setItem("onboardingComplete", "true");
-            router.push("/");
+            router.push("/home");
           }}
           className={buttonStyle}
         >

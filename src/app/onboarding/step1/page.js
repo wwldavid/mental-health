@@ -41,7 +41,7 @@ export default function Step1() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <div className="bg-[#325C77] px-4 pt-9 pb-3 rounded-b-xl flex justify-between items-center shadow-md">
         <button
           onClick={() => router.push("/welcome")}
@@ -109,6 +109,8 @@ export default function Step1() {
             </label>
           </div>
         </div>
+      </div>
+      <div className="fixed bottom-5 left-0 w-full  p-4 ">
         <button
           onClick={handleNext}
           className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"

@@ -39,7 +39,7 @@ export default function OpenaiSuggest() {
   };
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen w-full">
       <Upperbar title="My Center" />
       <div className="flex flex-col items-center justify-center p-6 mt-28">
         <motion.h3

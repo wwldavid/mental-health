@@ -113,12 +113,12 @@ export default function SignInPage() {
           </div>
 
           <p className="mt-6 text-center text-sm text-gray-600">
-            Without an account ？{" "}
+            Without an account ?{" "}
             <a
               href="/onboarding/step1"
               className="text-[#325C77] hover:underline"
             >
-              Sign in now
+              Sign up now
             </a>
           </p>
         </form>
