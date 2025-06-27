@@ -6,14 +6,26 @@ import { ChevronLeft } from "lucide-react";
 export default function Step2() {
   const router = useRouter();
   const [gender, setGender] = useState("");
+  const [otherGender, setOtherGender] = useState("");
   const [error, setError] = useState("");
 
   const handleNext = async () => {
     if (!gender) return setError("Please select a gender identity");
+
+    if (gender === "Other" && !otherGender.trim()) {
+      setError("Please specify your gender identity");
+      return;
+    }
+
+    const payload = { genderIdentity: gender };
+    if (gender === "Other") {
+      payload.otherGenderIdentity = otherGender.trim();
+    }
+
     await fetch("/api/profile", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ genderIdentity: gender }),
+      body: JSON.stringify(payload),
     });
     router.push("/onboarding/step3");
   };
@@ -43,18 +55,26 @@ export default function Step2() {
 
         <div className="space-y-4">
           {options.map((option) => (
-            <label
-              key={option}
-              className="flex items-center text-gray-800 text-sm"
-            >
-              <input
-                type="checkbox"
-                checked={gender === option}
-                onChange={() => setGender(option)}
-                className="mr-3 w-5 h-5 rounded border-gray-400"
-              />
-              {option}
-            </label>
+            <div key={option}>
+              <label className="flex items-center text-gray-800 text-sm">
+                <input
+                  type="checkbox"
+                  checked={gender === option}
+                  onChange={() => setGender(option)}
+                  className="mr-3 w-5 h-5 rounded border-gray-400"
+                />
+                {option}
+              </label>
+              {option === "Other" && gender === "Other" && (
+                <textarea
+                  rows={2}
+                  value={otherGender}
+                  onChange={(e) => setOtherGender(e.target.value)}
+                  placeholder="Please specify"
+                  className="mt-2 w-full px-3 py-2 border rounded text-sm resize-none"
+                />
+              )}
+            </div>
           ))}
         </div>
 

@@ -84,6 +84,12 @@ export default function OpenaiSuggest() {
             </div>
           )}
         </div>
+        {/* 新增：当有 suggestions 时显示标题 */}
+        {suggestions.length > 0 && (
+          <h3 className="text-lg font-semibold text-[#69821b]">
+            Suggested Activities
+          </h3>
+        )}
 
         <section className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl w-full pb-40">
           <AnimatePresence>

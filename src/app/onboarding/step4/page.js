@@ -5,6 +5,7 @@ import { ChevronLeft } from "lucide-react";
 export default function Step4() {
   const router = useRouter();
   const [reasons, setReasons] = useState([]);
+  const [otherText, setOtherText] = useState("");
   const [error, setError] = useState("");
 
   const toggleReason = (reason) => {
@@ -17,10 +18,21 @@ export default function Step4() {
 
   const handleNext = async () => {
     if (!reasons.length) return setError("Please select at least one option");
+
+    if (reasons.includes("Other") && !otherText.trim()) {
+      setError("Please specify your reason for selecting Other");
+      return;
+    }
+
+    const payload = { reasons };
+    if (reasons.includes("Other")) {
+      payload.otherReason = otherText.trim();
+    }
+
     await fetch("/api/profile", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ reasons }),
+      body: JSON.stringify(payload),
     });
     router.push("/onboarding/step5");
   };
@@ -52,18 +64,27 @@ export default function Step4() {
 
         <div className="space-y-4">
           {options.map((option) => (
-            <label
-              key={option}
-              className="flex items-center text-gray-800 text-sm"
-            >
-              <input
-                type="checkbox"
-                checked={reasons.includes(option)}
-                onChange={() => toggleReason(option)}
-                className="mr-3 w-5 h-5 rounded border-gray-400"
-              />
-              {option}
-            </label>
+            <div key={option}>
+              <label className="flex items-center text-gray-800 text-sm">
+                <input
+                  type="checkbox"
+                  checked={reasons.includes(option)}
+                  onChange={() => toggleReason(option)}
+                  className="mr-3 w-5 h-5 rounded border-gray-400"
+                />
+                {option}
+              </label>
+              {/* 如果是 Other 且被选中，就显示一个文本输入框 */}
+              {option === "Other" && reasons.includes("Other") && (
+                <textarea
+                  rows={3}
+                  value={otherText}
+                  onChange={(e) => setOtherText(e.target.value)}
+                  placeholder="Please specify"
+                  className="mt-2 w-full px-3 py-2 border rounded text-sm resize-none"
+                />
+              )}
+            </div>
           ))}
         </div>
 
