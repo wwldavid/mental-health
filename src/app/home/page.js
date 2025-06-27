@@ -20,7 +20,7 @@ export default function Home() {
   if (!showMain) return null;
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-[#E9E9E9]">
+    <div className="flex flex-col items-center justify-center p-6">
       <OpenaiSuggest />
     </div>
   );
