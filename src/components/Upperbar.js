@@ -26,75 +26,77 @@ export default function Upperbar({ title = "My Center" }) {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 px-4 pt-10 pb-2 w-full text-[#325C77] mb-6 flex items-center justify-between rounded-b-2xl">
-      <button
-        onClick={() => router.back()}
-        className="text-xl hover:text-black"
-      >
-        <ChevronLeft size={24} />
-      </button>
-      <div className="text-lg font-semibold">{title}</div>
-      <div className="relative flex gap-2 p-2 items-center">
-        <div
-          className="w-[43px] h-[43px]"
-          onClick={() => router.push("/wellness")}
+    <div className="fixed top-0 left-0 w-full px-4 pt-14 pb-2">
+      <div className="h-[43px] grid grid-cols-[auto_1fr_auto] items-center rounded-b-2xl  text-[#325C77]   ">
+        <button
+          onClick={() => router.back()}
+          className="text-xl hover:text-black justify-self-start"
         >
-          <Image
-            src="/images/heart_plus.svg"
-            width={43}
-            height={43}
-            alt="wellness icon"
-            className="w-full h-full  object-cover "
-          />
-        </div>
-        <div
-          ref={avatarRef}
-          className={`w-[43px] h-[43px] rounded-full overflow-hidden cursor-pointer ${
-            status === "authenticated" ? "" : "filter grayscale opacity-50"
-          } `}
-          onClick={() => {
-            if (status === "authenticated") {
-              // 切换下拉菜单
-              setMenuOpen((o) => !o);
-            } else {
-              setMenuOpen(true);
-            }
-          }}
-        >
-          <Image
-            src="/images/person.svg"
-            width={43}
-            height={43}
-            alt="User Avatar"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        {/* 下拉菜单 */}
-        {menuOpen && (
+          <ChevronLeft size={24} />
+        </button>
+        <div className="text-center text-lg font-semibold ">{title}</div>
+        <div className="relative flex gap-2  items-center justify-self-end">
           <div
-            className="absolute right-0 mt-2 w-32 text-[#325C77] border shadow-lg rounded"
-            style={{ top: "60px" }}
+            className="w-[43px] h-[43px]"
+            onClick={() => router.push("/wellness")}
           >
-            {status === "authenticated" ? (
-              <button
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                onClick={() => {
-                  localStorage.removeItem("onboardingComplete");
-                  signOut({ callbackUrl: "/welcome" });
-                }}
-              >
-                Log out
-              </button>
-            ) : (
-              <button
-                className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                onClick={() => router.push("/sign-in")}
-              >
-                Sign in
-              </button>
-            )}
+            <Image
+              src="/images/heart_plus.svg"
+              width={43}
+              height={43}
+              alt="wellness icon"
+              className="w-full h-full  object-cover "
+            />
           </div>
-        )}
+          <div
+            ref={avatarRef}
+            className={`w-[43px] h-[43px] rounded-full overflow-hidden cursor-pointer ${
+              status === "authenticated" ? "" : "filter grayscale opacity-50"
+            } `}
+            onClick={() => {
+              if (status === "authenticated") {
+                // 切换下拉菜单
+                setMenuOpen((o) => !o);
+              } else {
+                setMenuOpen(true);
+              }
+            }}
+          >
+            <Image
+              src="/images/person.svg"
+              width={43}
+              height={43}
+              alt="User Avatar"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          {/* 下拉菜单 */}
+          {menuOpen && (
+            <div
+              className="absolute right-0 mt-2 w-32 text-[#325C77] border shadow-lg rounded"
+              style={{ top: "60px" }}
+            >
+              {status === "authenticated" ? (
+                <button
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  onClick={() => {
+                    localStorage.removeItem("onboardingComplete");
+                    signOut({ callbackUrl: "/welcome" });
+                  }}
+                >
+                  Log out
+                </button>
+              ) : (
+                <button
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                  onClick={() => router.push("/sign-in")}
+                >
+                  Sign in
+                </button>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

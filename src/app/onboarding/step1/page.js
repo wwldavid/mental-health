@@ -43,11 +43,13 @@ export default function Step1() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[url('/step_bg1.png')] bg-cover bg-center">
-      <div className=" px-4 pt-9 mt-16 rounded-b-xl flex justify-between items-center ">
+      <div className="relative px-4 pt-9 mt-16 rounded-b-xl flex justify-between items-center ">
         <button onClick={() => router.push("/welcome")} className=" text-xl">
           <ChevronLeft size={24} />
         </button>
-        <Image src="/serein.svg" alt="Serein Logo" width={94} height={30} />
+        <div className="absolute left-1/2 transform -translate-x-1/2">
+          <Image src="/serein.svg" alt="Serein Logo" width={94} height={30} />
+        </div>
         <span className="text-sm ">Step 1 of 4</span>
       </div>
       <div className="flex-1 p-6 max-w-md w-full mx-auto space-y-14">

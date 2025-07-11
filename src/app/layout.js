@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
         <div className="flex flex-col min-h-screen">
           <SessionProviderWrapper>
             <ConditionalNavbar />
-            <main className="flex-grow pt-0 md:pt-16 flex flex-col">
+            <main className="flex-grow pt-0 md:pt-16 flex flex-col ">
               {children}
             </main>
             <ConditionalNavbar mobile />

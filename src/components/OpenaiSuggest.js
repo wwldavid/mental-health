@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Upperbar from "./Upperbar";
 
 const buttonStyle =
-  "w-full p-2 flex items-center justify-center text-base font-medium text-white bg-[#325C77] hover:bg-[#7ebeab] transition duration-200 ";
+  "w-full h-11 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold mt-5";
 
 export default function OpenaiSuggest() {
   const { data: session } = useSession(); // ← 新增
@@ -39,7 +39,7 @@ export default function OpenaiSuggest() {
   };
 
   return (
-    <main className="min-h-screen w-full">
+    <main className="min-h-screen w-full ">
       <Upperbar title="My Center" />
       <div className="flex flex-col items-center justify-center p-6 mt-28">
         <motion.h3
@@ -55,7 +55,7 @@ export default function OpenaiSuggest() {
           value={feeling}
           onChange={(e) => setFeeling(e.target.value)}
           placeholder="I am feeling stressed because of work. My boss is very difficult and I am burned out."
-          className="w-[361px] h-[233px] shrink-0 rounded-[15px] mt-4 mb-4 bg-[#D9D9D9]"
+          className="w-[365px] h-60 rounded-2xl border  border-zinc-600/50 bg-white"
           rows={3}
         />
 
