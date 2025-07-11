@@ -1,3 +1,4 @@
+// src>app>wellness>page.js
 "use client";
 
 import Navbar from "@/components/Navbar";
@@ -9,32 +10,32 @@ import Image from "next/image";
 const features = [
   {
     title: "Breathing Exercise",
-    icon: "/images/breathing.png",
+    icon: "/images/breath.svg",
     path: "/solution/do-breathing-exercise",
   },
   {
     title: "Going for a Walk",
-    icon: "/images/walk.png",
+    icon: "/images/breath.svg",
     path: "/solution/walk",
   },
   {
     title: "Body Scan",
-    icon: "/images/body-scan.png",
+    icon: "/images/breath.svg",
     path: "/solution/body-scan",
   },
   {
     title: "Gratitude Practice",
-    icon: "/images/gratitude.png",
+    icon: "/images/breath.svg",
     path: "/solution/gratitude",
   },
   {
     title: "Self-Compassion",
-    icon: "/images/compassion.png",
+    icon: "/images/breath.svg",
     path: "/solution/self-compassion",
   },
   {
     title: "Five Senses",
-    icon: "/images/five-senses.png",
+    icon: "/images/breath.svg",
     path: "/solution/five-senses",
   },
 ];
@@ -51,23 +52,15 @@ export default function Wellness() {
             <div
               key={i}
               onClick={() => router.push(f.path)}
-              className="cursor-pointer flex flex-col items-center justify-center p-4 border rounded-[10px] shadow hover:shadow-lg transition w-[172px] h-[151px] bg-[#EAD098]"
+              className="cursor-pointer w-44 h-48 rounded-2xl"
             >
-              <div className="w-20 h-20 mb-2">
-                <Image
-                  src={f.icon}
-                  alt={f.title}
-                  width={76}
-                  height={76}
-                  className="w-full h-full object-contain"
-                  style={{
-                    filter: "brightness(0) invert(1) brightness(0.35)",
-                  }}
-                />
-              </div>
-              <span className="w-[188px] h-[20px] text-center text-base font-medium text-[#fff]">
-                {f.title}
-              </span>
+              <Image
+                src={f.icon}
+                alt={f.title}
+                width={76}
+                height={76}
+                className="w-full h-full object-contain"
+              />
             </div>
           ))}
         </div>

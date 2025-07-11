@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { ChevronLeft } from "lucide-react";
+import Image from "next/image";
 
 export default function Step1() {
   const router = useRouter();
@@ -41,22 +42,22 @@ export default function Step1() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="bg-[#325C77] px-4 pt-9 pb-3 rounded-b-xl flex justify-between items-center shadow-md">
-        <button
-          onClick={() => router.push("/welcome")}
-          className="text-white text-xl"
-        >
+    <div className="min-h-screen flex flex-col bg-[url('/step_bg1.png')] bg-cover bg-center">
+      <div className=" px-4 pt-9 mt-16 rounded-b-xl flex justify-between items-center ">
+        <button onClick={() => router.push("/welcome")} className=" text-xl">
           <ChevronLeft size={24} />
         </button>
-        <span className="text-sm text-white">Step 1 of 5</span>
+        <Image src="/serein.svg" alt="Serein Logo" width={94} height={30} />
+        <span className="text-sm ">Step 1 of 4</span>
       </div>
       <div className="flex-1 p-6 max-w-md w-full mx-auto space-y-14">
-        <h2 className="text-2xl font-semibold mb-4">Create an Account</h2>
+        <h2 className="text-center text-xl font-semibold mb-4">
+          Let&apos;s get you signed up
+        </h2>
         {error && <p className="text-red-600 mb-4">{error}</p>}
         <div className="space-y-3">
           <div>
-            <label className="block mb-1">Your Name</label>
+            <label className="block mb-1">What&apos;s your Name?</label>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -64,7 +65,7 @@ export default function Step1() {
             />
           </div>
           <div>
-            <label className="block mb-1">Your Email</label>
+            <label className="block mb-1">What&apos;s your email</label>
             <input
               type="email"
               value={email}
@@ -73,7 +74,7 @@ export default function Step1() {
             />
           </div>
           <div>
-            <label className="block mb-1">Confirm Your Email</label>
+            <label className="block mb-1">Confirm your email address </label>
             <input
               type="email"
               value={confirmEmail}
@@ -82,7 +83,7 @@ export default function Step1() {
             />
           </div>
           <div>
-            <label className="block mb-1">Password</label>
+            <label className="block mb-1">Create a password</label>
             <input
               type="password"
               value={password}
@@ -110,10 +111,10 @@ export default function Step1() {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-5 left-0 w-full  p-4 ">
+      <div className="fixed bottom-5 left-0 w-full  p-6 ">
         <button
           onClick={handleNext}
-          className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
+          className="w-full h-11 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold"
         >
           Next
         </button>

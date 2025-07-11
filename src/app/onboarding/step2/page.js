@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
+import Image from "next/image";
 
 export default function Step2() {
   const router = useRouter();
@@ -40,50 +41,56 @@ export default function Step2() {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <div className="bg-[#325C77] px-4 pt-9 pb-3 rounded-b-xl flex justify-between items-center shadow-md">
-        <button onClick={() => router.back()}>
-          <ChevronLeft className="text-white w-6 h-6" />
+    <div className="min-h-screen flex flex-col bg-[url('/step_bg1.png')] bg-cover bg-center">
+      <div className=" px-4 pt-9 mt-16 rounded-b-xl flex justify-between items-center ">
+        <button onClick={() => router.push("/welcome")} className=" text-xl">
+          <ChevronLeft size={24} />
         </button>
-        <span className="text-white font-medium">Step 2 of 4</span>
+        <Image src="/serein.svg" alt="Serein Logo" width={94} height={30} />
+        <span className="text-sm ">Step 2 of 4</span>
       </div>
 
-      <div className="flex-1 p-6 max-w-md w-full mx-auto space-y-14">
-        <h2 className="text-xl font-semibold text-gray-800">
+      <div className="flex-1 p-6 max-w-md w-full mx-auto space-y-5">
+        <h2 className="text-center text-xl font-semibold mb-10">
           What is your gender identity?
         </h2>
-
+        <hr className="border-0 h-[3px] bg-[#e9e4d4] w-full" />
         <div className="space-y-4">
-          {options.map((option) => (
-            <div key={option}>
-              <label className="flex items-center text-gray-800 text-sm">
-                <input
-                  type="checkbox"
-                  checked={gender === option}
-                  onChange={() => setGender(option)}
-                  className="mr-3 w-5 h-5 rounded border-gray-400"
-                />
-                {option}
-              </label>
-              {option === "Other" && gender === "Other" && (
-                <textarea
-                  rows={2}
-                  value={otherGender}
-                  onChange={(e) => setOtherGender(e.target.value)}
-                  placeholder="Please specify"
-                  className="mt-2 w-full px-3 py-2 border rounded text-sm resize-none"
-                />
-              )}
-            </div>
-          ))}
+          {options.map((option) => {
+            const isSelected = gender === option;
+            return (
+              <div key={option} className="flex flex-col">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setGender(option);
+                    setError("");
+                  }}
+                  className={`w-full h-11  py-2.5  rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center overflow-hidden text-neutral-700 text-lg font-semibold
+                    ${isSelected ? "bg-[#cee4ae]" : "bg-[#f4dda5]"}
+                    `}
+                >
+                  {option}
+                </button>
+                {option === "Other" && isSelected && (
+                  <textarea
+                    rows={2}
+                    value={otherGender}
+                    onChange={(e) => setOtherGender(e.target.value)}
+                    placeholder="Please specify"
+                    className="mt-2 w-full px-3 py-2 border rounded text-sm resize-none"
+                  />
+                )}
+              </div>
+            );
+          })}
         </div>
-
         {error && <p className="text-red-500 text-sm">{error}</p>}
       </div>
       <div className="fixed bottom-5 left-0 w-full  p-4 ">
         <button
           onClick={handleNext}
-          className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
+          className="w-full h-11 bg-gradient-to-r from-[#2c3e50]/90 to-[#2980b9]/80 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold"
         >
           Next
         </button>

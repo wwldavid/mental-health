@@ -26,21 +26,21 @@ export default function Upperbar({ title = "My Center" }) {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 px-4 pt-10 pb-2 w-full bg-[#325C77] text-white shadow-sm mb-6 flex items-center justify-between rounded-b-2xl">
+    <div className="fixed top-0 left-0 px-4 pt-10 pb-2 w-full text-[#325C77] mb-6 flex items-center justify-between rounded-b-2xl">
       <button
         onClick={() => router.back()}
-        className="text-xl text-white hover:text-black"
+        className="text-xl hover:text-black"
       >
         <ChevronLeft size={24} />
       </button>
-      <div className="text-lg font-semibold text-white">{title}</div>
+      <div className="text-lg font-semibold">{title}</div>
       <div className="relative flex gap-2 p-2 items-center">
         <div
           className="w-[43px] h-[43px]"
           onClick={() => router.push("/wellness")}
         >
           <Image
-            src="/images/heart.svg"
+            src="/images/heart_plus.svg"
             width={43}
             height={43}
             alt="wellness icon"
@@ -62,7 +62,7 @@ export default function Upperbar({ title = "My Center" }) {
           }}
         >
           <Image
-            src="/images/avatar.svg"
+            src="/images/person.svg"
             width={43}
             height={43}
             alt="User Avatar"
@@ -72,7 +72,7 @@ export default function Upperbar({ title = "My Center" }) {
         {/* 下拉菜单 */}
         {menuOpen && (
           <div
-            className="absolute right-0 mt-2 w-32 bg-[#325C77] border shadow-lg rounded"
+            className="absolute right-0 mt-2 w-32 text-[#325C77] border shadow-lg rounded"
             style={{ top: "60px" }}
           >
             {status === "authenticated" ? (

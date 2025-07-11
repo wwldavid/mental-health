@@ -11,10 +11,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 // import { Menu, X } from "lucide-react";
 import HomeIcon from "@/icons/home.svg";
-import JournalIcon from "@/icons/book.svg";
-import SessionsIcon from "@/icons/calendar.svg";
-import GoalsIcon from "@/icons/target.svg";
-import ChatIcon from "@/icons/chat.svg";
+import JournalIcon from "@/icons/auto_stories.svg";
+import SessionsIcon from "@/icons/calendar_month.svg";
+import GoalsIcon from "@/icons/flag.svg";
+import ChatIcon from "@/icons/mode_comment.svg";
 
 const Navbar = ({ mobile = false }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -68,37 +68,42 @@ const Navbar = ({ mobile = false }) => {
 
   if (mobile) {
     return (
-      <div className="fixed bottom-0 left-0 w-full z-100 bg-[#325C77] border-t shadow-md flex justify-around items-center h-[50px] md:hidden">
+      <div className="fixed bottom-0 left-0 w-full z-[100] border-t-2 border-[#325C77]/50 bg-white shadow-md flex justify-around items-center min-h-[64px] md:hidden">
         <button
           onClick={() => router.push("/journal")}
-          className="text-gray-700 hover:text-blue-500 p-2"
+          className="flex flex-col items-center justify-center p-2"
         >
           <JournalIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          <span className="mt-1 text-xs text-[#325C77]">Journal</span>
         </button>
         <button
           onClick={() => router.push("/consult")}
-          className="text-gray-700 hover:text-blue-500 p-2"
+          className="flex flex-col items-center justify-center p-2"
         >
           <SessionsIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          <span className="mt-1 text-xs text-[#325C77]">Sessions</span>
         </button>
         <button
           onClick={() => router.push("/home")}
-          className="text-gray-700 hover:text-blue-500 p-2"
+          className="flex flex-col items-center justify-center p-2"
         >
-          <HomeIcon className="w-6 h-6 scale-150 text-white fill-current" />
+          <HomeIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          <span className="mt-1 text-xs text-[#325C77]">Home</span>
         </button>
 
         <button
           onClick={() => router.push("/chat")}
-          className="text-gray-700 hover:text-blue-500 p-2"
+          className="flex flex-col items-center justify-center p-2"
         >
-          <ChatIcon className="w-6 h-6 scale-110 text-white fill-current" />
+          <ChatIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          <span className="mt-1 text-xs text-[#325C77]">Chats</span>
         </button>
         <button
           onClick={() => router.push("/subitem10")}
-          className="text-gray-700 hover:text-blue-500 p-2"
+          className="flex flex-col items-center justify-center p-2"
         >
           <GoalsIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          <span className="mt-1 text-xs text-[#325C77]">Goals</span>
         </button>
       </div>
     );
@@ -136,87 +141,8 @@ const Navbar = ({ mobile = false }) => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ))}
-            {/* <Button
-              variant="ghost"
-              className="block w-full text-left"
-              onClick={() => router.push("/contact")}
-            >
-              Contact Us
-            </Button>
-            <Button variant="ghost" onClick={handleSignIn}>
-              Sign In
-            </Button>
-            <Button variant="ghost" onClick={handleSignUp}>
-              Sign Up
-            </Button> */}
           </div>
-
-          {/* Mobile Menu Button */}
-          {/* <div className="md:hidden flex items-center gap-4">
-            {isMobileMenuOpen ? (
-              <X
-                size={24}
-                className="cursor-pointer"
-                onClick={() => setIsMobileMenuOpen(false)}
-              />
-            ) : (
-              <Menu
-                size={24}
-                className="cursor-pointer"
-                onClick={() => setIsMobileMenuOpen(true)}
-              />
-            )}
-          </div> */}
         </div>
-
-        {/* Mobile Menu Dropdown */}
-        {/* {isMobileMenuOpen && (
-          <div className="md:hidden bg-white shadow-md border-t space-y-4">
-            {menuItems.map((menu, index) => (
-              <DropdownMenu key={index}>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="block text-left">
-                    {menu.label}
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  {menu.items.map((item, idx) => (
-                    <DropdownMenuItem
-                      key={idx}
-                      onClick={() => {
-                        setIsMobileMenuOpen(false); // 关闭菜单
-                        router.push(item.path); // 跳转
-                      }}
-                    >
-                      {item.name}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ))}
-            <Button
-              variant="ghost"
-              className="block w-full text-left"
-              onClick={() => router.push("/contact")}
-            >
-              Contact Us
-            </Button>
-            <Button
-              variant="ghost"
-              className="block w-full text-left"
-              onClick={handleSignIn}
-            >
-              Sign In
-            </Button>
-            <Button
-              variant="ghost"
-              className="block w-full text-left"
-              onClick={handleSignUp}
-            >
-              Sign Up
-            </Button>
-          </div>
-        )} */}
       </nav>
     </div>
   );

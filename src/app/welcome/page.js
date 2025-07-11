@@ -4,18 +4,18 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const buttonStyle =
-  "w-96 h-11 mx-auto block bg-[#325C77] rounded-2xl text-white py-2 mb-6 hover:bg-[#7ebeab] active:bg-[#7ebeab] transition duration-200 ";
+  "w-full h-11 bg-gradient-to-r from-[#2c3e50]/90 to-[#2980b9]/80 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold";
 
 export default function Welcome() {
   const router = useRouter();
 
   return (
-    <div className="h-screen flex flex-col items-center gap-64 bg-white">
-      <div className="flex flex-col items-center mt-52">
+    <div className="h-screen flex flex-col items-center gap-64 bg-[url('/welcome_bg.png')] bg-cover bg-center">
+      <div className="flex flex-col items-center mt-52 ">
         <Image src="/logo.png" alt="logo" width={263} height={85} priority />
       </div>
 
-      <div>
+      <div className="fixed inset-x-0 bottom-8 flex flex-col items-center px-6">
         <button
           onClick={() => router.push("/onboarding/step1")}
           className={buttonStyle}
