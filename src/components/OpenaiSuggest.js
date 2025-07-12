@@ -10,9 +10,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import Upperbar from "./Upperbar";
 
-const buttonStyle =
-  "w-full h-11 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold mt-5";
-
 export default function OpenaiSuggest() {
   const { data: session } = useSession(); // ← 新增
   const userName = session?.user?.name || "there"; // ←
@@ -41,7 +38,7 @@ export default function OpenaiSuggest() {
   return (
     <main className="min-h-screen w-full ">
       <Upperbar title="My Center" />
-      <div className="flex flex-col items-center justify-center p-6 mt-28">
+      <div className="flex flex-col items-center justify-center py-6 px-3 mt-28 max-h-[72vh] overflow-y-auto overflow-x-hidden">
         <motion.h3
           className="text-2xl sm:text-4xl text-center mb-6"
           initial={{ opacity: 0, y: -30 }}
@@ -55,19 +52,19 @@ export default function OpenaiSuggest() {
           value={feeling}
           onChange={(e) => setFeeling(e.target.value)}
           placeholder="I am feeling stressed because of work. My boss is very difficult and I am burned out."
-          className="w-[365px] h-60 rounded-2xl border  border-zinc-600/50 bg-white"
-          rows={3}
+          className="w-[340px] h-60 py-2 rounded-2xl border  border-zinc-600/50 bg-white"
+          rows={6}
         />
 
         <Button
           onClick={handleSubmit}
           disabled={loading}
-          className={buttonStyle}
+          className="w-full py-5 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)]  text-center text-white text-xl font-semibold mt-5"
         >
           {loading ? "Analyzing..." : "Get Suggestions"}
         </Button>
 
-        <div className="mt-8 max-w-2xl w-full">
+        <div className="mt-28 max-w-2xl w-full">
           {acknowledgement.length > 0 && (
             <div className="mb-4 space-y-2">
               {acknowledgement.map((line, idx) => (
@@ -105,7 +102,7 @@ export default function OpenaiSuggest() {
                   onClick={() => router.push(`/solution/${s.slug}`)}
                   className="hover:shadow-xl transition cursor-pointer"
                 >
-                  <CardContent className="p-2 flex items-center justify-center text-base font-medium text-white bg-[#325C77]">
+                  <CardContent className="p-2 flex items-center justify-center text-lg font-medium text-white bg-gradient-to-r from-slate-600 to-blue-400 rounded-xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)]">
                     {s.title}
                   </CardContent>
                 </Card>
