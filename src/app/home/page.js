@@ -11,16 +11,16 @@ export default function Home() {
   useEffect(() => {
     const completed = localStorage.getItem("onboardingComplete");
     if (completed === "true") {
-      setShowMain(true); // 说明已经完成 onboarding
+      setShowMain(true);
     } else {
-      router.replace("/welcome"); // 还没完成，引导去 onboarding 流程
+      router.replace("/welcome");
     }
   }, [router]);
 
   if (!showMain) return null;
 
   return (
-    <div className="flex flex-col items-center justify-center p-6">
+    <div className="flex flex-col items-center justify-center p-6 bg-[url('/mycenter_bg.png')] bg-cover bg-center">
       <OpenaiSuggest />
     </div>
   );

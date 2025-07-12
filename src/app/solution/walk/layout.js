@@ -63,7 +63,7 @@ export default function WalkLayout({ children }) {
 
   return (
     <WalkContext.Provider value={value}>
-      <div className=" min-h-screen flex flex-col">
+      <div className=" min-h-screen flex flex-col bg-[url('/walk_bg.png')] bg-cover bg-center">
         <Upperbar title="Walk" />
         <div className="mt-8 mb-32">{children}</div>
         <Navbar />

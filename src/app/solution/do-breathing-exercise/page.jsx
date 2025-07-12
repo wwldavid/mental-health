@@ -5,11 +5,14 @@ import { useRouter } from "next/navigation";
 
 const phases = ["Breathe In", "Hold", "Breathe Out"];
 const durations = [4000, 4000, 4000];
+const buttonStyle =
+  "w-96 h-11  py-2.5 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold";
 
 export default function Breathing() {
   const [phaseIndex, setPhaseIndex] = useState(0);
   const [running, setRunning] = useState(false);
   const [circleSize, setCircleSize] = useState("w-20 h-20");
+  const [circleColor, setCircleColor] = useState("bg-[#D1E9EC]");
   const [showOptions, setShowOptions] = useState(false);
   const router = useRouter();
 
@@ -24,12 +27,12 @@ export default function Breathing() {
     }, durations[phaseIndex]);
 
     // 动态调整动画圆圈大小
-    if (phases[phaseIndex] === "Breathe In") {
+    if (phases[phaseIndex] === "Breathe In" || phases[phaseIndex] === "Hold") {
       setCircleSize("w-48 h-48");
-    } else if (phases[phaseIndex] === "Hold") {
-      setCircleSize("w-48 h-48");
+      setCircleColor("bg-[#7CCBD5]");
     } else {
       setCircleSize("w-20 h-20");
+      setCircleColor("bg-[#D1E9EC]");
     }
 
     return () => clearTimeout(timeout);
@@ -61,14 +64,16 @@ export default function Breathing() {
   const moreActs = () => router.push("/wellness");
 
   return (
-    <div className="flex flex-col items-center mt-36 p-4">
-      <h1 className="text-2xl font-bold mb-6 text-black">Breathing Exercise</h1>
-      <p className="text-black text-base font-normal ">
+    <div className="relative flex flex-col items-center mt-36 p-4 h-[71vh]">
+      <h1 className="text-2xl font-bold mb-6 text-neutral-700">
+        Breathing Exercise
+      </h1>
+      <p className="text-neutral-700 text-xl font-bold ">
         Follow the animation to relax your body and reset your focus.
       </p>
       <div className="w-52 h-52 flex items-center justify-center my-6">
         <div
-          className={`transition-all duration-1000 ease-in-out bg-blue-300 rounded-full ${circleSize} mb-6`}
+          className={`transition-all duration-1000 ease-in-out ${circleColor} rounded-full ${circleSize} mb-6`}
         ></div>
       </div>
 
@@ -77,24 +82,18 @@ export default function Breathing() {
       </p>
 
       <button
-        className="w-96 h-11 px-32 py-2.5 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center gap-2.5 overflow-hidden"
+        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-96 h-11 py-2.5 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold"
         onClick={running ? stopExercise : startExercise}
       >
         {running ? "Stop" : "Start"}
       </button>
 
       {showOptions && (
-        <div className="w-full flex flex-col items-center space-y-4 mt-6">
-          <button
-            className="w-full py-3 bg-[#EAD098] text-gray-800 rounded-xl font-semibold hover:opacity-90 transition"
-            onClick={feelBetter}
-          >
+        <div className="w-full flex flex-col items-center space-y-3">
+          <button className={buttonStyle} onClick={feelBetter}>
             I am Feeling Better
           </button>
-          <button
-            className="w-full py-3 bg-[#EAD098] text-gray-800 rounded-xl font-semibold hover:opacity-90 transition"
-            onClick={moreActs}
-          >
+          <button className={buttonStyle} onClick={moreActs}>
             More Activities
           </button>
         </div>

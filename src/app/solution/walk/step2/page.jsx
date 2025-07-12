@@ -13,6 +13,9 @@ const walkerImages = [
   "/icons/walker5.png",
 ];
 
+const buttonStyle =
+  "w-96 h-11  py-2.5 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold";
+
 export default function WalkPage2() {
   const {
     duration,
@@ -107,7 +110,7 @@ export default function WalkPage2() {
   const moreActs = () => router.push("/wellness");
 
   return (
-    <div className="flex flex-col items-center p-4 mt-28">
+    <div className="relative flex flex-col items-center p-4 mt-28 h-[70vh]">
       {/* —— SVG: path, highlight, trees, walker —— */}
       <svg viewBox="0 0 300 300" className="w-64 h-64 mb-6 drop-shadow-lg">
         <g transform="translate(45, 50)">
@@ -154,30 +157,20 @@ export default function WalkPage2() {
       </p>
 
       {!showSummary ? (
-        <button
-          className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
-          onClick={handleStop}
-        >
-          Stop
-        </button>
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+          <button className={buttonStyle} onClick={handleStop}>
+            Stop
+          </button>
+        </div>
       ) : (
-        <div className="w-full flex flex-col items-center space-y-4">
-          <button
-            className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
-            onClick={handleRestart}
-          >
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full flex flex-col items-center space-y-4">
+          <button className={buttonStyle} onClick={handleRestart}>
             Restart
           </button>
-          <button
-            className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
-            onClick={feelBetter}
-          >
+          <button className={buttonStyle} onClick={feelBetter}>
             I am Feeling Better
           </button>
-          <button
-            className=" bg-[#EAD098] text-gray-800 py-3 rounded-xl font-semibold w-full hover:opacity-90 transition"
-            onClick={moreActs}
-          >
+          <button className={buttonStyle} onClick={moreActs}>
             More Activities
           </button>
         </div>

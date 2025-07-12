@@ -43,7 +43,7 @@ export default function OpenaiSuggest() {
       <Upperbar title="My Center" />
       <div className="flex flex-col items-center justify-center p-6 mt-28">
         <motion.h3
-          className="text-2xl sm:text-4xl font-serif text-center mb-6"
+          className="text-2xl sm:text-4xl text-center mb-6"
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}

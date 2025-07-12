@@ -15,7 +15,7 @@ const features = [
   },
   {
     title: "Going for a Walk",
-    icon: "/images/breath.svg",
+    icon: "/images/walk_button.png",
     path: "/solution/walk",
   },
   {
