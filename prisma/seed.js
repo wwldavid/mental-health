@@ -10,13 +10,14 @@ async function main() {
       email: "alice@therapy.com",
       image: "/experts/alice.png",
       password: "12345678",
-      role: "counselor",
+      role: "volunteer",
       // Alice 专属 Provider 内容
       bio: "I support individuals navigating anxiety, overwhelm, and the mental load of daily life. My approach is grounded, compassionate, and focused on helping you find steadiness in moments of stress. Whether you're feeling stuck, overstimulated, or just need space to breathe and sort through things, I am here to listen and guide without judgment.",
       specialties: "anxiety, stress",
-      rateInfo: "Sliding scale available",
+      rateInfo: "Jane accepts flexible payments",
       languages: "English",
-      availability: "Mon-Wed 9:00-17:00",
+      availability: "Monday-Wednesday 9:00am-17:00pm",
+      desc: "Calm and compassionate",
     },
     {
       name: "Dr. Bob",
@@ -25,11 +26,12 @@ async function main() {
       password: "12345678",
       role: "counselor",
       // Bob 专属 Provider 内容
-      bio: "I work with people facing low mood, self-doubt, and the weight that often comes with depression. My approach is straightforward but supportive — I’ll meet you where you are without sugarcoating or judgment. Whether you're struggling to find motivation or feeling stuck in your own head, I am here to help you get clearer, steadier, and more in touch with your own sense of worth.",
+      bio: "I work with people facing low mood, self-doubt, and the weight that often comes with depression. My approach is straightforward but supportive — I'll meet you where you are without sugarcoating or judgment. Whether you're struggling to find motivation or feeling stuck in your own head, I am here to help you get clearer, steadier, and more in touch with your own sense of worth.",
       specialties: "depression, self-esteem",
       rateInfo: "First session free",
       languages: "English, Spanish",
-      availability: "Tue-Thu 10:00-18:00",
+      availability: "Tuesday-Thursday 10:00am-18:00pm",
+      desc: "Attentive and empathetic",
     },
     {
       name: "Dr. Carol",
@@ -38,11 +40,12 @@ async function main() {
       password: "12345678",
       role: "counselor",
       // Carol 专属 Provider 内容
-      bio: "Specializing in life transitions, I am here to support you through change. My approach is compassionate and client-centered, focusing on building resilience and emotional clarity. Whether you're facing personal loss, career shifts, or identity changes, we'll navigate the path forward together.",
+      bio: "Specializing in life transitions, I am here to support you through change. My approach is compassionate and client-centered, focusing on building resilience and emotional clarity. I believe that every stage of transition also holds the potential for personal growth and renewed purpose. Whether you're facing personal loss, career shifts, or identity changes, we'll navigate the path forward together.",
       specialties: "life transitions, grief",
       rateInfo: "Insurance accepted",
       languages: "English, French",
-      availability: "Mon, Fri 11:00-16:00",
+      availability: "Monday, Friday 11:00am-16:00pm",
+      desc: "Insightful and supportive",
     },
   ];
 
@@ -78,6 +81,7 @@ async function main() {
         languages: e.languages,
         availability: e.availability,
         image: user.image,
+        desc: e.desc || "",
       },
       create: {
         userId: user.id,
@@ -87,6 +91,7 @@ async function main() {
         languages: e.languages,
         availability: e.availability,
         image: user.image,
+        desc: e.desc || "",
       },
     });
   }

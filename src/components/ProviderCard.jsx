@@ -81,7 +81,7 @@ export default function ProviderCard({
         onClick={onView}
         className="cursor-pointer w-96 h-[556px] p-4 rounded-2xl flex flex-col bg-[url('/provider_bg2.png')] bg-cover bg-center outline outline-1 outline-offset-[-1px] outline-neutral-700"
       >
-        <div className="flex">
+        <div className="flex gap-5">
           <Image
             src={provider.image || "/avatar-placeholder.png"}
             alt={provider.user.name}
@@ -89,21 +89,21 @@ export default function ProviderCard({
             height={144}
             className="w-36 h-36 rounded-2xl border border-neutral-700"
           />
-          <div className="ml-4 text-sm flex flex-col justify-center gap-1">
+          <div className="flex flex-col justify-center gap-2">
             <div className="text-center text-neutral-700 text-lg font-extrabold">
               {provider.user.name}
             </div>
-            <div className="w-40 text-neutral-700 text-base font-medium">
-              Calm and compassionate
+            <div className="w-40 text-neutral-700/70 text-base font-medium">
+              {provider.desc}
             </div>
 
             <div className="w-40 text-neutral-700 text-base ">
-              <span className="font-extrabold">Specialities:</span>
-              <span className="font-bold "> {provider.specialties}</span>
+              <span className="font-extrabold">Specialities:</span> <br />
+              <span className="font-medium"> {provider.specialties}</span>
             </div>
           </div>
         </div>
-        <div className="mt-20 text-base flex-1 overflow-y-auto text-neutral-700 font-extrabold leading-7">
+        <div className="mt-20 p-1 text-base text-neutral-700 font-extrabold leading-7">
           {provider.bio}
         </div>
       </div>

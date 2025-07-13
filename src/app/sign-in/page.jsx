@@ -18,6 +18,9 @@ export default function SignInPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const buttonStyle =
+    "w-full h-11 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -44,20 +47,14 @@ export default function SignInPage() {
   };
 
   return (
-    <div className=" min-h-screen bg-white flex flex-col">
-      <div className="bg-[#325C77] px-4 pt-9 pb-3 rounded-b-xl flex justify-between items-center shadow-md">
-        <button
-          onClick={() => router.push("/welcome")}
-          className="text-white text-xl"
-        >
+    <div className=" min-h-screen flex flex-col bg-[url('/step_bg1.png')] bg-cover bg-center">
+      <div className="px-4 pt-14 rounded-b-xl flex justify-between items-center ">
+        <button onClick={() => router.push("/welcome")} className=" text-xl">
           <ChevronLeft size={24} />
         </button>
       </div>
       <div className="flex-1 p-6 max-w-md w-full mx-auto space-y-14">
-        <form
-          onSubmit={handleSubmit}
-          className="w-full max-w-md bg-white rounded-lg"
-        >
+        <form onSubmit={handleSubmit} className="w-full max-w-md rounded-lg">
           <h2 className="text-2xl font-semibold text-center mt-32 mb-6">
             Log In
           </h2>
@@ -95,7 +92,7 @@ export default function SignInPage() {
           </button>
 
           {/* 可选：第三方登录按钮 */}
-          <div className="mt-6 text-center space-y-2">
+          <div className="text-center">
             <button
               type="button"
               onClick={() => signIn("google", { callbackUrl })}
@@ -112,7 +109,7 @@ export default function SignInPage() {
             </button>
           </div>
 
-          <p className="mt-6 text-center text-sm text-gray-600">
+          <p className="mt-5 text-center text-sm text-gray-600">
             Without an account ?{" "}
             <a
               href="/onboarding/step1"

@@ -10,7 +10,13 @@ export async function GET(request, { params }) {
       where: { id: Number(id) },
       include: {
         user: {
-          select: { id: true, name: true, email: true, image: true },
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            image: true,
+            role: true,
+          },
         },
       },
     });

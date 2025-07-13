@@ -1,3 +1,4 @@
+// prisma>schema.prisma
 generator client {
   provider = "prisma-client-js"
   output   = "../node_modules/.prisma/client"
@@ -39,17 +40,18 @@ model User {
 
 }
 model Provider {
-  id          Int     @id @default(autoincrement())
-  user        User    @relation("CounselorRelation", fields: [userId], references: [id])
-  userId      Int     @unique
-  bio         String
-  specialties String
-  rateInfo    String
-  languages   String
-  availability String
-  image       String?
+  id            Int     @id @default(autoincrement())
+  user          User    @relation("CounselorRelation", fields: [userId], references: [id])
+  userId        Int     @unique
+  bio           String
+  specialties   String
+  rateInfo      String
+  languages     String
+  availability  String
+  image         String?
+  desc         String  @default("") 
 
-  sessions TherapySession[] @relation("ProviderTherapySessions")
+  sessions      TherapySession[] @relation("ProviderTherapySessions")
 }
 model TherapySession {
   id          Int       @id @default(autoincrement())
