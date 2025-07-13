@@ -19,23 +19,23 @@ const features = [
     path: "/solution/walk",
   },
   {
-    title: "Body Scan",
-    icon: "/images/breath.svg",
-    path: "/solution/body-scan",
-  },
-  {
     title: "Gratitude Practice",
-    icon: "/images/breath.svg",
+    icon: "/images/gratitude.png",
     path: "/solution/gratitude",
   },
   {
     title: "Self-Compassion",
-    icon: "/images/breath.svg",
+    icon: "/images/compassion.png",
     path: "/solution/self-compassion",
   },
   {
+    title: "Body Scan",
+    icon: "/images/scan.png",
+    path: "/solution/body-scan",
+  },
+  {
     title: "Five Senses",
-    icon: "/images/breath.svg",
+    icon: "/images/five-sense.png",
     path: "/solution/five-senses",
   },
 ];
