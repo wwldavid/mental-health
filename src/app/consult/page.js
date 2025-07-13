@@ -9,6 +9,7 @@ import Calendar from "@/components/Calendar";
 import ProviderCard from "@/components/ProviderCard";
 import dayjs from "dayjs";
 import { useSession, signIn } from "next-auth/react";
+import { Search } from "lucide-react";
 
 export default function ConsultPage() {
   const router = useRouter();
@@ -81,17 +82,14 @@ export default function ConsultPage() {
   }
 
   return (
-    <div className="h-screen flex flex-col p-4 bg-[#E9E9E9]">
+    <div className="h-screen flex flex-col p-4">
       <Upperbar title="Session" />
-
       {/* 切换按钮组 */}
-      <div className="flex mt-28 mb-2 w-full">
+      <div className="flex mt-28 mb-2 w-full border-b border-gray-600">
         <button
           onClick={() => setMode("mine")}
           className={`flex-1 py-2 text-center ${
-            mode === "mine"
-              ? "border-none"
-              : "border-r border-b border-gray-600 "
+            mode === "mine" ? "border-b-2 border-gray-600/50 " : "border-none"
           }`}
         >
           My Support Providers
@@ -99,9 +97,7 @@ export default function ConsultPage() {
         <button
           onClick={() => setMode("find")}
           className={`flex-1 py-2 text-center ${
-            mode === "find"
-              ? "border-none"
-              : "border-l border-b border-gray-600"
+            mode === "find" ? "border-b-2 border-gray-600/50" : "border-none"
           }`}
         >
           Find Support Providers
@@ -109,9 +105,9 @@ export default function ConsultPage() {
       </div>
 
       {/* 主体内容 */}
-      <div className="flex-1 overflow-y-auto flex-col items-center gap-4 mt-4 pb-20">
+      <div className="flex-1 flex-col items-center gap-4 mt-2 pb-20 overflow-y-auto">
         {mode === "mine" ? (
-          <>
+          <div className="w-full h-[67vh] overflow-y-auto">
             <div className="flex items-center gap-4">
               <button onClick={prevMonth} className="px-2">
                 ‹
@@ -158,14 +154,18 @@ export default function ConsultPage() {
                 <p className="text-center py-4">暂无预约会话</p>
               )}
             </div>
-          </>
+          </div>
         ) : (
-          <>
-            <div className="w-96">
+          <div className="w-full h-[67vh] overflow-y-auto">
+            <div className="w-full mb-4 relative">
+              <Search
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+                size={16}
+              />
               <input
                 type="search"
                 placeholder="Search"
-                className="w-full h-9 px-3 rounded border"
+                className="w-full h-9 pl-10 pr-3 rounded border "
                 onChange={(e) => {
                   const query = e.target.value.toLowerCase();
                   setProviders((prev) =>
@@ -182,15 +182,14 @@ export default function ConsultPage() {
                   key={p.id}
                   mode="find"
                   provider={p}
-                  onMessage={() => router.push(`/consult/provider/${p.id}`)}
+                  onView={() => router.push(`/consult/provider/${p.id}`)}
                   onBook={() => router.push(`/consult/provider/${p.id}/book`)}
                 />
               ))}
             </div>
-          </>
+          </div>
         )}
       </div>
-
       <Navbar />
     </div>
   );
