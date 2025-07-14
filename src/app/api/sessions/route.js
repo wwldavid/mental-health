@@ -8,12 +8,12 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import "dayjs/locale/en"; // 确保使用英文地区
+import "dayjs/locale/en";
 
 dayjs.extend(customParseFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
-dayjs.locale("en"); // 设置为英文
+dayjs.locale("en");
 
 export async function GET(req) {
   const session = await getServerSession(authOptions);
@@ -45,22 +45,20 @@ export async function POST(req) {
     const { providerId, date, time } = await req.json();
     const year = new Date().getFullYear();
     const raw = `${date}, ${year} ${time}`;
-    console.log("▶️ raw:", raw);
 
-    // 使用更可靠的解析方法
     let scheduledAt;
 
-    console.log("▶️ Attempting to parse with different methods...");
+    console.log("Attempting to parse with different methods...");
 
     // 方法1: 直接用 JavaScript Date 构造函数
     try {
       scheduledAt = new Date(raw);
-      console.log("▶️ Method 1 (JS Date):", scheduledAt);
+      console.log("Method 1 (JS Date):", scheduledAt);
       if (isNaN(scheduledAt.getTime())) {
         throw new Error("Invalid date");
       }
     } catch (e) {
-      console.log("▶️ Method 1 failed, trying method 2");
+      console.log("Method 1 failed, trying method 2");
 
       // 方法2: 手动解析并重构
       try {
@@ -112,13 +110,13 @@ export async function POST(req) {
 
         // 使用 Date 构造函数创建日期
         scheduledAt = new Date(year, monthIndex, parseInt(day), hours, minutes);
-        console.log("▶️ Method 2 (manual parsing):", scheduledAt);
+        console.log("Method 2 (manual parsing):", scheduledAt);
 
         if (isNaN(scheduledAt.getTime())) {
           throw new Error("Invalid date after manual parsing");
         }
       } catch (e2) {
-        console.log("▶️ Method 2 failed, trying method 3");
+        console.log("Method 2 failed, trying method 3");
 
         // 方法3: 使用更简单的格式
         try {
@@ -126,10 +124,10 @@ export async function POST(req) {
           const standardFormat = `${
             date.split(", ")[1]
           }, ${year} ${time.toUpperCase()}`;
-          console.log("▶️ Standard format:", standardFormat);
+          console.log("Standard format:", standardFormat);
 
           scheduledAt = new Date(standardFormat);
-          console.log("▶️ Method 3 (standard format):", scheduledAt);
+          console.log("Method 3 (standard format):", scheduledAt);
 
           if (isNaN(scheduledAt.getTime())) {
             throw new Error("Invalid date with standard format");
@@ -169,10 +167,10 @@ export async function POST(req) {
         },
       },
     });
-    console.log("🔥 Created session:", newSession);
+    console.log("Created session:", newSession);
     return NextResponse.json(newSession, { status: 201 });
   } catch (err) {
-    console.error("❌ POST /api/sessions error:", err);
+    console.error("POST /api/sessions error:", err);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }

@@ -1,87 +1,88 @@
-// src/components/Calendar.jsx
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useState } from "react";
 import dayjs from "dayjs";
 
 export default function Calendar({ year, month, sessions }) {
-  // 当月第一天和天数
-  const firstDay = dayjs(`${year}-${String(month).padStart(2, "0")}-01`);
-  const daysInMonth = firstDay.daysInMonth();
-  const firstDayOfWeek = firstDay.day(); // 0=Sun
+  const startDay = dayjs(`${year}-${String(month).padStart(2, "0")}-01`);
+  const firstWeekday = startDay.day();
 
-  // 总列数和每行列数
-  const rows = 2;
-  const totalCols = firstDayOfWeek + daysInMonth;
-  const colsPerRow = Math.ceil(totalCols / rows);
+  const totalCells = 6 * 7;
+  const [hoverKey, setHoverKey] = useState(null);
+  const [selectedKey, setSelectedKey] = useState(null);
 
-  // 生成单元格数据
-  const cells = Array.from({ length: rows * colsPerRow }, (_, idx) => {
-    const dayPosition = idx + 1 - firstDayOfWeek;
-    if (dayPosition >= 1 && dayPosition <= daysInMonth) {
-      const dateObj = firstDay.date(dayPosition);
-      const dateKey = dateObj.format("YYYY-MM-DD");
-      const daySessions = sessions.filter(
-        (s) => dayjs(s.scheduledAt).format("YYYY-MM-DD") === dateKey
-      );
-      return { day: dayPosition, sessions: daySessions };
-    }
-    return { day: null, sessions: [] };
+  const calendarCells = Array.from({ length: totalCells }).map((_, idx) => {
+    const offset = idx - firstWeekday;
+    return startDay.add(offset, "day");
   });
 
-  // 滚动引用
-  const scrollRef = useRef(null);
-  const gridRef = useRef(null);
+  // sessions 按天聚合
+  const sessionMap = sessions.reduce((map, s) => {
+    const key = dayjs(s.scheduledAt).format("YYYY-MM-DD");
+    if (!map[key]) map[key] = [];
+    map[key].push(s);
+    return map;
+  }, {});
 
-  // 默认滚动到首个 session
-  useEffect(() => {
-    if (sessions.length && scrollRef.current && gridRef.current) {
-      const firstDate = dayjs(sessions[0].scheduledAt).date();
-      const cellEl = gridRef.current.querySelector(`[data-day="${firstDate}"]`);
-      if (cellEl)
-        scrollRef.current.scrollLeft = Math.max(0, cellEl.offsetLeft - 56);
-    }
-  }, [sessions]);
-
-  const colSize = "3.5rem";
+  const weekdays = ["s", "m", "t", "w", "t", "f", "s"];
 
   return (
-    <div ref={scrollRef} className="w-full bg-zinc-100 p-2 overflow-x-auto">
-      {/* 日期网格，无星期标签 */}
-      <div
-        ref={gridRef}
-        className="grid text-xs text-center gap-1"
-        style={{
-          gridTemplateColumns: `repeat(${colsPerRow}, ${colSize})`,
-          gridTemplateRows: `repeat(${rows}, auto)`,
-        }}
-      >
-        {cells.map((cell, idx) => (
-          <div
-            key={idx}
-            data-day={cell.day}
-            className={`border h-20 p-1 text-[10px] flex flex-col ${
-              cell.day
-                ? cell.sessions.length
-                  ? "bg-lime-300 border-lime-400"
-                  : "bg-white border-gray-200"
-                : "border-transparent"
-            }`}
-          >
-            {cell.day && (
-              <>
-                <div className="flex justify-between items-center mb-1">
-                  <span className="font-semibold">{cell.day}</span>
-                  <span className="text-[8px] text-gray-500">
-                    {dayjs(
-                      `${year}-${String(month).padStart(2, "0")}-${String(
-                        cell.day
-                      ).padStart(2, "0")}`
-                    ).format("ddd")}
-                  </span>
-                </div>
-                <div className="flex-1 overflow-y-auto text-[9px] leading-tight">
-                  {cell.sessions.map((s) => (
-                    <div key={s.id} className="mb-1">
+    <div className="w-full pt-4">
+      {/* 周头 */}
+      <div className="grid grid-cols-7 text-center font-semibold text-sm mb-2">
+        {weekdays.map((wd) => (
+          <div key={wd}>{wd}</div>
+        ))}
+      </div>
+
+      {/* 日期格子 */}
+      <div className="grid grid-cols-7 grid-rows-6 gap-1">
+        {calendarCells.map((dateObj, idx) => {
+          const dateKey = dateObj.format("YYYY-MM-DD");
+          const inMonth = dateObj.month() + 1 === Number(month);
+          const dayNumber = dateObj.date();
+          const hasSessions = !!sessionMap[dateKey]?.length;
+
+          return (
+            <div
+              key={idx}
+              className="relative inline-block"
+              onMouseEnter={() => hasSessions && setHoverKey(dateKey)}
+              onMouseLeave={() => setHoverKey(null)}
+            >
+              <div
+                className={`h-6 p-1 rounded-sm flex items-center justify-center cursor-pointer ${
+                  inMonth ? "text-black" : "text-gray-400"
+                }`}
+                onClick={() =>
+                  hasSessions &&
+                  setSelectedKey((prev) => (prev === dateKey ? null : dateKey))
+                }
+              >
+                {hasSessions ? (
+                  <div className="flex items-center justify-center w-6 h-6 rounded-full bg-blue-600">
+                    <span className=" text-white text-sm font-semibold">
+                      {dayNumber}
+                    </span>
+                  </div>
+                ) : (
+                  <span className="text-xs font-normal">{dayNumber}</span>
+                )}
+              </div>
+
+              {/* 弹窗显示 session */}
+              {(hoverKey === dateKey || selectedKey === dateKey) && (
+                <div className="absolute z-10 bg-[#2a83a2] text-white border shadow-lg p-2 w-28 top-full mt-1">
+                  {sessionMap[dateKey].map((s) => (
+                    <div
+                      key={s.id}
+                      className="mb-1"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedKey(null);
+                        setSelectedKey(null);
+                        setHoverKey(null);
+                      }}
+                    >
                       <div className="font-medium text-[9px]">
                         {s.provider.user.name}
                       </div>
@@ -92,10 +93,10 @@ export default function Calendar({ year, month, sessions }) {
                     </div>
                   ))}
                 </div>
-              </>
-            )}
-          </div>
-        ))}
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

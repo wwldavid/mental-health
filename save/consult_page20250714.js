@@ -36,11 +36,13 @@ export default function ConsultPage() {
           console.log("Loaded sessions:", data);
           setSessions(Array.isArray(data) ? data : []);
 
+          // 如果有预约，就自动跳到第一条 session 的月份
           if (data.length > 0) {
             const firstDate = new Date(data[0].scheduledAt);
             setDisplayYear(firstDate.getFullYear());
             setDisplayMonth(firstDate.getMonth() + 1);
           } else {
+            // 没有预约，恢复到当前
             setDisplayYear(now.getFullYear());
             setDisplayMonth(now.getMonth() + 1);
           }
@@ -74,15 +76,15 @@ export default function ConsultPage() {
     setDisplayMonth(m);
     setDisplayYear(y);
   };
-
+  // 渲染保护
   if (status !== "authenticated") {
-    return <p>loading...</p>;
+    return <p>加载中……</p>;
   }
 
   return (
     <div className="h-screen flex flex-col p-4">
       <Upperbar title="Session" />
-
+      {/* 切换按钮组 */}
       <div className="flex mt-28 mb-2 w-full border-b border-gray-600">
         <button
           onClick={() => setMode("mine")}
@@ -102,31 +104,39 @@ export default function ConsultPage() {
         </button>
       </div>
 
+      {/* 主体内容 */}
       <div className="flex-1 flex-col items-center gap-4 mt-2 pb-20 overflow-y-auto">
         {mode === "mine" ? (
           <div className="w-full h-[67vh] overflow-y-auto">
-            <div className=" p-1 pt-3 border rounded-lg border-neutral-700">
-              <div className="flex items-center gap-4">
-                <button onClick={prevMonth} className="px-2">
-                  ‹
-                </button>
-                <span className="font-medium">
-                  {dayjs(`${displayYear}-${displayMonth}-01`).format(
-                    "MMMM YYYY"
-                  )}
-                </span>
-                <button onClick={nextMonth} className="px-2">
-                  ›
-                </button>
-              </div>
-
-              <Calendar
-                year={displayYear}
-                month={displayMonth}
-                sessions={sessions}
-              />
+            <div className="flex items-center gap-4">
+              <button onClick={prevMonth} className="px-2">
+                ‹
+              </button>
+              <span className="font-medium">
+                {dayjs(`${displayYear}-${displayMonth}-01`).format("MMMM YYYY")}
+              </span>
+              <button onClick={nextMonth} className="px-2">
+                ›
+              </button>
             </div>
+            <Calendar
+              year={displayYear}
+              month={displayMonth}
+              sessions={sessions}
+            />
             <div className="flex flex-wrap justify-center gap-4 mt-4">
+              {/* {sessions.map((s) => (
+                <ProviderCard
+                  key={s.id}
+                  mode="mine"
+                  session={s}
+                  onJoin={() => router.push(`/consult/live/${s.id}`)}
+                  onCancel={() => router.push(`/consult/cancel/${s.id}`)}
+                  onBook={() =>
+                    router.push(`/consult/provider/${s.provider.id}/book`)
+                  }
+                />
+              ))} */}
               {sessions.length > 0 ? (
                 sessions.map((s) => (
                   <ProviderCard
@@ -141,7 +151,7 @@ export default function ConsultPage() {
                   />
                 ))
               ) : (
-                <p className="text-center py-4">No upcoming appointments</p>
+                <p className="text-center py-4">暂无预约会话</p>
               )}
             </div>
           </div>
