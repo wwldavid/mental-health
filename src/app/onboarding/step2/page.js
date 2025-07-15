@@ -68,9 +68,9 @@ export default function Step2() {
                     setGender(option);
                     setError("");
                   }}
-                  className={`w-full h-11  py-2.5  rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center overflow-hidden text-neutral-700 text-lg font-semibold
-                    ${isSelected ? "bg-[#cee4ae]" : "bg-[#f4dda5]"}
-                    `}
+                  className={`w-full h-11  py-2.5  rounded-3xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.30)] flex justify-center items-center overflow-hidden text-lg font-semibold border-2 text-slate-600 ${
+                    isSelected ? "bg-[#cee4ae]" : ""
+                  }`}
                 >
                   {option}
                 </button>
@@ -92,7 +92,7 @@ export default function Step2() {
       <div className="fixed bottom-5 left-0 w-full  p-4 ">
         <button
           onClick={handleNext}
-          className="w-full h-11 bg-gradient-to-r from-[#2c3e50]/90 to-[#2980b9]/80 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold"
+          className="w-full h-11 bg-[#4782A9]  rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold"
         >
           Next
         </button>

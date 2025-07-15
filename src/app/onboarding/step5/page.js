@@ -28,7 +28,7 @@ export default function Step5() {
             localStorage.setItem("onboardingComplete", "true");
             router.push("/home");
           }}
-          className="w-full h-11 bg-gradient-to-r from-[#2c3e50]/90 to-[#2980b9]/80 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold"
+          className="w-full h-11 bg-[#4782A9]  rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold"
         >
           Begin
         </button>
