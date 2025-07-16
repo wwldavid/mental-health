@@ -68,7 +68,7 @@ export default function Step2() {
                     setGender(option);
                     setError("");
                   }}
-                  className={`w-full h-11  py-2.5  rounded-3xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.30)] flex justify-center items-center overflow-hidden text-lg font-semibold border-2 text-slate-600 ${
+                  className={`w-full h-11  py-2.5  rounded-3xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.30)] flex justify-center items-center overflow-hidden text-lg font-semibold border-2 text-[#325C77] ${
                     isSelected ? "bg-[#cee4ae]" : ""
                   }`}
                 >
