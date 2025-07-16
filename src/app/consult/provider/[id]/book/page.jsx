@@ -42,7 +42,7 @@ export default function ProviderBookPage() {
   return (
     <div className="min-h-screen flex flex-col p-4 bg-[#E9E9E9]">
       <Upperbar title="Session" />
-      <h2 className="mt-28 mb-4 text-lg font-semibold">
+      <h2 className="mt-16 text-lg font-semibold">
         Reach out to Provider No.{id}
       </h2>
 
