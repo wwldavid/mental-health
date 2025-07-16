@@ -14,7 +14,7 @@ const walkerImages = [
 ];
 
 const buttonStyle =
-  "w-96 h-11  py-2.5 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold";
+  "w-96 h-11  py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold";
 
 export default function WalkPage2() {
   const {

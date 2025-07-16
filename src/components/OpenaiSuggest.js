@@ -59,7 +59,7 @@ export default function OpenaiSuggest() {
         <Button
           onClick={handleSubmit}
           disabled={loading}
-          className="w-full py-5 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)]  text-center text-white text-xl font-semibold mt-5"
+          className="w-full py-5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)]  text-center text-white text-xl font-semibold mt-5"
         >
           {loading ? "Analyzing..." : "Get Suggestions"}
         </Button>

@@ -19,7 +19,7 @@ export default function SignInPage() {
   const [error, setError] = useState("");
 
   const buttonStyle =
-    "w-full h-11 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold";
+    "w-full h-11 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold";
 
   const handleSubmit = async (e) => {
     e.preventDefault();

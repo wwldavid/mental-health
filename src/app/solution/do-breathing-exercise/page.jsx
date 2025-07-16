@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 const phases = ["Breathe In", "Hold", "Breathe Out"];
 const durations = [4000, 4000, 4000];
 const buttonStyle =
-  "w-96 h-11  py-2.5 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold";
+  "w-96 h-11  py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold";
 
 export default function Breathing() {
   const [phaseIndex, setPhaseIndex] = useState(0);
@@ -82,7 +82,7 @@ export default function Breathing() {
       </p>
 
       <button
-        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-96 h-11 py-2.5 bg-gradient-to-r from-slate-600 to-blue-400 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold"
+        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-96 h-11 py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold"
         onClick={running ? stopExercise : startExercise}
       >
         {running ? "Stop" : "Start"}
