@@ -1,7 +1,8 @@
 // src>components>Navbar.js
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,14 +12,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 // import { Menu, X } from "lucide-react";
 import HomeIcon from "@/icons/home.svg";
+import HomeIconActive from "@/icons/home_active.svg";
 import JournalIcon from "@/icons/auto_stories.svg";
+import JournalIconActive from "@/icons/auto_stories_active.svg";
 import SessionsIcon from "@/icons/calendar_month.svg";
+import SessionsIconActive from "@/icons/calendar_month_active.svg";
 import GoalsIcon from "@/icons/flag.svg";
+import GoalsIconActive from "@/icons/flag_active.svg";
 import ChatIcon from "@/icons/mode_comment.svg";
+import ChatIconActive from "@/icons/mode_comment_active.svg";
 
 const Navbar = ({ mobile = false }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
 
   const menuItems = [
     {
@@ -73,21 +80,33 @@ const Navbar = ({ mobile = false }) => {
           onClick={() => router.push("/journal")}
           className="flex flex-col items-center justify-center p-2"
         >
-          <JournalIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          {pathname === "/journal" ? (
+            <JournalIconActive className="w-6 h-6 scale-125 text-white fill-current" />
+          ) : (
+            <JournalIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          )}
           <span className="mt-1 text-xs text-[#325C77]">Journal</span>
         </button>
         <button
           onClick={() => router.push("/consult")}
           className="flex flex-col items-center justify-center p-2"
         >
-          <SessionsIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          {pathname === "/consult" ? (
+            <SessionsIconActive className="w-6 h-6 scale-125 text-white fill-current" />
+          ) : (
+            <SessionsIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          )}
           <span className="mt-1 text-xs text-[#325C77]">Sessions</span>
         </button>
         <button
           onClick={() => router.push("/home")}
           className="flex flex-col items-center justify-center p-2"
         >
-          <HomeIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          {pathname === "/home" ? (
+            <HomeIconActive className="w-6 h-6 scale-125 text-white fill-current" />
+          ) : (
+            <HomeIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          )}
           <span className="mt-1 text-xs text-[#325C77]">Home</span>
         </button>
 
@@ -95,14 +114,22 @@ const Navbar = ({ mobile = false }) => {
           onClick={() => router.push("/chat")}
           className="flex flex-col items-center justify-center p-2"
         >
-          <ChatIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          {pathname === "/chat" ? (
+            <ChatIconActive className="w-6 h-6 scale-125 text-white fill-current" />
+          ) : (
+            <ChatIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          )}
           <span className="mt-1 text-xs text-[#325C77]">Chats</span>
         </button>
         <button
           onClick={() => router.push("/subitem10")}
           className="flex flex-col items-center justify-center p-2"
         >
-          <GoalsIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          {pathname === "/subitem10" ? (
+            <GoalsIconActive className="w-6 h-6 scale-125 text-white fill-current" />
+          ) : (
+            <GoalsIcon className="w-6 h-6 scale-125 text-white fill-current" />
+          )}
           <span className="mt-1 text-xs text-[#325C77]">Goals</span>
         </button>
       </div>
