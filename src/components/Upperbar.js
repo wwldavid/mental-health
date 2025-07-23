@@ -27,7 +27,7 @@ export default function Upperbar({ title = "My Center" }) {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full px-4 pt-4 pb-2">
+    <div className="fixed top-0 left-0 w-full px-4 pt-4 pb-2 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)]">
       <div className=" h-[43px] grid grid-cols-[auto_1fr_auto] items-center rounded-b-2xl text-[#325C77]">
         <button
           onClick={() => router.back()}

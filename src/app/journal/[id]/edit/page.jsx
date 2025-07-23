@@ -7,7 +7,7 @@ import Upperbar from "@/components/Upperbar";
 import Navbar from "@/components/Navbar";
 import { X, Mic, Image as ImgIcon } from "lucide-react";
 
-const COLORS = ["#f87171", "#fb923c", "#facc15", "#4ade80", "#60a5fa"];
+const COLORS = ["#50A570", "#509FAA", "#B29124", "#EB7114", "#DD7373"];
 
 export default function JournalEditPage() {
   const { id } = useParams();
@@ -15,6 +15,7 @@ export default function JournalEditPage() {
   const [entry, setEntry] = useState(null);
   const [content, setContent] = useState("");
   const [color, setColor] = useState(COLORS[0]);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   // 初次加载，获取已有数据
   useEffect(() => {
@@ -42,7 +43,7 @@ export default function JournalEditPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col p-4 bg-[#E9E9E9]">
+    <div className="min-h-screen flex flex-col p-4 bg-[url('/journal_bg3.png')] bg-cover bg-center">
       <Upperbar title="Journal" />
 
       <div className="flex justify-between items-center mt-28 mb-4 w-full h-9 p-2 mx-auto">
@@ -57,7 +58,7 @@ export default function JournalEditPage() {
         </div>
         <button
           onClick={() => router.back()}
-          className="w-8 h-8 bg-black rounded flex items-center justify-center cursor-pointer"
+          className="w-8 h-8 bg-[#4782A9] rounded flex items-center justify-center cursor-pointer"
         >
           <X className="w-4 h-4 text-white" />
         </button>
@@ -80,17 +81,17 @@ export default function JournalEditPage() {
         </div>
 
         {/* 日记编辑区 */}
-        <div className="w-full h-96 bg-zinc-300 rounded-2xl p-4 relative">
+        <div className="w-full h-96 bg-white shadow-[0px_0px_6px_0px_rgba(0,0,0,0.50)] rounded-2xl p-4 relative">
           <textarea
             className="w-full h-full bg-transparent resize-none outline-none"
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
           <div className="absolute bottom-2 right-2 flex space-x-2">
-            <div className="p-1 bg-black rounded cursor-pointer">
+            <div className="p-1 bg-[#4782A9] rounded cursor-pointer">
               <Mic className="w-5 h-5 text-white" />
             </div>
-            <div className="p-1 bg-black rounded cursor-pointer">
+            <div className="p-1 bg-[#4782A9] rounded cursor-pointer">
               <ImgIcon className="w-5 h-5 text-white" />
             </div>
           </div>
@@ -99,14 +100,39 @@ export default function JournalEditPage() {
 
       <div className="p-4 border-t">
         <button
-          onClick={handleUpdate}
-          className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
+          onClick={() => setShowConfirm(true)}
+          className="w-full bg-[#4782A9] text-white py-2 rounded-3xl hover:bg-gray-800"
         >
           Update Entry
         </button>
       </div>
 
-      <Navbar mobile={false} />
+      {showConfirm && (
+        <div className="fixed inset-0 bg-red-300/20 flex items-center justify-center">
+          <div className="bg-white p-3 rounded-lg shadow-lg max-w-sm w-4/5">
+            <p className="mb-4 text-center">
+              Are you sure you want to update this entry?
+            </p>
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => setShowConfirm(false)}
+                className="px-2 py-1 border rounded bg-[#4782A9] text-white"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  handleUpdate();
+                  setShowConfirm(false);
+                }}
+                className="px-2 py-1 bg-red-400 text-white rounded"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

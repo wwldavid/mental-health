@@ -41,3 +41,14 @@ export async function PATCH(req, { params }) {
 
   return Response.json(updated);
 }
+
+export async function DELETE(req, {params}){
+  const session = await getServerSession(authOptions);
+  if (!session){
+    return new Response("Unauthorized", {status: 401});
+  }
+
+  const id = parseInt(params.id, 10);
+  await prisma.diaryEntry.delete({where: {id}});
+  return new Response(null, {status: 204});
+}

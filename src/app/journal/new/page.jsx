@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import { useRouter } from "next/navigation";
 import { Mic, Image as ImgIcon } from "lucide-react";
 
-const COLORS = ["#f87171", "#fb923c", "#facc15", "#4ade80", "#60a5fa"];
+const COLORS = ["#50A570", "#509FAA", "#B29124", "#EB7114", "#DD7373"];
 
 export default function NewJournalPage() {
   const [color, setColor] = useState(COLORS[0]);
@@ -37,7 +37,7 @@ export default function NewJournalPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col p-4 bg-[#E9E9E9]">
+    <div className="min-h-screen flex flex-col p-4 bg-[url('/journal_bg2.png')] bg-cover bg-center">
       <Upperbar title="Journal" />
 
       <div className="mt-20 mb-10 w-full p-2 h-[60vh] overflow-y-auto space-y-4">
@@ -59,7 +59,7 @@ export default function NewJournalPage() {
         </div>
 
         {/* 日记输入区 */}
-        <div className="w-full h-60 bg-zinc-300 rounded-lg p-4 relative">
+        <div className="w-full h-60 bg-white rounded-2xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.50)] p-4 relative">
           <textarea
             className="w-full h-full bg-transparent resize-none outline-none"
             placeholder="What is on your mind?"
@@ -68,10 +68,10 @@ export default function NewJournalPage() {
           />
 
           <div className="absolute bottom-2 right-2 flex space-x-2">
-            <div className="p-1 bg-black rounded cursor-pointer">
+            <div className="p-1 bg-[#4782A9] rounded cursor-pointer">
               <Mic className="w-5 h-5 text-white" />
             </div>
-            <div className="p-1 bg-black rounded cursor-pointer">
+            <div className="p-1 bg-[#4782A9] rounded cursor-pointer">
               <ImgIcon className="w-5 h-5 text-white" />
             </div>
           </div>
@@ -80,7 +80,7 @@ export default function NewJournalPage() {
 
       <div className="p-4 border-t">
         <button
-          className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
+          className="w-full bg-[#4782A9] text-white py-2 rounded-3xl hover:bg-gray-800"
           onClick={handleAdd}
         >
           Add Entry

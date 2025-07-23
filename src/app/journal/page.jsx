@@ -22,7 +22,7 @@ export default function JournalListPage() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col p-4 bg-[#E9E9E9]">
+    <div className="min-h-screen flex flex-col p-4 bg-[url('/journal_bg1.png')] bg-cover bg-center">
       <Upperbar title="Journal" />
 
       {/* 搜索框 */}
@@ -42,7 +42,7 @@ export default function JournalListPage() {
           <div
             key={entry.id}
             onClick={() => router.push(`/journal/${entry.id}`)}
-            className="p-4 border rounded-lg shadow-sm cursor-pointer hover:bg-gray-50"
+            className="p-4 border-b border-[#4782A9] shadow-sm cursor-pointer hover:bg-gray-50"
           >
             <div className="flex justify-between items-center mb-2">
               <span className="font-semibold">
@@ -69,7 +69,7 @@ export default function JournalListPage() {
 
       <div className="px-4 py-2 border-t flex justify-between items-center">
         <button
-          className=" w-full bg-black text-white py-2 rounded hover:bg-gray-800"
+          className=" w-full bg-[#4782A9] text-white py-2 rounded-3xl hover:bg-gray-800"
           onClick={() => router.push("/journal/new")}
         >
           New Entry
