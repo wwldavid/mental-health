@@ -37,7 +37,7 @@ export default function ChatListPage() {
   //  2) 未认证：显示提示并提供跳转
   if (status === "unauthenticated") {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[#E9E9E9]">
+      <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[url('/chat_bg1.png')] bg-cover bg-center">
         <p className="mb-6 text-lg">
           To start chatting with a counselor, please log in or create an
           account.
@@ -62,7 +62,7 @@ export default function ChatListPage() {
 
   //  3) 已认证：正常渲染后端返回的 chats   列表（此时包含三位咨询师的会话）
   return (
-    <div className="min-h-screen flex flex-col p-4 bg-[#E9E9E9]">
+    <div className="min-h-screen flex flex-col p-4 bg-[url('/chat_bg1.png')] bg-cover bg-center">
       <Upperbar title="My Chat" />
 
       <input
@@ -77,8 +77,8 @@ export default function ChatListPage() {
         <button
           className={
             filter === "all"
-              ? "font-bold w-44 h-7 px-2 py-2.5 bg-black text-white flex justify-center items-center"
-              : "w-44 h-7 px-2 py-2.5 flex justify-center items-center"
+              ? "font-bold w-44 h-7 px-2 py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] text-white flex justify-center items-center"
+              : "w-44 h-7 px-2 py-2.5 flex justify-center items-center border border-[#4782A9] rounded-3xl"
           }
           onClick={() => setFilter("all")}
         >
@@ -87,8 +87,8 @@ export default function ChatListPage() {
         <button
           className={
             filter === "unread"
-              ? "font-bold w-44 h-7 px-2 py-2.5 bg-black text-white flex justify-center items-center"
-              : "w-44 h-7 px-2 py-2.5 flex justify-center items-center"
+              ? "font-bold w-44 h-7 px-2 py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] text-white flex justify-center items-center"
+              : "w-44 h-7 px-2 py-2.5 flex justify-center items-center border border-[#4782A9] rounded-3xl"
           }
           onClick={() => setFilter("unread")}
         >
@@ -106,13 +106,13 @@ export default function ChatListPage() {
               <li
                 key={chat.id}
                 onClick={() => router.push(`/chat/${chat.id}`)}
-                className="flex items-center p-2 border-b cursor-pointer hover:bg-gray-100"
+                className="flex items-center p-2 border-b border-b-[#4782A9] cursor-pointer hover:bg-gray-100 mt-5"
               >
                 <Image
                   src={chat.user.image || "/default-avatar.png"}
                   alt={chat.user.name}
-                  width={40}
-                  height={40}
+                  width={50}
+                  height={50}
                   className="rounded-full mr-4"
                 />
                 <div>
@@ -122,7 +122,6 @@ export default function ChatListPage() {
                   </div>
                 </div>
               </li>
-              <div class="w-full h-0 outline outline-1 outline-offset-[-0.50px] outline-black"></div>
             </>
           ))}
       </ul>

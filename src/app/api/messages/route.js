@@ -8,6 +8,15 @@ export async function GET(request) {
   const messages = await prisma.message.findMany({
     where: { chatId },
     orderBy: { createdAt: "asc" },
+    include: {
+      sender: {
+        select: {
+          id: true,
+          name: true,
+          image: true,
+        },
+      },
+    },
   });
 
   return new Response(JSON.stringify(messages), {

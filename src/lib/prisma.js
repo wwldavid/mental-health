@@ -9,10 +9,7 @@ const globalForPrisma = globalThis;
 const prisma =
   globalForPrisma.prisma ||
   new PrismaClient({
-    log:
-      process.env.NODE_ENV === "development"
-        ? ["query", "error", "warn"]
-        : ["error"],
+    log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
   });
 
 // 在开发环境下将实例挂载到全局，避免热重载时重复创建
