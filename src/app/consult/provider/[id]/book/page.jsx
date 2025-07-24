@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Upperbar from "@/components/Upperbar";
-import { Button } from "@/components/ui/button";
 
 export default function ProviderBookPage() {
   const router = useRouter();
@@ -40,27 +39,30 @@ export default function ProviderBookPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col p-4 bg-[#E9E9E9]">
+    <div className="min-h-screen flex flex-col p-4 bg-[url('/provider_bg3.png')] bg-cover bg-center">
       <Upperbar title="Session" />
-      <h2 className="mt-16 text-lg font-semibold">
+      <h2 className="mt-16 pt-2 text-lg font-semibold">
         Reach out to Provider No.{id}
       </h2>
 
       <div className="mb-12">
         {Object.entries(slotsByDate).map(([date, times]) => (
-          <div key={date} className="mb-1">
-            <div className="text-center font-medium mt-6">{date}</div>
-            <div className="grid grid-cols-2 gap-2 mt-2">
+          <div
+            key={date}
+            className="w-full h-28  bg-white/50 rounded-2xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.50)]"
+          >
+            <div className="text-center font-medium mt-6 pt-1">{date}</div>
+            <div className="grid grid-cols-2 gap-2 mt-2 ml-2">
               {times.map((t) => {
                 const key = `${date}|${t}`;
                 const isSel = selected === key;
                 return (
                   <button
                     key={t}
-                    className={`w-44 h-7 rounded border ${
+                    className={`w-40 h-7 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] flex justify-center items-center ${
                       isSel
-                        ? "bg-black text-white border-black"
-                        : "border-gray-600 text-black"
+                        ? "bg-[#EAD098] text-black "
+                        : "bg-[#4782A9] text-white "
                     }`}
                     onClick={() => toggle(date, t)}
                   >
@@ -73,7 +75,12 @@ export default function ProviderBookPage() {
         ))}
       </div>
 
-      <Button onClick={handleBook}>Book Session</Button>
+      <button
+        className="w-full h-11 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold"
+        onClick={handleBook}
+      >
+        Book Session
+      </button>
     </div>
   );
 }
