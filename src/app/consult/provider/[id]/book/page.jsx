@@ -1,6 +1,6 @@
 // src/app/consult/provider/[id]/book/page.jsx
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Upperbar from "@/components/Upperbar";
 
@@ -14,6 +14,15 @@ export default function ProviderBookPage() {
     "Monday, August 18": ["10:00am", "12:00pm", "2:00pm", "4:00pm"],
     "Thursday, August 21": ["10:00am", "12:00pm", "2:00pm", "4:00pm"],
   };
+  const [provider, setProvider] = useState(null);
+  useEffect(() => {
+    fetch(`/api/providers/${id}`)
+      .then((res) => res.json())
+      .then((data) => setProvider(data))
+      .catch((err) => {
+        console.error("Failed to load provider:", err);
+      });
+  }, [id]);
   const [selected, setSelected] = useState(null);
   const toggle = (date, time) => {
     const key = `${date}|${time}`;
@@ -42,7 +51,7 @@ export default function ProviderBookPage() {
     <div className="min-h-screen flex flex-col p-4 bg-[url('/provider_bg3.png')] bg-cover bg-center">
       <Upperbar title="Session" />
       <h2 className="mt-16 pt-2 text-lg font-semibold">
-        Reach out to Provider No.{id}
+        {provider ? `Connect with ${provider.user.name}` : "Loading..."}
       </h2>
 
       <div className="mb-12">
