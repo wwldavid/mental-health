@@ -122,10 +122,10 @@ const Navbar = ({ mobile = false }) => {
           <span className="mt-1 text-xs text-[#325C77]">Chats</span>
         </button>
         <button
-          onClick={() => router.push("/subitem10")}
+          onClick={() => router.push("/goals")}
           className="flex flex-col items-center justify-center p-2"
         >
-          {pathname === "/subitem10" ? (
+          {pathname === "/goals" ? (
             <GoalsIconActive className="w-6 h-6 scale-125 text-white fill-current" />
           ) : (
             <GoalsIcon className="w-6 h-6 scale-125 text-white fill-current" />

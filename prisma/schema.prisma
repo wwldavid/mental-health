@@ -37,7 +37,7 @@ model User {
   // client 模式下的 sessions
   sessionsAsUser TherapySession[] @relation("UserTherapySessions")
 
-
+  goals     Goal[]
 }
 model Provider {
   id            Int     @id @default(autoincrement())
@@ -151,4 +151,16 @@ model Message {
 
   chat      Chat     @relation(fields: [chatId], references: [id])
   chatId    Int
+}
+
+model Goal {
+  id         Int      @id @default(autoincrement())
+  title      String
+  status     String   @default("not_start") // not_start | in_progress | achieved
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  
 }
