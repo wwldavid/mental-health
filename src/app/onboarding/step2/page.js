@@ -89,7 +89,7 @@ export default function Step2() {
         </div>
         {error && <p className="text-red-500 text-sm">{error}</p>}
       </div>
-      <div className="fixed bottom-5 left-0 w-full  p-4 ">
+      <div className="fixed bottom-5 left-0 w-full  p-4">
         <button
           onClick={handleNext}
           className="w-full h-11 bg-[#4782A9]  rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold"
