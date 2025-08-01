@@ -1,4 +1,3 @@
-// src>app>api>goals>route.js
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
@@ -24,7 +23,6 @@ export async function GET(req) {
 
   const goals = await prisma.goal.findMany({
     where,
-    include: { steps: true },
     orderBy: { createdAt: "desc" },
   });
   return NextResponse.json(goals);
@@ -35,14 +33,12 @@ export async function POST(req) {
   if (!session)
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-  const { title, description, steps } = await req.json();
+  const { title } = await req.json();
 
   const goal = await prisma.goal.create({
     data: {
       title,
-      description,
       user: { connect: { id: session.user.id } },
-      steps: { create: steps.map((t) => ({ title: t })) },
     },
   });
   return NextResponse.json(goal, { status: 201 });

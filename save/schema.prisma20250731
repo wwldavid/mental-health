@@ -154,32 +154,16 @@ model Message {
   chatId    Int
 }
 
-enum Status {
-  NOT_STARTED    // 新建
-  IN_PROGRESS    // 进行中
-  ACHIEVED       // 已完成
-}
-
 model Goal {
-  id          Int       @id @default(autoincrement())
-  title       String
-  description String?   // 可选的详细描述
-  status      Status    @default(NOT_STARTED)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  completedAt DateTime? // 达标时间
+  id         Int      @id @default(autoincrement())
+  title      String
+  status     String   @default("not_start") // not_start | in_progress | achieved
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-  userId      Int
-  user        User      @relation(fields: [userId], references: [id])
-  steps       Step[]    // 关系到步骤表
-}
-
-model Step {
-  id        Int      @id @default(autoincrement())
-  title     String
-  completed Boolean  @default(false)
-  goalId    Int
-  goal      Goal     @relation(fields: [goalId], references: [id])
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  
 }
 
 model GratitudeEntry {

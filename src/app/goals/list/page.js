@@ -1,28 +1,35 @@
+export const dynamic = "force-dynamic";
 import GoalList from "@/components/GoalList";
+
 import prisma from "@/lib/prisma";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
-import Upperbar from "@/components/Upperbar";
 
 export default async function GoalsList({ searchParams }) {
   const session = await getServerSession(authOptions);
+  if (!session) return null;
+
+  const where = { userId: session.user.id };
+  if (searchParams.status) where.status = searchParams.status;
+
   const initialGoals = await prisma.goal.findMany({
-    where: {
-      userId: session.user.id,
-      ...(searchParams.status && { status: searchParams.status }),
-      ...(searchParams.search && {
-        OR: [
-          { title: { contains: searchParams.search, mode: "insensitive" } },
-          { status: { contains: searchParams.search, mode: "insensitive" } },
-        ],
-      }),
-    },
+    where,
+    include: { steps: true },
     orderBy: { createdAt: "desc" },
   });
+
+  // 动态标题
+  const title =
+    searchParams.status === "NOT_STARTED"
+      ? "New Goals"
+      : searchParams.status === "IN_PROGRESS"
+      ? "Goals In Progress"
+      : "Completed Goals";
+
   return (
-    <div className="min-h-screen flex flex-col p-4 bg-[url('/journal_bg3.png')] bg-cover bg-center">
-      <Upperbar title="Goals" />
-      <GoalList initialGoals={initialGoals} />
+    <div className="p-4 mt-8">
+      <h2 className="text-xl font-semibold mb-4">{title}</h2>
+      <GoalList initialGoals={initialGoals} status={searchParams.status} />
     </div>
   );
 }
