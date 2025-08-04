@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { X, Edit2 } from "lucide-react";
 
@@ -7,6 +7,10 @@ export default function GoalList({ initialGoals, status }) {
   const router = useRouter();
   const [goals, setGoals] = useState(initialGoals);
   const [deletingId, setDeletingId] = useState(null);
+
+  useEffect(() => {
+    setGoals(initialGoals);
+  }, [initialGoals]);
 
   // 删除
   const handleDelete = async (id) => {
@@ -37,10 +41,10 @@ export default function GoalList({ initialGoals, status }) {
     setGoals(newGoals);
 
     // （4）检查刚更新的那个 goal：如果它的所有 steps 都完成了，就自动切到 ACHIEVED
-    const updated = newGoals.find((g) => g.id === goalId);
-    if (updated && updated.steps.every((s) => s.completed)) {
-      await changeStatus(goalId, "ACHIEVED");
-    }
+    // const updated = newGoals.find((g) => g.id === goalId);
+    // if (updated && updated.steps.every((s) => s.completed)) {
+    //   await changeStatus(goalId, "ACHIEVED");
+    // }
   };
 
   // 状态切换（New → InProgress／InProgress → Achieved)
@@ -123,6 +127,15 @@ export default function GoalList({ initialGoals, status }) {
                     type="checkbox"
                     checked={s.completed}
                     onChange={() => toggleStep(g.id, s.id, s.completed)}
+                    className="w-5 h-5 appearance-none border-2 border-gray-500 rounded relative checked:border-transparent focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+                    style={{
+                      backgroundImage: s.completed
+                        ? `url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%2316a34a' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='m13.854 3.646-7.5 7.5a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L6 9.793l7.146-7.147a.5.5 0 0 1 .708.708z' stroke='%2316a34a' stroke-width='1'/%3e%3c/svg%3e")`
+                        : "none",
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "center",
+                      backgroundSize: "18px 18px",
+                    }}
                   />
                 </div>
               ))}
@@ -153,6 +166,12 @@ export default function GoalList({ initialGoals, status }) {
                   />
                 </div>
               </div>
+              <button
+                onClick={() => changeStatus(g.id, "ACHIEVED")}
+                className="flex items-center justify-center w-3/4 mx-auto py-1 bg-[#4782A9] text-base text-white font-bold rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)]"
+              >
+                Mark Completed
+              </button>
             </div>
           )}
 

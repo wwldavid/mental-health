@@ -68,7 +68,7 @@ export default function NewOrEditGoal() {
           type="text"
           required
           placeholder="What’s your goal?"
-          className="w-full p-2 "
+          className="w-full p-2 font-semibold placeholder-gray-700 text-gray-900 placeholder:font-bold"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -89,8 +89,13 @@ export default function NewOrEditGoal() {
               onChange={(e) => handleStepChange(idx, e.target.value)}
             />
           ))}
-          <button type="button" onClick={handleAddStep} className="text-lg">
-            + Add Step
+          <button
+            type="button"
+            onClick={handleAddStep}
+            className="flex items-center"
+          >
+            <span className="text-2xl leading-none">+</span>
+            <span className="text-base ml-2">Add Step</span>
           </button>
         </div>
         <div className="flex justify-end">

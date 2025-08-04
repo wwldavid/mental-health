@@ -10,7 +10,7 @@ import Image from "next/image";
 const features = [
   {
     title: "Breathing Exercise",
-    icon: "/images/breath.svg",
+    icon: "/images/breathing.png",
     path: "/solution/do-breathing-exercise",
   },
   {
