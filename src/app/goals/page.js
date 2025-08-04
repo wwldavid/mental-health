@@ -43,6 +43,7 @@ export default async function GoalsPage() {
       {items.map(({ status, bg, count }) => (
         <Link
           key={status}
+          prefetch={false}
           href={`/goals/list?status=${status}`}
           className="relative w-80 h-36 border-2 rounded-2xl shadow-lg flex items-center justify-center bg-center bg-cover"
           style={{ backgroundImage: `url(${bg})` }}
