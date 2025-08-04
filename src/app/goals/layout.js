@@ -1,3 +1,7 @@
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
+
 import Upperbar from "@/components/Upperbar";
 import Navbar from "@/components/Navbar";
 
@@ -5,7 +9,13 @@ export const metadata = {
   title: "Goals",
 };
 
-export default function GoalsLayout({ children }) {
+export const dynamic = "force-dynamic";
+
+export default async function GoalsLayout({ children }) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect(`/sign-in?callbackUrl=${encodeURIComponent("/goals")}`);
+  }
   return (
     <div className="h-screen flex flex-col bg-[url('/grati_bg.png')] bg-cover bg-center">
       <Upperbar title="Goals" />

@@ -14,9 +14,25 @@ export default function GoalList({ initialGoals, status }) {
 
   // 删除
   const handleDelete = async (id) => {
-    await fetch(`/api/goals/${id}`, { method: "DELETE" });
-    setGoals(goals.filter((g) => g.id !== id));
-    setDeletingId(null);
+    setDeletingId(id);
+    try {
+      const res = await fetch(`/api/goals/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        // 尝试读取后端返回的错误信息
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.message || `Status ${res.status}`);
+      }
+      // 成功后，更新本地 state 或者直接 router.refresh()
+      setGoals((prev) => prev.filter((g) => g.id !== id));
+      // router.refresh(); // 如果你希望强制重新拉一次列表，取消注释这行
+    } catch (err) {
+      console.error("Delete failed:", err);
+      alert(`Delete failed: ${err.message}`);
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   // 步骤勾选
