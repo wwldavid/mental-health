@@ -39,6 +39,7 @@ model User {
 
   goals     Goal[]
   gratitudeEntries  GratitudeEntry []
+  compassionEntries  CompassionEntry[]
 }
 model Provider {
   id            Int     @id @default(autoincrement())
@@ -190,4 +191,20 @@ model GratitudeEntry {
 
   user          User      @relation(fields: [userId], references: [id])
   userId        Int
+}
+
+enum Category {
+  COMMON_HUMANITY
+  MINDFULNESS
+  KINDNESS
+}
+
+model CompassionEntry {
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int
+  content   String
+  category  Category
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }

@@ -11,8 +11,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Upperbar from "./Upperbar";
 
 export default function OpenaiSuggest() {
-  const { data: session } = useSession(); // ← 新增
-  const userName = session?.user?.name || "there"; // ←
+  const { data: session } = useSession();
+  const userName = session?.user?.name || "there";
 
   const [feeling, setFeeling] = useState("");
   const [acknowledgement, setAcknowledgement] = useState([]);

@@ -1,4 +1,4 @@
-// app/solution/walk/page.jsx (step 1)
+// app/solution/walk/page.jsx
 "use client";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";

@@ -12,7 +12,7 @@ const buttonStyle =
 export default function SignInPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/chat";
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,24 +26,29 @@ export default function SignInPage() {
     setError("");
 
     // 调用 NextAuth Credentials Provider
-    const res = await signIn("credentials", {
-      redirect: false,
+    // const res = await signIn("credentials", {
+    //   redirect: false,
+    //   email,
+    //   password,
+    //   callbackUrl,
+    // });
+
+    // if (!res) {
+    //   setError("登录失败，请重试");
+    //   return;
+    // }
+    // if (res.error) {
+    //   setError(res.error);
+    // } else {
+
+    //   localStorage.setItem("onboardingComplete", "true");
+    //   router.push(res.url || callbackUrl);
+    // }
+    await signIn("credentials", {
       email,
       password,
       callbackUrl,
     });
-
-    if (!res) {
-      setError("登录失败，请重试");
-      return;
-    }
-    if (res.error) {
-      setError(res.error);
-    } else {
-      // 登录成功，跳转到 callbackUrl
-      localStorage.setItem("onboardingComplete", "true");
-      router.push(res.url || callbackUrl);
-    }
   };
 
   return (
@@ -95,14 +100,16 @@ export default function SignInPage() {
           <div className="text-center">
             <button
               type="button"
-              onClick={() => signIn("google", { callbackUrl })}
+              // onClick={() => signIn("google", { callbackUrl })}
+              onClick={() => signIn("google", { callbackUrl, redirect: true })}
               className={buttonStyle}
             >
               Continue with Google
             </button>
             <button
               type="button"
-              onClick={() => signIn("discord", { callbackUrl })}
+              // onClick={() => signIn("discord", { callbackUrl })}
+              onClick={() => signIn("discord", { callbackUrl, redirect: true })}
               className={buttonStyle}
             >
               Continue with Discord
