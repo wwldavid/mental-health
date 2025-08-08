@@ -25,29 +25,30 @@ export default function SignInPage() {
     e.preventDefault();
     setError("");
 
-    // 没提供 callbackUrl 时，默认去 /home（别用 "/"，会被你项目重定向到 /welcome）
-    const finalCallbackUrl =
-      callbackUrl && callbackUrl !== "/" ? callbackUrl : "/home";
+    // 调用 NextAuth Credentials Provider
+    // const res = await signIn("credentials", {
+    //   redirect: false,
+    //   email,
+    //   password,
+    //   callbackUrl,
+    // });
 
-    const res = await signIn("credentials", {
+    // if (!res) {
+    //   setError("登录失败，请重试");
+    //   return;
+    // }
+    // if (res.error) {
+    //   setError(res.error);
+    // } else {
+
+    //   localStorage.setItem("onboardingComplete", "true");
+    //   router.push(res.url || callbackUrl);
+    // }
+    await signIn("credentials", {
       email,
       password,
-      redirect: false, // 手动处理跳转
-      callbackUrl: finalCallbackUrl,
+      callbackUrl,
     });
-
-    if (!res) {
-      setError("登录失败，请重试");
-      return;
-    }
-    if (res.error) {
-      setError(res.error);
-      return;
-    }
-    try {
-      localStorage.setItem("onboardingComplete", "true");
-    } catch {}
-    router.push(res.url || finalCallbackUrl);
   };
 
   return (
