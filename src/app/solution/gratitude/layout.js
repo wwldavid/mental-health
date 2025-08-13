@@ -19,7 +19,7 @@ export default async function GratitudeLayout({ children }) {
     );
   }
   return (
-    <div className="h-screen flex flex-col bg-[url('/grati_bg.png')] bg-cover bg-center">
+    <div className="h-screen flex flex-col bg-[url('/grati_bg.webp')] bg-cover bg-center">
       <Upperbar title="Gratitude" />
       <div className="mt-16 flex-grow overflow-auto">{children}</div>
       <Navbar />

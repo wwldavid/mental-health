@@ -23,17 +23,17 @@ export default async function GoalsPage() {
   const items = [
     {
       status: "NOT_STARTED",
-      bg: "/images/goal_new.png",
+      bg: "/images/goal_new.webp",
       count: counts.NOT_STARTED || 0,
     },
     {
       status: "IN_PROGRESS",
-      bg: "/images/goal_pro.png",
+      bg: "/images/goal_pro.webp",
       count: counts.IN_PROGRESS || 0,
     },
     {
       status: "ACHIEVED",
-      bg: "/images/goal_com.png",
+      bg: "/images/goal_com.webp",
       count: counts.ACHIEVED || 0,
     },
   ];

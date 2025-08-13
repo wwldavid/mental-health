@@ -17,7 +17,7 @@ export default async function GoalsLayout({ children }) {
     redirect(`/sign-in?callbackUrl=${encodeURIComponent("/goals")}`);
   }
   return (
-    <div className="h-screen flex flex-col bg-[url('/grati_bg.png')] bg-cover bg-center">
+    <div className="h-screen flex flex-col bg-[url('/grati_bg.webp')] bg-cover bg-center">
       <Upperbar title="Goals" />
       <div className="mt-16 flex-grow overflow-auto">{children}</div>
       <Navbar />
