@@ -28,7 +28,23 @@ export default function ProviderDetailPage() {
       {provider ? (
         <ProviderDetailCard
           provider={provider}
-          onMessage={() => router.push(`/consult/provider/${id}`)}
+          onMessage={async () => {
+            try {
+              const res = await fetch("/api/chats/start", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ peerId: provider.user.id }),
+              });
+              if (!res.ok) {
+                console.error("start chat failed:", await res.text());
+                return;
+              }
+              const { chatId } = await res.json();
+              router.push(`/chat/${chatId}`);
+            } catch (e) {
+              console.error("start chat error:", e);
+            }
+          }}
           onBook={() => router.push(`/consult/provider/${id}/book`)}
         />
       ) : (

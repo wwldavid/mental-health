@@ -69,7 +69,7 @@ export default function ChatDetailPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col p-4 bg-[url('/chat_bg2.png')] bg-cover bg-center">
+    <div className="min-h-screen flex flex-col p-4 bg-[url('/chat_bg2.webp')] bg-cover bg-center">
       <Upperbar title="My Chat" />
 
       <div className=" mt-28 mb-4 px-2 max-h-[60vh] overflow-y-auto">

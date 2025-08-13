@@ -79,7 +79,7 @@ export default function ProviderCard({
     return (
       <div
         onClick={onView}
-        className="cursor-pointer w-96 h-[556px] p-4 rounded-2xl flex flex-col bg-[url('/provider_bg2.png')] bg-cover bg-center outline outline-1 outline-offset-[-1px] outline-neutral-700"
+        className="cursor-pointer w-96 h-[556px] p-4 rounded-2xl flex flex-col bg-[url('/provider_bg2.webp')] bg-cover bg-center outline outline-1 outline-offset-[-1px] outline-neutral-700"
       >
         <div className="flex gap-5">
           <Image

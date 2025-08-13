@@ -22,6 +22,24 @@ export default function ConsultPage() {
   const [displayYear, setDisplayYear] = useState(now.getFullYear());
   const [displayMonth, setDisplayMonth] = useState(now.getMonth() + 1);
 
+  const startChatAndGo = async (peerUserId) => {
+    try {
+      const res = await fetch("/api/chats/start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ peerId: peerUserId }),
+      });
+      if (!res.ok) {
+        console.error("start chat failed:", await res.text());
+        return;
+      }
+      const { chatId } = await res.json();
+      router.push(`/chat/${chatId}`);
+    } catch (e) {
+      console.error("start chat error:", e);
+    }
+  };
+
   useEffect(() => {
     if (status === "loading") return;
     if (status === "unauthenticated") signIn();
@@ -133,6 +151,7 @@ export default function ConsultPage() {
                     key={s.id}
                     mode="mine"
                     session={s}
+                    onMessage={() => startChatAndGo(s?.provider?.user?.id)}
                     onJoin={() => router.push(`/consult/live/${s.id}`)}
                     onCancel={() => router.push(`/consult/cancel/${s.id}`)}
                     onBook={() =>
