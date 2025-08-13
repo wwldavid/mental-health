@@ -19,7 +19,7 @@ export default function ProviderCard({
 }) {
   if (mode === "mine" && session) {
     return (
-      <div className="w-96 h-96  p-4 flex flex-col justify-between rounded-2xl bg-[url('/provider_bg1.png')] bg-cover bg-center border border-neutral-700">
+      <div className="w-96 h-96  p-4 flex flex-col justify-between rounded-2xl bg-[url('/provider_bg1.webp')] bg-cover bg-center border border-neutral-700">
         <div className="flex">
           <Image
             src={session.provider.image || "/avatar-placeholder.png"}

@@ -10,32 +10,32 @@ import Image from "next/image";
 const features = [
   {
     title: "Breathing Exercise",
-    icon: "/images/breathing.png",
+    icon: "/images/breathing.webp",
     path: "/solution/do-breathing-exercise",
   },
   {
     title: "Going for a Walk",
-    icon: "/images/walk_button.png",
+    icon: "/images/walk_button.webp",
     path: "/solution/walk",
   },
   {
     title: "Gratitude Practice",
-    icon: "/images/gratitude.png",
+    icon: "/images/gratitude.webp",
     path: "/solution/gratitude",
   },
   {
     title: "Self-Compassion",
-    icon: "/images/compassion.png",
+    icon: "/images/compassion.webp",
     path: "/solution/self-compassion",
   },
   {
     title: "Body Scan",
-    icon: "/images/scan.png",
+    icon: "/images/scan.webp",
     path: "/solution/body-scan",
   },
   {
     title: "Five Senses",
-    icon: "/images/five-sense.png",
+    icon: "/images/five-sense.webp",
     path: "/solution/five-senses",
   },
 ];

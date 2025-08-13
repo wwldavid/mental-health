@@ -37,7 +37,7 @@ export default function SignInPage() {
     });
 
     if (!res) {
-      setError("登录失败，请重试");
+      setError("log in failed, please try again.");
       return;
     }
     if (res.error) {

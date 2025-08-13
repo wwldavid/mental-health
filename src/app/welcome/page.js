@@ -10,7 +10,7 @@ export default function Welcome() {
   const router = useRouter();
 
   return (
-    <div className="h-screen flex flex-col items-center gap-64 bg-[url('/welcome_bg.png')] bg-cover bg-center">
+    <div className="h-screen flex flex-col items-center gap-64 bg-[url('/welcome_bg.webp')] bg-cover bg-center">
       <div className="flex flex-col items-center mt-52 ">
         <Image src="/logo.png" alt="logo" width={263} height={85} priority />
       </div>

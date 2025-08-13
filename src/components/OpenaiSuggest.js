@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react"; // ← 新增
+import { useSession } from "next-auth/react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -59,7 +59,7 @@ export default function OpenaiSuggest() {
         <Button
           onClick={handleSubmit}
           disabled={loading}
-          className="w-full py-5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)]  text-center text-white text-xl font-semibold mt-5"
+          className="w-full max-w-96 py-5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)]  text-center text-white text-xl font-semibold mt-5"
         >
           {loading ? "Analyzing..." : "Get Suggestions"}
         </Button>
