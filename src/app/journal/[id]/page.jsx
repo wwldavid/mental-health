@@ -33,7 +33,7 @@ export default function JournalDetail() {
     <div className="min-h-screen flex flex-col p-4 bg-[url('/journal_bg3.png')] bg-cover bg-center">
       <Upperbar title="Journal" />
 
-      <div className="mt-20 mb-4 w-full p-4 flex justify-between items-center">
+      <div className="mt-16 mb-4 w-full p-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <span className="font-semibold">
             {new Date(entry.createdAt).toLocaleDateString()}
