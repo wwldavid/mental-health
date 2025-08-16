@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 import Upperbar from "@/components/Upperbar";
 import Navbar from "@/components/Navbar";
+import GoalsShell from "./GoalsShell";
 
 export const metadata = {
   title: "Goals",
@@ -17,10 +18,10 @@ export default async function GoalsLayout({ children }) {
     redirect(`/sign-in?callbackUrl=${encodeURIComponent("/goals")}`);
   }
   return (
-    <div className="h-screen flex flex-col bg-[url('/grati_bg.webp')] bg-cover bg-center">
+    <GoalsShell>
       <Upperbar title="Goals" />
       <div className="mt-16 flex-grow overflow-auto">{children}</div>
       <Navbar />
-    </div>
+    </GoalsShell>
   );
 }

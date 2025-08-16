@@ -86,7 +86,7 @@ export default function GoalList({ initialGoals, status }) {
       {goals.map((g) => (
         <div
           key={g.id}
-          className="p-4 bg-white rounded-lg border-2 shadow-lg relative"
+          className="p-4 bg-white/60 rounded-lg border-2 shadow-lg relative"
         >
           {/* 标题 + 编辑/删 附件 */}
           <div className="flex justify-between items-center ">

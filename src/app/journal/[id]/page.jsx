@@ -33,7 +33,7 @@ export default function JournalDetail() {
     <div className="min-h-screen flex flex-col p-4 bg-[url('/journal_bg3.png')] bg-cover bg-center">
       <Upperbar title="Journal" />
 
-      <div className="mt-28 mb-4 w-full p-4 flex justify-between items-center">
+      <div className="mt-20 mb-4 w-full p-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <span className="font-semibold">
             {new Date(entry.createdAt).toLocaleDateString()}
@@ -64,23 +64,23 @@ export default function JournalDetail() {
       </div>
 
       {showConfirm && (
-        <div className="fixed inset-0 bg-red-300/20 flex items-center justify-center">
-          <div className="bg-white p-3 rounded-lg shadow-lg max-w-sm w-4/5">
-            <p className="mb-4 text-center">
+        <div className="fixed inset-0 bg-black/10 flex items-center justify-center">
+          <div className="bg-white p-4 m-4 rounded-lg shadow-lg max-w-sm w-full">
+            <p className="mb-4 text-neutral-700 text-lg font-bold leading-7">
               Are you sure you want to delete this entry?
             </p>
-            <div className="flex justify-end gap-3">
-              <button
-                onClick={handleCancel}
-                className="px-2 py-1 border rounded bg-[#4782A9] text-white"
-              >
-                Cancel
-              </button>
+            <div className="flex justify-around gap-3">
               <button
                 onClick={handleDelete}
-                className="px-2 py-1 bg-red-400 text-white rounded"
+                className="px-2  bg-[#DD7373] w-40 py-1  rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] flex justify-center  text-white font-bold"
               >
                 Delete
+              </button>
+              <button
+                onClick={handleCancel}
+                className="px-2ß bg-[#4782A9] w-40 py-1 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] flex justify-center   text-white font-bold"
+              >
+                Cancel
               </button>
             </div>
           </div>

@@ -18,10 +18,10 @@ export default function SelfCompassionList({ entriesByCategory }) {
   };
 
   return (
-    <div className="p-6">
+    <div className="mt-16 p-6 pb-56">
       {/* 标题 */}
       <h2 className="text-xl font-semibold">Self Compassion</h2>
-      <div className="mt-4 p-1 space-y-4 h-[570px] overflow-y-auto">
+      <div className="mt-4 p-1 space-y-4 h-[570px]">
         {/* 按类别渲染条目 */}
         {Object.entries(entriesByCategory).map(([cat, list]) =>
           list.length > 0 ? (
@@ -30,7 +30,7 @@ export default function SelfCompassionList({ entriesByCategory }) {
                 {list.map((e) => (
                   <div
                     key={e.id}
-                    className="p-4 rounded-2xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.50)] relative"
+                    className="p-4 rounded-2xl bg-[url('/comp_bg2.png')] bg-cover bg-center shadow-[0px_0px_6px_0px_rgba(0,0,0,0.50)] relative"
                   >
                     {/* 日期 + 编辑 / 删除 */}
                     <div className="flex justify-between items-center">

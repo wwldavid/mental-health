@@ -1,17 +1,15 @@
-// src>components>ProviderDetailCard.jsx
 "use client";
 import React from "react";
 import Image from "next/image";
 
 const buttonStyle =
-  "w-36 h-9 bg-orange-200 rounded-2xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] flex items-center justify-center text-neutral-700 text-base font-bold ";
+  "w-36 h-9 bg-[#4782A9] text-white rounded-2xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] flex items-center justify-center font-bold ";
 
 export default function ProviderDetailCard({ provider, onMessage, onBook }) {
   const [days, hours] = provider.availability.split(" ");
   return (
     <div
-      className="w-full mt-28 h-96 p-4 rounded-2xl flex flex-col
-                    bg-[url('/provider_bg2.png')] bg-cover bg-center
+      className="w-full mt-20 bg-white/60 min-h-96 p-4 rounded-2xl flex flex-col
                     shadow-[0_0_12px_-2px_rgba(0,0,0,0.2)] border border-neutral-200"
     >
       <div className="flex gap-5">

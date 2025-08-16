@@ -14,7 +14,6 @@ export default function ChatListPage() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
 
-  // 已登录才拉后端数据
   useEffect(() => {
     if (status !== "authenticated") return;
     (async () => {
@@ -23,18 +22,10 @@ export default function ChatListPage() {
     })();
   }, [status, userId, filter]);
 
-  // async function fetchChats() {
-  //   const res = await fetch(`/api/chats?userId=${userId}&filter=${filter}`);
-  //   const data = await res.json();
-  //   setChats(data);
-  // }
-
-  // 1) loading 状态
   if (status === "loading") {
     return <p className="p-4 text-center">Loading…</p>;
   }
 
-  //  2) 未认证：显示提示并提供跳转
   if (status === "unauthenticated") {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[url('/chat_bg1.png')] bg-cover bg-center">
@@ -60,7 +51,6 @@ export default function ChatListPage() {
     );
   }
 
-  //  3) 已认证：正常渲染后端返回的 chats   列表（此时包含三位咨询师的会话）
   return (
     <div className="min-h-screen flex flex-col p-4 bg-[url('/chat_bg1.png')] bg-cover bg-center">
       <Upperbar title="My Chat" />
@@ -70,26 +60,18 @@ export default function ChatListPage() {
         placeholder="Search chats..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="mt-28 mb-4 w-full h-9 p-2  bg-neutral-50/95 rounded-[10px] mx-auto"
+        className="mt-20 mb-4 w-full h-9 p-2  bg-neutral-50/95 rounded-[10px] mx-auto"
       />
 
       <div className="flex gap-4 mb-4">
         <button
-          className={
-            filter === "all"
-              ? "font-bold w-44 h-7 px-2 py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] text-white flex justify-center items-center"
-              : "w-44 h-7 px-2 py-2.5 flex justify-center items-center border border-[#4782A9] rounded-3xl"
-          }
+          className="font-bold w-44 h-7 px-2 py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] text-white flex justify-center items-center"
           onClick={() => setFilter("all")}
         >
           All Messages
         </button>
         <button
-          className={
-            filter === "unread"
-              ? "font-bold w-44 h-7 px-2 py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] text-white flex justify-center items-center"
-              : "w-44 h-7 px-2 py-2.5 flex justify-center items-center border border-[#4782A9] rounded-3xl"
-          }
+          className="font-bold w-44 h-7 px-2 py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] text-white flex justify-center items-center"
           onClick={() => setFilter("unread")}
         >
           Unread

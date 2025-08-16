@@ -39,13 +39,13 @@ export default async function GoalsPage() {
   ];
 
   return (
-    <div className="mt-20 flex flex-col gap-6 items-center">
+    <div className="mt-16 flex flex-col gap-3 p-4 mb-32">
       {items.map(({ status, bg, count }) => (
         <Link
           key={status}
           prefetch={false}
           href={`/goals/list?status=${status}`}
-          className="relative w-80 h-36 border-2 rounded-2xl shadow-lg flex items-center justify-center bg-center bg-cover"
+          className="relative w-full h-44 border-2 rounded-2xl shadow-lg flex items-center justify-center bg-center bg-cover"
           style={{ backgroundImage: `url(${bg})` }}
         >
           <span className="absolute bottom-2 right-2 text-gray-800 px-2 py-1 rounded-full">

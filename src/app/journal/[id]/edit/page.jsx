@@ -46,7 +46,7 @@ export default function JournalEditPage() {
     <div className="min-h-screen flex flex-col p-4 bg-[url('/journal_bg3.png')] bg-cover bg-center">
       <Upperbar title="Journal" />
 
-      <div className="flex justify-between items-center mt-28 mb-4 w-full h-9 p-2 mx-auto">
+      <div className="flex justify-between items-center mt-20 mb-4 w-full h-9 p-2 mx-auto">
         <div className="flex items-center space-x-2">
           <span className="font-semibold">
             {new Date(entry.createdAt).toLocaleDateString()}

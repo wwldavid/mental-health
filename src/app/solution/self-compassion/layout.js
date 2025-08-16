@@ -18,9 +18,9 @@ export default async function CompassionLayout({ children }) {
     );
   }
   return (
-    <div className="h-screen flex flex-col bg-[url('/grati_bg.png')] bg-cover bg-center">
+    <div className="h-screen flex flex-col ">
       <Upperbar title="Self compassion" />
-      <div className="mt-16 flex-grow overflow-auto">{children}</div>
+      <div>{children}</div>
       <Navbar />
     </div>
   );

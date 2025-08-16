@@ -50,46 +50,51 @@ export default function ProviderBookPage() {
   return (
     <div className="min-h-screen flex flex-col p-4 bg-[url('/provider_bg3.png')] bg-cover bg-center">
       <Upperbar title="Session" />
-      <h2 className="mt-16 pt-2 text-lg font-semibold">
-        {provider ? `Connect with ${provider.user.name}` : "Loading..."}
-      </h2>
 
-      <div className="mb-12">
-        {Object.entries(slotsByDate).map(([date, times]) => (
-          <div
-            key={date}
-            className="w-full h-28  bg-white/50 rounded-2xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.50)]"
-          >
-            <div className="text-center font-medium mt-6 pt-1">{date}</div>
-            <div className="grid grid-cols-2 gap-2 mt-2 ml-2">
-              {times.map((t) => {
-                const key = `${date}|${t}`;
-                const isSel = selected === key;
-                return (
-                  <button
-                    key={t}
-                    className={`w-40 h-7 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] flex justify-center items-center ${
-                      isSel
-                        ? "bg-[#EAD098] text-black "
-                        : "bg-[#4782A9] text-white "
-                    }`}
-                    onClick={() => toggle(date, t)}
-                  >
-                    {t}
-                  </button>
-                );
-              })}
+      <div className="flex-1 p-1 overflow-y-auto mb-32">
+        <h2 className="mt-16 pt-2 text-lg font-semibold">
+          {provider ? `Connect with ${provider.user.name}` : "Loading..."}
+        </h2>
+
+        <div>
+          {Object.entries(slotsByDate).map(([date, times]) => (
+            <div
+              key={date}
+              className="w-full h-28  bg-white/50 rounded-2xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.50)]"
+            >
+              <div className="text-center font-medium mt-6 pt-1">{date}</div>
+              <div className="grid grid-cols-2 gap-2 mt-2 ml-2">
+                {times.map((t) => {
+                  const key = `${date}|${t}`;
+                  const isSel = selected === key;
+                  return (
+                    <button
+                      key={t}
+                      className={`w-40 h-7 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] flex justify-center items-center ${
+                        isSel
+                          ? "bg-[#EAD098] text-black "
+                          : "bg-[#4782A9] text-white "
+                      }`}
+                      onClick={() => toggle(date, t)}
+                    >
+                      {t}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      <button
-        className="w-full h-11 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden mb-6 text-center text-white text-xl font-semibold"
-        onClick={handleBook}
-      >
-        Book Session
-      </button>
+      <div className="fixed bottom-20 left-0 w-full p-4">
+        <button
+          className="w-full h-11 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] inline-flex justify-center items-center overflow-hidden text-center text-white text-xl font-semibold"
+          onClick={handleBook}
+        >
+          Book Session
+        </button>
+      </div>
     </div>
   );
 }

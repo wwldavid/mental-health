@@ -26,7 +26,7 @@ export default function JournalListPage() {
       <Upperbar title="Journal" />
 
       {/* 搜索框 */}
-      <div className="flex mt-20 mb-4 w-full h-9 p-2  bg-neutral-50/95 rounded-[10px] mx-auto">
+      <div className="flex mt-20 mb-4 w-full h-9 p-2  bg-white/50 rounded-[10px] mx-auto">
         <Search className="text-gray-400 mr-2" />
         <input
           className="flex-1 focus:outline-none bg-neutral-50/95"

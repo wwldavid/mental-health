@@ -75,15 +75,15 @@ const Navbar = ({ mobile = false }) => {
 
   if (mobile) {
     return (
-      <div className="fixed bottom-0 left-0 w-full h-20 pb-3 z-[100] border-t-2 border-[#325C77]/50 shadow-md flex justify-around items-center min-h-[64px] md:hidden">
+      <div className="fixed bottom-0 left-0 w-full h-20 p-1 z-[100] border-t-2 border-[#325C77]/50 shadow-md flex justify-around items-center min-h-[64px] md:hidden bg-white">
         <button
           onClick={() => router.push("/journal")}
           className="flex flex-col items-center justify-center p-2"
         >
           {pathname === "/journal" ? (
-            <JournalIconActive className="w-6 h-6 scale-125 text-white fill-current" />
+            <JournalIcon className="w-7 h-7 scale-125 text-white fill-current" />
           ) : (
-            <JournalIcon className="w-6 h-6 scale-125 text-white fill-current" />
+            <JournalIconActive className="w-7 h-7 scale-125 text-white fill-current" />
           )}
           <span className="mt-1 text-xs text-[#325C77]">Journal</span>
         </button>
@@ -92,9 +92,9 @@ const Navbar = ({ mobile = false }) => {
           className="flex flex-col items-center justify-center p-2"
         >
           {pathname === "/consult" ? (
-            <SessionsIconActive className="w-6 h-6 scale-125 text-white fill-current" />
+            <SessionsIcon className="w-7 h-7 scale-125 text-white fill-current" />
           ) : (
-            <SessionsIcon className="w-6 h-6 scale-125 text-white fill-current" />
+            <SessionsIconActive className="w-7 h-7 scale-125 text-white fill-current" />
           )}
           <span className="mt-1 text-xs text-[#325C77]">Sessions</span>
         </button>
@@ -103,9 +103,9 @@ const Navbar = ({ mobile = false }) => {
           className="flex flex-col items-center justify-center p-2"
         >
           {pathname === "/home" ? (
-            <HomeIconActive className="w-6 h-6 scale-125 text-white fill-current" />
+            <HomeIcon className="w-7 h-7 scale-125 text-white fill-current" />
           ) : (
-            <HomeIcon className="w-6 h-6 scale-125 text-white fill-current" />
+            <HomeIconActive className="w-7 h-7 scale-125 text-white fill-current" />
           )}
           <span className="mt-1 text-xs text-[#325C77]">Home</span>
         </button>
@@ -115,9 +115,9 @@ const Navbar = ({ mobile = false }) => {
           className="flex flex-col items-center justify-center p-2"
         >
           {pathname === "/chat" ? (
-            <ChatIconActive className="w-6 h-6 scale-125 text-white fill-current" />
+            <ChatIcon className="w-7 h-7 scale-125 text-white fill-current" />
           ) : (
-            <ChatIcon className="w-6 h-6 scale-125 text-white fill-current" />
+            <ChatIconActive className="w-7 h-7 scale-125 text-white fill-current" />
           )}
           <span className="mt-1 text-xs text-[#325C77]">Chats</span>
         </button>
@@ -126,9 +126,9 @@ const Navbar = ({ mobile = false }) => {
           className="flex flex-col items-center justify-center p-2"
         >
           {pathname === "/goals" ? (
-            <GoalsIconActive className="w-6 h-6 scale-125 text-white fill-current" />
+            <GoalsIcon className="w-7 h-7 scale-125 text-white fill-current" />
           ) : (
-            <GoalsIcon className="w-6 h-6 scale-125 text-white fill-current" />
+            <GoalsIconActive className="w-7 h-7 scale-125 text-white fill-current" />
           )}
           <span className="mt-1 text-xs text-[#325C77]">Goals</span>
         </button>

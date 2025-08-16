@@ -59,7 +59,7 @@ export default function NewJournalPage() {
         </div>
 
         {/* 日记输入区 */}
-        <div className="w-full h-60 bg-white rounded-2xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.50)] p-4 relative">
+        <div className="w-full h-60 bg-white/60 rounded-2xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.50)] p-4 relative">
           <textarea
             className="w-full h-full bg-transparent resize-none outline-none"
             placeholder="What is on your mind?"

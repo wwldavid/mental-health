@@ -20,7 +20,7 @@ export default function ProviderDetailPage() {
   }, [id]);
 
   return (
-    <div className="h-screen flex flex-col p-4">
+    <div className="h-screen flex flex-col p-4 bg-[url('/provider_bg5.webp')] bg-cover bg-center">
       {/* 一定会渲染 */}
       <Upperbar title="Session" />
 
