@@ -64,7 +64,7 @@ export default function Breathing() {
   const moreActs = () => router.push("/wellness");
 
   return (
-    <div className="relative flex flex-col items-center mt-36 p-4 h-[71vh]">
+    <div className="relative flex flex-col items-center mt-20 p-4 h-[71vh]">
       <h1 className="text-2xl font-bold mb-6 text-neutral-700">
         Breathing Exercise
       </h1>
@@ -81,21 +81,33 @@ export default function Breathing() {
         {running ? phases[phaseIndex] : "Whenever you are ready"}
       </p>
 
-      <button
-        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-96 h-11 py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold"
-        onClick={running ? stopExercise : startExercise}
-      >
-        {running ? "Stop" : "Start"}
-      </button>
+      {!showOptions && (
+        <div className="fixed bottom-20 left-0 w-full p-4">
+          <button
+            className="w-full h-11 py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold"
+            onClick={running ? stopExercise : startExercise}
+          >
+            {running ? "Stop" : "Start"}
+          </button>
+        </div>
+      )}
 
       {showOptions && (
-        <div className="w-full flex flex-col items-center space-y-3">
-          <button className={buttonStyle} onClick={feelBetter}>
-            I am Feeling Better
-          </button>
-          <button className={buttonStyle} onClick={moreActs}>
-            More Activities
-          </button>
+        <div className="fixed bottom-20 left-0 w-full p-4">
+          <div className="w-full flex flex-col items-center space-y-3 p-2">
+            <button className={buttonStyle} onClick={feelBetter}>
+              I am Feeling Better
+            </button>
+            <button className={buttonStyle} onClick={moreActs}>
+              More Activities
+            </button>
+            <button
+              className={buttonStyle}
+              onClick={running ? stopExercise : startExercise}
+            >
+              {running ? "Stop" : "Start"}
+            </button>
+          </div>
         </div>
       )}
 

@@ -45,7 +45,7 @@ export default function Wellness() {
   return (
     <div className="min-h-svh flex flex-col ">
       <Upperbar title="Wellness" />
-      <div className="mt-16 flex-1 overflow-y-auto px-3 pb-28">
+      <div className="mt-20 flex-1 overflow-y-auto px-3 pb-28">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-w-4xl mx-auto">
           {features.map((f, i) => (
             <div

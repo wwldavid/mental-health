@@ -14,7 +14,7 @@ const walkerImages = [
 ];
 
 const buttonStyle =
-  "w-96 h-11  py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold";
+  "w-full h-11  py-2.5 bg-[#4782A9] rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center gap-2.5 text-white font-semibold";
 
 export default function WalkPage2() {
   const {
@@ -157,13 +157,13 @@ export default function WalkPage2() {
       </p>
 
       {!showSummary ? (
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+        <div className="fixed bottom-20 left-0 w-full p-4">
           <button className={buttonStyle} onClick={handleStop}>
             Stop
           </button>
         </div>
       ) : (
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full flex flex-col items-center space-y-4">
+        <div className="fixed bottom-20 left-0 w-full p-4 w-full flex flex-col items-center space-y-4">
           <button className={buttonStyle} onClick={handleRestart}>
             Restart
           </button>
