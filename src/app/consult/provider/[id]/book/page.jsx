@@ -52,7 +52,7 @@ export default function ProviderBookPage() {
       <Upperbar title="Session" />
 
       <div className="flex-1 p-1 overflow-y-auto mb-32">
-        <h2 className="mt-16 pt-2 text-lg font-semibold">
+        <h2 className="mt-16 text-lg font-semibold">
           {provider ? `Connect with ${provider.user.name}` : "Loading..."}
         </h2>
 
@@ -62,15 +62,15 @@ export default function ProviderBookPage() {
               key={date}
               className="w-full h-28  bg-white/50 rounded-2xl shadow-[0px_0px_6px_0px_rgba(0,0,0,0.50)]"
             >
-              <div className="text-center font-medium mt-6 pt-1">{date}</div>
-              <div className="grid grid-cols-2 gap-2 mt-2 ml-2">
+              <div className="text-center font-medium mt-5 pt-1">{date}</div>
+              <div className="grid grid-cols-2 gap-2 mt-2 px-4">
                 {times.map((t) => {
                   const key = `${date}|${t}`;
                   const isSel = selected === key;
                   return (
                     <button
                       key={t}
-                      className={`w-40 h-7 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] flex justify-center items-center ${
+                      className={`w-36 h-7 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] flex justify-center items-center ${
                         isSel
                           ? "bg-[#EAD098] text-black "
                           : "bg-[#4782A9] text-white "

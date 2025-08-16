@@ -9,7 +9,7 @@ export default function ProviderDetailCard({ provider, onMessage, onBook }) {
   const [days, hours] = provider.availability.split(" ");
   return (
     <div
-      className="w-full mt-20 bg-white/60 min-h-96 p-4 rounded-2xl flex flex-col
+      className="w-full mt-16 bg-white/60 min-h-96 p-4 rounded-2xl flex flex-col
                     shadow-[0_0_12px_-2px_rgba(0,0,0,0.2)] border border-neutral-200"
     >
       <div className="flex gap-5">

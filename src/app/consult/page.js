@@ -101,7 +101,7 @@ export default function ConsultPage() {
     <div className="h-screen flex flex-col p-4">
       <Upperbar title="Session" />
 
-      <div className="flex mt-20 mb-2 w-full shadow-[0_4px_4px_-2px_rgba(0,0,0,0.25)]">
+      <div className="flex mt-16 mb-2 w-full shadow-[0_4px_4px_-2px_rgba(0,0,0,0.25)]">
         <button
           onClick={() => setMode("mine")}
           className={`flex-1 py-2 text-center ${
