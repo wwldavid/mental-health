@@ -52,7 +52,7 @@ export default function JournalDetail() {
           </button>
           <button
             onClick={() => setShowConfirm(true)}
-            className="w-8 h-8 bg-red-400 rounded flex items-center justify-center cursor-pointer"
+            className="w-8 h-8 bg-[#4782A9] rounded flex items-center justify-center cursor-pointer"
           >
             <X className="w-4 h-4 text-white" />
           </button>

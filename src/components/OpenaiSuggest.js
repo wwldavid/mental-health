@@ -38,7 +38,7 @@ export default function OpenaiSuggest() {
   return (
     <main className="min-h-screen w-full ">
       <Upperbar title="My Center" />
-      <div className="flex flex-col items-center justify-center py-6 px-3 mt-28 max-h-[72vh] overflow-y-auto overflow-x-hidden">
+      <div className="flex flex-col items-center justify-center py-6 px-7 mt-12 overflow-y-auto overflow-x-hidden">
         <motion.h3
           className="text-2xl sm:text-4xl text-center mb-6"
           initial={{ opacity: 0, y: -30 }}
@@ -51,9 +51,9 @@ export default function OpenaiSuggest() {
         <Textarea
           value={feeling}
           onChange={(e) => setFeeling(e.target.value)}
-          placeholder="I am feeling stressed because of work. My boss is very difficult and I am burned out."
-          className="w-[340px] h-60 py-2 rounded-2xl border  border-zinc-600/50 bg-white"
-          rows={6}
+          placeholder=""
+          className="w-[340px] py-2 rounded-2xl border  border-zinc-600/50 bg-white"
+          rows={12}
         />
 
         <Button

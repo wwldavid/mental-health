@@ -12,7 +12,7 @@ export default function ProviderDetailCard({ provider, onMessage, onBook }) {
     <div
       className="w-full mt-28 h-96 p-4 rounded-2xl flex flex-col
                     bg-[url('/provider_bg2.png')] bg-cover bg-center
-                    outline outline-1 outline-offset-[-1px] outline-neutral-700"
+                    shadow-[0_0_12px_-2px_rgba(0,0,0,0.2)] border border-neutral-200"
     >
       <div className="flex gap-5">
         <Image

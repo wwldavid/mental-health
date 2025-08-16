@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 const buttonStyle =
-  "w-80 h-10 py-2.5 bg-orange-200 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)] justify-center items-center text-center text-neutral-700 text-lg font-bold ";
+  "w-80 h-10 bg-[#4782A9] rounded-3xl justify-center items-center text-center text-lg font-bold text-white py-2  shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)]";
 
 export default function ProviderCard({
   mode = "mine",
@@ -19,7 +19,7 @@ export default function ProviderCard({
 }) {
   if (mode === "mine" && session) {
     return (
-      <div className="w-96 h-96  p-4 flex flex-col justify-between rounded-2xl bg-[url('/provider_bg1.webp')] bg-cover bg-center border border-neutral-700">
+      <div className="w-96 h-96  p-4 flex flex-col justify-between rounded-2xl bg-white/60 shadow-[0_0_12px_-2px_rgba(0,0,0,0.2)] border border-neutral-200">
         <div className="flex">
           <Image
             src={session.provider.image || "/avatar-placeholder.png"}
@@ -49,12 +49,7 @@ export default function ProviderCard({
           </div>
         </div>
         <div className="flex flex-col gap-3">
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={onMessage}
-            className={buttonStyle}
-          >
+          <Button size="sm" onClick={onMessage} className={buttonStyle}>
             Message
           </Button>
           <Button onClick={onJoin} className={buttonStyle}>
@@ -79,7 +74,7 @@ export default function ProviderCard({
     return (
       <div
         onClick={onView}
-        className="cursor-pointer w-96 h-[556px] p-4 rounded-2xl flex flex-col bg-[url('/provider_bg2.webp')] bg-cover bg-center outline outline-1 outline-offset-[-1px] outline-neutral-700"
+        className="cursor-pointer w-96 h-[556px] p-4 rounded-2xl flex flex-col bg-[url('/provider_bg2.webp')] bg-cover bg-center shadow-[0_0_12px_-2px_rgba(0,0,0,0.2)] border border-neutral-200"
       >
         <div className="flex gap-5">
           <Image

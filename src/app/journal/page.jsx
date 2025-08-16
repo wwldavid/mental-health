@@ -26,8 +26,8 @@ export default function JournalListPage() {
       <Upperbar title="Journal" />
 
       {/* 搜索框 */}
-      <div className="flex mt-36 mb-4 w-full h-9 p-2  bg-neutral-50/95 rounded-[10px] mx-auto">
-        <Search className="text-gray-400  mr-2" />
+      <div className="flex mt-20 mb-4 w-full h-9 p-2  bg-neutral-50/95 rounded-[10px] mx-auto">
+        <Search className="text-gray-400 mr-2" />
         <input
           className="flex-1 focus:outline-none bg-neutral-50/95"
           placeholder="Find Entries"
@@ -67,9 +67,9 @@ export default function JournalListPage() {
         ))}
       </div>
 
-      <div className="px-4 py-2 border-t flex justify-between items-center">
+      <div className="fixed bottom-20 left-0 w-full p-4">
         <button
-          className=" w-full bg-[#4782A9] text-white py-2 rounded-3xl hover:bg-gray-800"
+          className=" w-full bg-[#4782A9] text-white py-2 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)]"
           onClick={() => router.push("/journal/new")}
         >
           New Entry

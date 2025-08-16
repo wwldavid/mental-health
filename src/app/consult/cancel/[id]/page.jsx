@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Upperbar from "@/components/Upperbar";
 import Navbar from "@/components/Navbar";
-import { Button } from "@/components/ui/button";
 
 export default function CancelSessionPage() {
   const { id } = useParams();
@@ -49,9 +48,9 @@ export default function CancelSessionPage() {
   // 已确认取消后的视图
   if (canceled) {
     return (
-      <div className="flex flex-col h-screen bg-[#E9E9E9]">
+      <div className="flex flex-col h-screen bg-[url('/session_cancel.webp')] bg-cover bg-center">
         <Upperbar title="Session" />
-        <div className="flex-1 p-4 flex flex-col items-center justify-center">
+        <div className="mt-20 p-4 flex flex-col items-center justify-center">
           <h1 className="text-2xl font-semibold mb-4">Cancel Session</h1>
           <p className="text-center">
             Your session has been canceled. We will be here whenever you are
@@ -68,9 +67,9 @@ export default function CancelSessionPage() {
 
   // 初始确认取消视图
   return (
-    <div className="flex flex-col h-screen bg-[#E9E9E9]">
+    <div className="flex flex-col h-screen bg-[url('/session_cancel.webp')] bg-cover bg-center">
       <Upperbar title="Session" />
-      <div className="flex-1 p-4 flex flex-col items-center justify-center">
+      <div className="mt-20 p-4 flex flex-col items-center justify-center">
         <h1 className="text-2xl font-semibold mb-4">Cancel Session</h1>
         <p className="text-center mb-2">
           Are you sure you want to cancel this session?
@@ -81,22 +80,20 @@ export default function CancelSessionPage() {
         </p>
         {error && <p className="text-red-500 mb-4">{error}</p>}
 
-        <div className="w-full max-w-xs">
-          <Button
-            variant="destructive"
+        <div className="fixed flex flex-col gap-5 bottom-20 left-0 w-full p-4">
+          <button
             onClick={handleCancel}
-            className="w-full mb-3"
+            className="w-full bg-[#4782A9] text-white py-2 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)]"
             disabled={loading}
           >
             {loading ? "Cancelling..." : "Cancel Session"}
-          </Button>
-          <Button
-            variant="outline"
+          </button>
+          <button
             onClick={() => router.push("/consult")}
-            className="w-full"
+            className=" w-full bg-[#4782A9] text-white py-2 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)]"
           >
             Book Another Session
-          </Button>
+          </button>
         </div>
       </div>
       <Navbar />

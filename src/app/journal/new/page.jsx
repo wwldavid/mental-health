@@ -78,9 +78,9 @@ export default function NewJournalPage() {
         </div>
       </div>
 
-      <div className="p-4 border-t">
+      <div className="fixed bottom-20 left-0 w-full p-4">
         <button
-          className="w-full bg-[#4782A9] text-white py-2 rounded-3xl hover:bg-gray-800"
+          className="w-full bg-[#4782A9] text-white py-2 rounded-3xl shadow-[0px_4px_4px_0px_rgba(0,0,0,0.50)]"
           onClick={handleAdd}
         >
           Add Entry

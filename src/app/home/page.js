@@ -20,7 +20,7 @@ export default function Home() {
   if (!showMain) return null;
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 bg-[url('/mycenter_bg.webp')] bg-cover bg-center">
+    <div className="flex flex-col items-center justify-center py-6 bg-[url('/mycenter_bg.webp')] bg-cover bg-center">
       <OpenaiSuggest />
     </div>
   );

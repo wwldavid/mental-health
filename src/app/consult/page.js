@@ -101,11 +101,11 @@ export default function ConsultPage() {
     <div className="h-screen flex flex-col p-4">
       <Upperbar title="Session" />
 
-      <div className="flex mt-28 mb-2 w-full border-b border-gray-600">
+      <div className="flex mt-20 mb-2 w-full shadow-[0_4px_4px_-2px_rgba(0,0,0,0.25)]">
         <button
           onClick={() => setMode("mine")}
           className={`flex-1 py-2 text-center ${
-            mode === "mine" ? "border-b-2 border-gray-600/50 " : "border-none"
+            mode === "mine" ? "border-b-4 border-[#4782A9] " : "border-none"
           }`}
         >
           My Support Providers
@@ -113,7 +113,7 @@ export default function ConsultPage() {
         <button
           onClick={() => setMode("find")}
           className={`flex-1 py-2 text-center ${
-            mode === "find" ? "border-b-2 border-gray-600/50" : "border-none"
+            mode === "find" ? "border-b-4 border-[#4782A9]" : "border-none"
           }`}
         >
           Find Support Providers
@@ -123,7 +123,7 @@ export default function ConsultPage() {
       <div className="flex-1 flex-col items-center gap-4 mt-2 pb-20 overflow-y-auto">
         {mode === "mine" ? (
           <div className="w-full h-[67vh] overflow-y-auto">
-            <div className=" p-1 pt-3 border rounded-lg border-neutral-700">
+            <div className=" p-1 pt-3 rounded-lg shadow-[0_0_12px_-2px_rgba(0,0,0,0.35)] border border-neutral-200">
               <div className="flex items-center gap-4">
                 <button onClick={prevMonth} className="px-2">
                   ‹
