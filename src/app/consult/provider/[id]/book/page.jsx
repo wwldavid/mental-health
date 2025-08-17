@@ -48,7 +48,7 @@ export default function ProviderBookPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col p-4 bg-[url('/provider_bg3.png')] bg-cover bg-center">
+    <div className="min-h-svh flex flex-col p-4 bg-[url('/provider_bg3.png')] bg-cover bg-center">
       <Upperbar title="Session" />
 
       <div className="flex-1 p-1 overflow-y-auto mb-32">

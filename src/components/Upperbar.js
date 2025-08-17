@@ -1,8 +1,6 @@
-// src>components>Upperbar.js
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 import Image from "next/image";
 import { ChevronLeft } from "lucide-react";
@@ -11,20 +9,6 @@ import { useRouter } from "next/navigation";
 export default function Upperbar({ title = "My Center" }) {
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const avatarRef = useRef(null);
-
-  // 点击别处时关闭菜单
-
-  useEffect(() => {
-    function onClickOutside(e) {
-      if (avatarRef.current && !avatarRef.current.contains(e.target)) {
-        setMenuOpen(false);
-      }
-    }
-    document.addEventListener("click", onClickOutside);
-    return () => document.removeEventListener("click", onClickOutside);
-  }, []);
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 px-4 pt-4 pb-2 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.25)] bg-white">
@@ -50,18 +34,10 @@ export default function Upperbar({ title = "My Center" }) {
             />
           </div>
           <div
-            ref={avatarRef}
             className={`w-[43px] h-[43px] rounded-full overflow-hidden cursor-pointer ${
               status === "authenticated" ? "" : "filter grayscale opacity-50"
             } `}
-            onClick={() => {
-              if (status === "authenticated") {
-                // 切换下拉菜单
-                setMenuOpen((o) => !o);
-              } else {
-                setMenuOpen(true);
-              }
-            }}
+            onClick={() => router.push("/settings")}
           >
             <Image
               src="/images/person.svg"
@@ -71,32 +47,6 @@ export default function Upperbar({ title = "My Center" }) {
               className="w-full h-full object-cover"
             />
           </div>
-          {/* 下拉菜单 */}
-          {menuOpen && (
-            <div
-              className="absolute right-0 mt-2 w-32 text-[#325C77] border shadow-lg rounded"
-              style={{ top: "60px" }}
-            >
-              {status === "authenticated" ? (
-                <button
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                  onClick={() => {
-                    localStorage.removeItem("onboardingComplete");
-                    signOut({ callbackUrl: "/welcome" });
-                  }}
-                >
-                  Log out
-                </button>
-              ) : (
-                <button
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
-                  onClick={() => router.push("/sign-in")}
-                >
-                  Sign in
-                </button>
-              )}
-            </div>
-          )}
         </div>
       </div>
     </div>
