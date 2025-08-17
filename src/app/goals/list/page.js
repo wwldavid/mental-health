@@ -27,7 +27,7 @@ export default async function GoalsList({ searchParams }) {
       : "Completed Goals";
 
   return (
-    <div className="p-4">
+    <div className="mt-16 p-4">
       <h2 className="text-xl font-semibold mb-4">{title}</h2>
       <GoalList initialGoals={initialGoals} status={searchParams.status} />
     </div>

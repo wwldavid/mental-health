@@ -20,7 +20,7 @@ export default async function GoalsLayout({ children }) {
   return (
     <GoalsShell>
       <Upperbar title="Goals" />
-      <div className="mt-16 flex-grow overflow-auto">{children}</div>
+      <div className="flex-grow overflow-auto">{children}</div>
       <Navbar />
     </GoalsShell>
   );

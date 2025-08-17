@@ -55,7 +55,7 @@ export default function NewOrEditGoal() {
   };
 
   return (
-    <div className="p-4 mt-6">
+    <div className="p-4 mt-16">
       <h2 className="text-xl font-semibold mb-4">
         {editingId ? "Edit Goal" : "New Goals"}
       </h2>
